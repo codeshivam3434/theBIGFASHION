@@ -382,8 +382,8 @@ export default function PartnersPage() {
                   <div>
                     <h3 className="font-bold mb-2">Questions?</h3>
                     <p className="text-sm text-muted-foreground mb-4">Contact our partnerships team directly:</p>
-                    <p className="text-sm hover:text-primary transition-colors">partners@fashionfusion.com</p>
-                    <p className="text-sm hover:text-primary transition-colors">+91 98765 43210</p>
+                    <p className="text-sm hover:text-primary transition-colors">thebigfashion@gmail.com</p>
+                    <p className="text-sm hover:text-primary transition-colors">+91 7033383119</p>
                   </div>
                 </HoverCardEffect>
               </div>

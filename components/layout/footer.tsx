@@ -55,15 +55,15 @@ export default function Footer() {
               <li className="text-sm text-muted-foreground transition-colors hover:text-foreground">
                 THE BIG FASHION Headquarters
               </li>
-              <li className="text-sm text-muted-foreground transition-colors hover:text-foreground">B-12, Sector 63</li>
+              <li className="text-sm text-muted-foreground transition-colors hover:text-foreground">B-12, Sector 63,Andheri East,</li>
               <li className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-                Noida, Uttar Pradesh 201301
+                Mumbai, Maharashtra 401208
               </li>
               <li className="text-sm text-muted-foreground transition-colors hover:text-foreground hover:underline">
-                <a href="mailto:contact@thebigfashion.com">contact@thebigfashion.com</a>
+                <a href="mailto:thebigfashion@gmail.com">thebigfashion@gmail.com</a>
               </li>
               <li className="text-sm text-muted-foreground transition-colors hover:text-foreground hover:underline">
-                <a href="tel:+911204567890">+91 120 4567890</a>
+                <a href="tel:+917033383119">+91 7033383119</a>
               </li>
             </ul>
           </div>
