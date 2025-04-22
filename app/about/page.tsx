@@ -181,8 +181,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team Section */}
-      
+{/* Team Section */}
 <section className="bg-muted/50 py-16 md:py-24">
   <div className="container">
     <FadeInSection>
@@ -198,18 +197,21 @@ export default function AboutPage() {
       {[
         {
           name: "Shivam Maurya",
-          image: "https://source.unsplash.com/HCdBpAo1tMU/300x300",
-          bio: "With over 15 years in the fashion industry, Priyanshu founded Fashion Fusion with a vision to revolutionize India's clothing wholesale ecosystem.",
+          image: "https://images.unsplash.com/photo-1603415526960-f8f6e01c2d1b?auto=format&fit=crop&w=300&h=300&q=80",
+          bio: "A visionary designer with a keen eye for emerging trends, Shivam leads our creative team in developing innovative collections.",
+          role: "Founder & CEO",
         },
         {
           name: "Priyanshu Gupta",
-          image: "https://source.unsplash.com/zaXJ3KA4Kg0/300x300",
-          bio: "Ankush brings extensive operations expertise, having scaled multiple retail businesses across India before joining Fashion Fusion.",
+          image: "https://drive.google.com/uc?id=1yI4oW-AlS37ykE9u9tD1hxxSoyAn-FOB",
+          bio: "With over 15 years in the fashion industry, Priyanshu founded Fashion Fusion with a vision to revolutionize India's clothing wholesale ecosystem.",
+          role: "Founder & COO",
         },
         {
           name: "Ankush Pal",
-          image: "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?auto=format&fit=crop&w=300&h=300&q=80",
-          bio: "A visionary designer with a keen eye for emerging trends, Shivam leads our creative team in developing innovative collections.",
+          image: "https://drive.google.com/uc?id=12XPso4aD5iKTMwTvpRzL4HoGYyPufmLN",
+          bio: "Ankush brings extensive operations expertise, having scaled multiple retail businesses across India before joining Fashion Fusion.",
+          role: "Co-founder & CTO",
         },
       ].map((member, index) => (
         <FadeInSection key={index} delay={index * 0.1} direction="up">
@@ -224,7 +226,7 @@ export default function AboutPage() {
                 boxShadow: "0 10px 25px -5px rgba(0,0,0,0.2)",
               }}
             >
-              <Image
+              <img
                 src={member.image || "/placeholder.svg"}
                 alt={member.name}
                 width={192}
@@ -240,6 +242,9 @@ export default function AboutPage() {
     </div>
   </div>
 </section>
+
+
+
  
 
       {/* CTA Section */}
