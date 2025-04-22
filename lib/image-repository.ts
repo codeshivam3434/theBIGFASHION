@@ -147,19 +147,19 @@ export const imageRepository = {
   ],
   team: [
     {
-      src: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2574&auto=format&fit=crop",
+      src: "https://images.unsplash.com/photo-1628069773461-269448102fd4?q=80&w=800&auto=format&fit=crop",
       alt: "CEO and founder",
       width: 400,
       height: 400,
     },
     {
-      src: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=2576&auto=format&fit=crop",
+      src: "https://images.unsplash.com/photo-1628069773461-269448102fd4?q=80&w=800&auto=format&fit=crop",
       alt: "Head of operations",
       width: 400,
       height: 400,
     },
     {
-      src: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=2522&auto=format&fit=crop",
+      src: "https://images.unsplash.com/photo-1628069773461-269448102fd4?q=80&w=800&auto=format&fit=crop",
       alt: "Lead designer",
       width: 400,
       height: 400,

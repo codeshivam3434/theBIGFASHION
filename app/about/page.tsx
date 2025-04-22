@@ -6,6 +6,7 @@ import { motion } from "framer-motion"
 import FadeInSection from "@/components/fade-in-section"
 import { ButtonWithFeedback } from "@/components/ui/button-with-feedback"
 import ParallaxImage from "@/components/parallax-image"
+import TeamSection from "@/components/team-section"
 
 export default function AboutPage() {
   return (
@@ -51,12 +52,12 @@ export default function AboutPage() {
                 <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-6">From Vision to Revolution</h2>
                 <p className="text-muted-foreground mb-6">
                   Fashion Fusion began in 2018 with a bold vision: to transform how clothing reaches India's vast
-                  network of retailers. Our founders, Priyanshu Gupta, Siddharth Sir, and Shivam Maurya, recognized the
+                  network of retailers. Our founders, Shivam Maurya,Priyanshu Gupta,and Ankush Pal, recognized the
                   challenges faced by small and medium retailers across the country—inconsistent supply chains, limited
                   inventory access, and outdated distribution systems.
                 </p>
                 <p className="text-muted-foreground mb-6">
-                  What started as a small operation connecting manufacturers in Delhi with local retailers has grown
+                  What started as a small operation connecting manufacturers in Mumbai with local retailers has grown
                   into India's fastest-growing wholesaler trusted by thousands of retailers nationwide. We've built a
                   modern supply chain that brings efficiency, transparency, and growth opportunities to businesses of
                   all sizes.
@@ -180,64 +181,66 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team */}
-      <section className="bg-muted/50 py-16 md:py-24">
-        <div className="container">
-          <FadeInSection>
-            <div className="flex flex-col items-center text-center mb-12">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Meet Our Leadership</h2>
-              <p className="mt-4 max-w-2xl text-muted-foreground">
-                The visionary team behind Fashion Fusion's success.
-              </p>
-            </div>
-          </FadeInSection>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-            {[
-              {
-                name: "Priyanshu Gupta",
-                role: "Founder & CEO",
-                image: "https://source.unsplash.com/HCdBpAo1tMU/300x300",
-                bio: "With over 15 years in the fashion industry, Priyanshu founded Fashion Fusion with a vision to revolutionize India's clothing wholesale ecosystem.",
-              },
-              {
-                name: "Ankush",
-                role: "COO",
-                image: "https://source.unsplash.com/zaXJ3KA4Kg0/300x300",
-                bio: "Ankush brings extensive operations expertise, having scaled multiple retail businesses across India before joining Fashion Fusion.",
-              },
-              {
-                name: "Shivam Maurya",
-                role: "Creative Director",
-                image: "https://images.unsplash.com/photo-xGX6OcsmFmM?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80",
-                bio: "A visionary designer with a keen eye for emerging trends, Shivam leads our creative team in developing innovative collections.",
-              },
-            ].map((member, index) => (
-              <FadeInSection key={index} delay={index * 0.1} direction="up">
-                <motion.div className="flex flex-col items-center text-center" whileHover={{ y: -5 }}>
-                  <motion.div
-                    className="relative h-48 w-48 overflow-hidden rounded-full mb-4"
-                    whileHover={{
-                      scale: 1.05,
-                      boxShadow: "0 10px 25px -5px rgba(0,0,0,0.2)",
-                    }}
-                  >
-                    <Image
-                      src={member.image || "/placeholder.svg"}
-                      alt={member.name}
-                      width={200}
-                      height={200}
-                      className="h-full w-full object-cover"
-                    />
-                  </motion.div>
-                  <h3 className="text-xl font-bold">{member.name}</h3>
-                  <p className="text-muted-foreground">{member.role}</p>
-                </motion.div>
-              </FadeInSection>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Team Section */}
+      
+<section className="bg-muted/50 py-16 md:py-24">
+  <div className="container">
+    <FadeInSection>
+      <div className="flex flex-col items-center text-center mb-12">
+        <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Meet Our Leadership</h2>
+        <p className="mt-4 max-w-2xl text-muted-foreground">
+          The visionary team behind Fashion Fusion's success.
+        </p>
+      </div>
+    </FadeInSection>
 
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-12">
+      {[
+        {
+          name: "Shivam Maurya",
+          image: "https://source.unsplash.com/HCdBpAo1tMU/300x300",
+          bio: "With over 15 years in the fashion industry, Priyanshu founded Fashion Fusion with a vision to revolutionize India's clothing wholesale ecosystem.",
+        },
+        {
+          name: "Priyanshu Gupta",
+          image: "https://source.unsplash.com/zaXJ3KA4Kg0/300x300",
+          bio: "Ankush brings extensive operations expertise, having scaled multiple retail businesses across India before joining Fashion Fusion.",
+        },
+        {
+          name: "Ankush Pal",
+          image: "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?auto=format&fit=crop&w=300&h=300&q=80",
+          bio: "A visionary designer with a keen eye for emerging trends, Shivam leads our creative team in developing innovative collections.",
+        },
+      ].map((member, index) => (
+        <FadeInSection key={index} delay={index * 0.1} direction="up">
+          <motion.div
+            className="flex flex-col items-center text-center"
+            whileHover={{ y: -5 }}
+          >
+            <motion.div
+              className="relative h-48 w-48 rounded-full overflow-hidden shadow-lg mb-4 border-4 border-white"
+              whileHover={{
+                scale: 1.05,
+                boxShadow: "0 10px 25px -5px rgba(0,0,0,0.2)",
+              }}
+            >
+              <Image
+                src={member.image || "/placeholder.svg"}
+                alt={member.name}
+                width={192}
+                height={192}
+                className="h-full w-full object-cover"
+              />
+            </motion.div>
+            <h3 className="text-xl font-bold">{member.name}</h3>
+            <p className="text-muted-foreground">{member.role}</p>
+          </motion.div>
+        </FadeInSection>
+      ))}
+    </div>
+  </div>
+</section>
+ 
 
       {/* CTA Section */}
       <section className="relative overflow-hidden">
