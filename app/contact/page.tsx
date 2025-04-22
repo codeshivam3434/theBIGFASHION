@@ -94,21 +94,22 @@ export default function ContactPage() {
                     {
                       icon: <MapPin className="h-6 w-6 text-primary" />,
                       title: "Our Location",
-                      details: ["Fashion Fusion Headquarters", "B-12, Sector 63", "Noida, Uttar Pradesh 201301"],
+                      details: ["Fashion Fusion Headquarters", "B-12, Sector 63, Andheri East",
+                      "Mumbai, Maharashtra 401208"],
                     },
                     {
                       icon: <Mail className="h-6 w-6 text-primary" />,
                       title: "Email Us",
                       details: [
-                        "General Inquiries: info@fashionfusion.com",
-                        "Partnerships: partners@fashionfusion.com",
-                        "Customer Support: support@fashionfusion.com",
+                        "General Inquiries: info.thebigfashion@gmail.com",
+                        "Partnerships: partners.thebigfashion@gmail.com",
+                        "Customer Support: support.thebigfashion@gmail.com",
                       ],
                     },
                     {
                       icon: <Phone className="h-6 w-6 text-primary" />,
                       title: "Call Us",
-                      details: ["Main Office: +91 120 4567890", "Partnership Inquiries: +91 98765 43210"],
+                      details: ["Main Office: +91 7033383119", "Partnership Inquiries: +91 8482819965"],
                     },
                   ].map((contact, index) => (
                     <motion.div
@@ -265,7 +266,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Map Section */}
+       {/* Map Section */}
       <section className="py-12">
         <div className="container">
           <FadeInSection>
@@ -275,22 +276,33 @@ export default function ContactPage() {
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
-                <Image
-                  src="https://images.unsplash.com/photo-1577563908411-5077b6dc7624?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=800&q=80"
-                  alt="Contact our team"
-                  fill
-                  className="object-cover rounded-lg"
-                />
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15072.268153729655!2d72.8666397!3d19.1132673!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDA2JzQ3LjgiTiA3MsKwNTEnNTkuOSJF!5e0!3m2!1sen!2sin!4v1713798980000!5m2!1sen!2sin"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen=""
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="absolute inset-0 w-full h-full border-0"
+                ></iframe>
               </motion.div>
               <motion.div className="absolute top-4 right-4 z-10" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
-                <Button variant="outline" size="sm" className="bg-background/80 backdrop-blur-sm">
-                  Open in Google Maps
-                </Button>
+                <a
+                  href="https://www.google.com/maps/place/19%C2%B006'47.8%22N+72%C2%B051'59.9%22E/@19.1132673,72.8640648,17z"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button variant="outline" size="sm" className="bg-background/80 backdrop-blur-sm">
+                    Open in Google Maps
+                  </Button>
+                </a>
               </motion.div>
             </div>
           </FadeInSection>
         </div>
       </section>
+
 
       {/* FAQ Section */}
       <section className="bg-muted/50 py-16">
