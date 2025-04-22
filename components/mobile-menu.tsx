@@ -41,7 +41,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
           <div className="flex flex-col gap-1 p-4">
             <MobileMenuLink href="/" label="Home" onClick={onClose} />
             <MobileMenuLink href="/about" label="About Us" onClick={onClose} />
-            <MobileMenuLink href="/catalog" label="Catalog" onClick={onClose} />
+            <MobileMenuLink href="/solution" label="Solution" onClick={onClose} />
             <MobileMenuLink href="/partners" label="For Retailers" onClick={onClose} />
             <MobileMenuLink href="/contact" label="Contact" onClick={onClose} />
           </div>
