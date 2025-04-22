@@ -196,22 +196,19 @@ export default function AboutPage() {
               {
                 name: "Priyanshu Gupta",
                 role: "Founder & CEO",
-                image:
-                  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80",
+                image: "https://source.unsplash.com/HCdBpAo1tMU/300x300",
                 bio: "With over 15 years in the fashion industry, Priyanshu founded Fashion Fusion with a vision to revolutionize India's clothing wholesale ecosystem.",
               },
               {
                 name: "Ankush",
                 role: "COO",
-                image:
-                  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80",
-                bio: "Siddharth brings extensive operations expertise, having scaled multiple retail businesses across India before joining Fashion Fusion.",
+                image: "https://source.unsplash.com/zaXJ3KA4Kg0/300x300",
+                bio: "Ankush brings extensive operations expertise, having scaled multiple retail businesses across India before joining Fashion Fusion.",
               },
               {
                 name: "Shivam Maurya",
                 role: "Creative Director",
-                image:
-                  "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80",
+                image: "https://images.unsplash.com/photo-xGX6OcsmFmM?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80",
                 bio: "A visionary designer with a keen eye for emerging trends, Shivam leads our creative team in developing innovative collections.",
               },
             ].map((member, index) => (
@@ -240,6 +237,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
 
       {/* CTA Section */}
       <section className="relative overflow-hidden">
