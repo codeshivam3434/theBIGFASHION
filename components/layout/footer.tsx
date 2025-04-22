@@ -15,11 +15,12 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2 text-xl font-bold">
-              <span>FASHION</span>
-              <span className="text-primary">FUSION</span>
+              <span>THE</span>
+              <span className="text-primary">BIG FASHION</span>
             </Link>
             <p className="text-sm text-muted-foreground">
-              Connecting manufacturers and retailers with premium fashion solutions since 2016.
+              Revolutionizing India's clothing wholesale industry since 2018. Empowering retailers with diverse
+              inventory, rapid restocking, and local logistics support.
             </p>
             <div className="flex space-x-4">
               <SocialIcon icon={<Facebook className="h-4 w-4" />} href="https://facebook.com" label="Facebook" />
@@ -52,23 +53,24 @@ export default function Footer() {
             <h3 className="font-semibold mb-4">Contact</h3>
             <ul className="space-y-2">
               <li className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-                1234 Fashion Avenue, Suite 500
+                THE BIG FASHION Headquarters
               </li>
+              <li className="text-sm text-muted-foreground transition-colors hover:text-foreground">B-12, Sector 63</li>
               <li className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-                New York, NY 10001
+                Noida, Uttar Pradesh 201301
               </li>
               <li className="text-sm text-muted-foreground transition-colors hover:text-foreground hover:underline">
-                <a href="mailto:contact@fashionfusion.com">contact@fashionfusion.com</a>
+                <a href="mailto:contact@thebigfashion.com">contact@thebigfashion.com</a>
               </li>
               <li className="text-sm text-muted-foreground transition-colors hover:text-foreground hover:underline">
-                <a href="tel:+15551234567">+1 (555) 123-4567</a>
+                <a href="tel:+911204567890">+91 120 4567890</a>
               </li>
             </ul>
           </div>
         </div>
         <div className="mt-12 pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-muted-foreground">© {currentYear} Fashion Fusion. All rights reserved.</p>
+            <p className="text-sm text-muted-foreground">© {currentYear} THE BIG FASHION. All rights reserved.</p>
             <div className="flex gap-6">
               <Link href="/terms" className="text-xs text-muted-foreground hover:text-foreground hover:underline">
                 Terms of Service
@@ -126,4 +128,3 @@ function SocialIcon({ icon, href, label }: SocialIconProps) {
     </motion.a>
   )
 }
-

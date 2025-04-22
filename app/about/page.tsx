@@ -15,8 +15,8 @@ export default function AboutPage() {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-transparent" />
           <Image
-            src="/placeholder.svg?height=600&width=1920"
-            alt="Our workshop"
+            src="https://images.unsplash.com/photo-1576995853123-5a10305d93c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80"
+            alt="Our workshop in Delhi"
             fill
             className="object-cover"
             priority
@@ -37,7 +37,7 @@ export default function AboutPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            How we're connecting manufacturers to retailers while growing our own distinctive clothing line.
+            How we're revolutionizing India's clothing wholesale industry and empowering local retailers
           </motion.p>
         </div>
       </section>
@@ -48,27 +48,29 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <FadeInSection direction="left">
               <div>
-                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-6">From Factory to Fashion</h2>
+                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-6">From Vision to Revolution</h2>
                 <p className="text-muted-foreground mb-6">
-                  Fashion Fusion began in 2016 with a simple mission: to bridge the gap between premium manufacturers
-                  and ambitious retailers. Our founders, with decades of experience in textile manufacturing and retail
-                  operations, recognized the inefficiencies in the traditional supply chain.
+                  Fashion Fusion began in 2018 with a bold vision: to transform how clothing reaches India's vast
+                  network of retailers. Our founders, Priyanshu Gupta, Siddharth Sir, and Shivam Maurya, recognized the
+                  challenges faced by small and medium retailers across the country—inconsistent supply chains, limited
+                  inventory access, and outdated distribution systems.
                 </p>
                 <p className="text-muted-foreground mb-6">
-                  What started as a small operation connecting local manufacturers with boutique retailers has grown
-                  into a global platform serving hundreds of partners across the fashion industry. Along the way, we've
-                  developed our own distinctive clothing line that embodies our commitment to quality, style, and
-                  sustainability.
+                  What started as a small operation connecting manufacturers in Delhi with local retailers has grown
+                  into India's fastest-growing wholesaler trusted by thousands of retailers nationwide. We've built a
+                  modern supply chain that brings efficiency, transparency, and growth opportunities to businesses of
+                  all sizes.
                 </p>
                 <p className="text-muted-foreground">
-                  Today, Fashion Fusion stands at the intersection of manufacturing excellence and retail innovation,
-                  creating value for partners on both sides of the fashion ecosystem.
+                  Today, Fashion Fusion stands at the forefront of India's retail revolution, empowering retailers with
+                  diverse inventory, rapid restocking capabilities, and localized logistics support that understands the
+                  unique challenges of the Indian market.
                 </p>
               </div>
             </FadeInSection>
             <FadeInSection direction="right" delay={0.2}>
               <ParallaxImage
-                src="/placeholder.svg?height=800&width=800"
+                src="https://images.unsplash.com/photo-1576995853123-5a10305d93c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=400&q=80"
                 alt="Our founders"
                 width={800}
                 height={800}
@@ -87,7 +89,7 @@ export default function AboutPage() {
         <div className="container relative z-10">
           <FadeInSection>
             <div className="flex flex-col items-center text-center mb-12">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Why Partners Trust Us</h2>
+              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Why Retailers Trust Us</h2>
               <p className="mt-4 max-w-2xl text-muted-foreground">
                 Our reputation is built on years of consistent quality, reliability, and innovation.
               </p>
@@ -97,13 +99,13 @@ export default function AboutPage() {
             {[
               {
                 icon: <TrendingUp className="h-6 w-6 text-primary" />,
-                title: "8+ Years",
-                description: "Of industry experience in fashion manufacturing and distribution",
+                title: "5+ Years",
+                description: "Of revolutionizing India's clothing wholesale industry",
               },
               {
                 icon: <Users className="h-6 w-6 text-primary" />,
-                title: "500+ Retailers",
-                description: "Trust our quality and service for their inventory needs",
+                title: "10,000+ Retailers",
+                description: "Trust our quality and service across 20+ states in India",
               },
               {
                 icon: <CheckCircle className="h-6 w-6 text-primary" />,
@@ -141,21 +143,21 @@ export default function AboutPage() {
             {[
               {
                 icon: <Award className="h-8 w-8 text-primary" />,
-                title: "Design & Development",
+                title: "Design & Curation",
                 description:
-                  "Our in-house design team works closely with trend forecasters to create collections that resonate with today's consumers while maintaining timeless appeal.",
+                  "Our team works with top designers and manufacturers across India to create collections that blend traditional craftsmanship with contemporary trends that resonate with today's consumers.",
               },
               {
                 icon: <Factory className="h-8 w-8 text-primary" />,
                 title: "Manufacturing",
                 description:
-                  "We partner with ethical factories that meet our strict standards for quality, working conditions, and environmental responsibility.",
+                  "We partner with ethical factories across Delhi, Mumbai, and Surat that meet our strict standards for quality, working conditions, and timely production.",
               },
               {
                 icon: <Truck className="h-8 w-8 text-primary" />,
                 title: "Distribution",
                 description:
-                  "Our efficient logistics network ensures timely delivery to retailers worldwide, with transparent tracking and flexible shipping options.",
+                  "Our efficient logistics network ensures timely delivery to retailers across India, with specialized routes and partnerships that understand local challenges.",
               },
             ].map((process, index) => (
               <FadeInSection key={index} delay={index * 0.2} direction="up">
@@ -185,31 +187,32 @@ export default function AboutPage() {
             <div className="flex flex-col items-center text-center mb-12">
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Meet Our Leadership</h2>
               <p className="mt-4 max-w-2xl text-muted-foreground">
-                The experienced team behind Fashion Fusion's success.
+                The visionary team behind Fashion Fusion's success.
               </p>
             </div>
           </FadeInSection>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
             {[
               {
-                name: "Alexandra Chen",
-                role: "CEO & Co-Founder",
-                image: "/placeholder.svg?height=400&width=400",
+                name: "Priyanshu Gupta",
+                role: "Founder & CEO",
+                image:
+                  "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80",
+                bio: "With over 15 years in the fashion industry, Priyanshu founded Fashion Fusion with a vision to revolutionize India's clothing wholesale ecosystem.",
               },
               {
-                name: "Marcus Williams",
-                role: "COO & Co-Founder",
-                image: "/placeholder.svg?height=400&width=400",
+                name: "Ankush",
+                role: "COO",
+                image:
+                  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80",
+                bio: "Siddharth brings extensive operations expertise, having scaled multiple retail businesses across India before joining Fashion Fusion.",
               },
               {
-                name: "Sophia Rodriguez",
+                name: "Shivam Maurya",
                 role: "Creative Director",
-                image: "/placeholder.svg?height=400&width=400",
-              },
-              {
-                name: "David Kim",
-                role: "Head of Partnerships",
-                image: "/placeholder.svg?height=400&width=400",
+                image:
+                  "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&h=300&q=80",
+                bio: "A visionary designer with a keen eye for emerging trends, Shivam leads our creative team in developing innovative collections.",
               },
             ].map((member, index) => (
               <FadeInSection key={index} delay={index * 0.1} direction="up">
@@ -254,7 +257,7 @@ export default function AboutPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                Ready to partner with us?
+                Ready to join the retail revolution?
               </motion.h2>
               <motion.p
                 className="mt-4 text-primary-foreground/90"
@@ -263,8 +266,8 @@ export default function AboutPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                Join hundreds of successful retailers who have partnered with Fashion Fusion to access premium products,
-                competitive pricing, and flexible ordering.
+                Join thousands of successful retailers who have partnered with Fashion Fusion to access premium
+                products, competitive pricing, and flexible ordering with local logistics support.
               </motion.p>
             </div>
             <motion.div
@@ -276,8 +279,8 @@ export default function AboutPage() {
               whileTap={{ scale: 0.95 }}
             >
               <ButtonWithFeedback
-                size="lg"
                 variant="secondary"
+                size="lg"
                 onClick={() => {
                   window.location.href = "/partners"
                 }}
@@ -291,4 +294,3 @@ export default function AboutPage() {
     </div>
   )
 }
-

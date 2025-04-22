@@ -72,8 +72,8 @@ export default function PartnersPage() {
         <div className="absolute inset-0 z-0">
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-transparent" />
           <Image
-            src="/placeholder.svg?height=600&width=1920"
-            alt="Retail partners"
+            src="https://images.unsplash.com/photo-1582719471384-894fbb16e074?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1920&h=500&q=80"
+            alt="Partner with us"
             fill
             className="object-cover"
             priority
@@ -94,8 +94,8 @@ export default function PartnersPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            Join our network of successful retailers and gain access to premium products, competitive pricing, and
-            flexible ordering.
+            Join our network of successful retailers across India and gain access to premium products, diverse
+            inventory, and local logistics support.
           </motion.p>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -124,21 +124,21 @@ export default function PartnersPage() {
             {[
               {
                 icon: <Truck className="h-6 w-6 text-primary" />,
-                title: "Faster Supply Chain",
+                title: "Local Logistics Support",
                 description:
-                  "Direct access to manufacturers with expedited shipping and priority production slots. Cut your lead times by up to 40%.",
+                  "Specialized delivery routes across 20+ states with regional warehouses in Delhi, Mumbai, Kolkata, and Bangalore for 24-48 hour delivery to most locations.",
               },
               {
                 icon: <Award className="h-6 w-6 text-primary" />,
-                title: "Private Labeling",
+                title: "Diverse Inventory",
                 description:
-                  "Create your own branded line with our manufacturing expertise and low MOQs. Stand out in the market with unique products.",
+                  "Access to 5000+ styles across traditional, fusion, and western wear with new designs added weekly to keep your store fresh and trending.",
               },
               {
                 icon: <Factory className="h-6 w-6 text-primary" />,
-                title: "Flexible Ordering",
+                title: "Rapid Restocking",
                 description:
-                  "Start with smaller orders and scale up as your business grows with tiered pricing. No need to overcommit inventory.",
+                  "48-hour restocking on bestsellers with priority allocation to partner retailers during peak festival seasons like Diwali, Eid, and wedding season.",
               },
             ].map((benefit, index) => (
               <FadeInSection key={index} delay={index * 0.1} direction="up">
@@ -165,8 +165,8 @@ export default function PartnersPage() {
         <div className="container relative z-10 py-16">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
             {[
-              { number: "500+", label: "Active Retail Partners" },
-              { number: "25+", label: "Countries Served" },
+              { number: "10,000+", label: "Active Retail Partners" },
+              { number: "20+", label: "States Served" },
               { number: "5,000+", label: "Products Available" },
               { number: "98%", label: "Partner Satisfaction" },
             ].map((counter, index) => (
@@ -215,24 +215,27 @@ export default function PartnersPage() {
             {[
               {
                 quote:
-                  "Fashion Fusion has been instrumental in helping us scale our boutique. Their flexible MOQs and quality products have made a huge difference.",
-                name: "Sarah Johnson",
-                role: "Owner, Urban Style Boutique",
-                image: "/placeholder.svg?height=100&width=100",
+                  "Fashion Fusion has transformed our boutique business. Their diverse inventory and quick restocking have helped us increase our sales by 40% in just six months.",
+                name: "Rajesh Sharma",
+                role: "Owner, Jaipur Fashion House",
+                image:
+                  "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&h=100&q=80",
               },
               {
                 quote:
-                  "The private labeling option allowed us to create our own brand without the massive upfront investment typically required. Game changer!",
-                name: "Michael Chen",
-                role: "Founder, Trend Setters",
-                image: "/placeholder.svg?height=100&width=100",
+                  "The regional warehouse system has cut our delivery times in half. We can now promise our customers new styles every week, even during peak festival seasons.",
+                name: "Meera Patel",
+                role: "Founder, Trendsetters Mumbai",
+                image:
+                  "https://images.unsplash.com/photo-1534751516642-a1af1ef26a56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&h=100&q=80",
               },
               {
                 quote:
-                  "Their trend forecasting and quick turnaround times have helped us stay ahead of the competition. A truly valuable partnership.",
-                name: "Priya Patel",
-                role: "Merchandise Director, Fashion Forward",
-                image: "/placeholder.svg?height=100&width=100",
+                  "Their MOQ flexibility and credit terms have been game-changers for our small retail operation. We've been able to expand our product range without overextending financially.",
+                name: "Amit Singh",
+                role: "Director, Style Hub Lucknow",
+                image:
+                  "https://images.unsplash.com/photo-1566492031773-4f4e44671857?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=100&h=100&q=80",
               },
             ].map((testimonial, index) => (
               <FadeInSection key={index} delay={index * 0.1} direction="up">
@@ -282,7 +285,7 @@ export default function PartnersPage() {
               {
                 title: "Standard Partner",
                 description: "For smaller retailers just getting started",
-                features: ["Access to wholesale catalog", "Standard MOQs (100 units)", "Basic partner support"],
+                features: ["Access to wholesale catalog", "Standard MOQs (50 units)", "Basic partner support"],
                 featured: false,
               },
               {
@@ -290,7 +293,7 @@ export default function PartnersPage() {
                 description: "For established retailers with consistent volume",
                 features: [
                   "All Standard Partner benefits",
-                  "Lower MOQs (50 units)",
+                  "Lower MOQs (25 units)",
                   "Priority shipping",
                   "Basic private labeling",
                   "Dedicated account representative",
@@ -380,7 +383,7 @@ export default function PartnersPage() {
                     <h3 className="font-bold mb-2">Questions?</h3>
                     <p className="text-sm text-muted-foreground mb-4">Contact our partnerships team directly:</p>
                     <p className="text-sm hover:text-primary transition-colors">partners@fashionfusion.com</p>
-                    <p className="text-sm hover:text-primary transition-colors">+1 (555) 123-4567</p>
+                    <p className="text-sm hover:text-primary transition-colors">+91 98765 43210</p>
                   </div>
                 </HoverCardEffect>
               </div>
@@ -492,8 +495,9 @@ export default function PartnersPage() {
                       >
                         <option value="">Select business type</option>
                         <option value="boutique">Boutique</option>
-                        <option value="department-store">Department Store</option>
+                        <option value="multi-brand-store">Multi-Brand Store</option>
                         <option value="online-retailer">Online Retailer</option>
+                        <option value="department-store">Department Store</option>
                         <option value="other">Other</option>
                       </select>
                     </div>
@@ -569,17 +573,17 @@ export default function PartnersPage() {
               {
                 question: "What are the requirements to become a partner?",
                 answer:
-                  "We look for established retailers with a strong brand presence, either online or in physical locations. While we don't have strict revenue requirements, we evaluate each application based on business potential and alignment with our values.",
+                  "We look for established retailers with a physical store or online presence. While we don't have strict revenue requirements, we evaluate each application based on business potential and alignment with our values.",
               },
               {
                 question: "How long does the application process take?",
                 answer:
-                  "Typically, we review applications within 2 business days. If approved, the onboarding process takes approximately 1-2 weeks, depending on your partnership tier and specific requirements.",
+                  "Typically, we review applications within 2 business days. If approved, the onboarding process takes approximately 3-5 days, depending on your partnership tier and location in India.",
               },
               {
                 question: "Can I start with a small order to test the products?",
                 answer:
-                  "Yes, our Standard Partnership tier allows for our minimum order quantities, which start at 100 units per style. We also offer sample orders for qualified applicants before committing to larger purchases.",
+                  "Yes, our Standard Partnership tier allows for minimum order quantities starting at 50 units per style. We also offer sample orders for qualified applicants before committing to larger purchases.",
               },
               {
                 question: "Do you offer exclusivity for certain products or regions?",
@@ -589,12 +593,12 @@ export default function PartnersPage() {
               {
                 question: "What kind of marketing support do you provide?",
                 answer:
-                  "All partners receive access to our digital asset library with product images and descriptions. Premium and Elite Partners also receive co-marketing opportunities, feature placement in our directory, and customized marketing materials.",
+                  "All partners receive access to our digital asset library with product images and descriptions. Premium and Elite Partners also receive co-marketing opportunities, feature placement in our directory, and customized marketing materials in multiple Indian languages.",
               },
               {
-                question: "How are shipping and returns handled?",
+                question: "How are shipping and logistics handled across India?",
                 answer:
-                  "We offer various shipping options based on your location and partnership tier. Returns for manufacturing defects are fully covered, while other returns are evaluated according to our partnership policies.",
+                  "We have regional warehouses in Delhi, Mumbai, Kolkata, and Bangalore with specialized delivery routes covering 20+ states. Most locations receive deliveries within 24-48 hours, with special arrangements for remote areas.",
               },
             ].map((faq, index) => (
               <FadeInSection key={index} delay={index * 0.05} direction={index % 2 === 0 ? "left" : "right"}>
@@ -624,7 +628,7 @@ export default function PartnersPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
               >
-                Ready to grow your retail business?
+                Ready to join India's retail revolution?
               </motion.h2>
               <motion.p
                 className="mt-4 text-primary-foreground/90"
@@ -633,8 +637,8 @@ export default function PartnersPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                Join hundreds of successful retailers who have partnered with Fashion Fusion to access premium products,
-                competitive pricing, and flexible ordering.
+                Join thousands of successful retailers who have partnered with Fashion Fusion to access premium
+                products, diverse inventory, and local logistics support.
               </motion.p>
             </div>
             <motion.div
@@ -661,4 +665,3 @@ export default function PartnersPage() {
     </div>
   )
 }
-

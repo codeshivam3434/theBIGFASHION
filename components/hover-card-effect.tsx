@@ -77,4 +77,3 @@ export default function HoverCardEffect({
     </motion.div>
   )
 }
-

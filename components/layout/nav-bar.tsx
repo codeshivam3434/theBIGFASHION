@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { motion } from "framer-motion"
-import { Menu } from "lucide-react"
+import { Menu, LogIn, UserPlus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { MobileMenu } from "@/components/mobile-menu"
 
@@ -12,6 +12,11 @@ export default function NavBar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const pathname = usePathname()
+
+  // Check if we're on an auth page to hide the auth buttons
+  const isAuthPage = pathname.startsWith("/auth")
+  // Check if we're on a dashboard page to hide the auth buttons
+  const isDashboardPage = pathname.startsWith("/dashboard")
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,24 +42,45 @@ export default function NavBar() {
         transition={{ type: "spring", stiffness: 300, damping: 30 }}
       >
         <div className="container flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 text-xl font-bold">
-            <span>FASHION</span>
-            <span className="text-primary">FUSION</span>
+          <Link href="/" className="flex items-center gap-2">
+            <span className="text-xl font-bold hidden sm:inline-block">THE</span>
+            <span className="text-xl font-bold text-primary hidden sm:inline-block">BIG FASHION</span>
+            <span className="text-xl font-bold sm:hidden">THE BIG</span>
           </Link>
           <nav className="hidden md:flex gap-8">
             <NavLink href="/" label="Home" isActive={pathname === "/"} />
             <NavLink href="/about" label="About Us" isActive={pathname.startsWith("/about")} />
-            <NavLink href="/catalog" label="Catalog" isActive={pathname.startsWith("/catalog")} />
+            <NavLink href="/solutions" label="Solutions" isActive={pathname.startsWith("/solutions")} />
             <NavLink href="/partners" label="For Retailers" isActive={pathname.startsWith("/partners")} />
             <NavLink href="/contact" label="Contact" isActive={pathname.startsWith("/contact")} />
           </nav>
           <div className="flex items-center gap-4">
-            <Link
-              href="/partners"
-              className="hidden md:inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-all duration-300 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
-            >
-              Become a Partner
-            </Link>
+            {!isAuthPage && !isDashboardPage && (
+              <>
+                <Link
+                  href="/auth/login"
+                  className="hidden md:inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
+                >
+                  <LogIn className="mr-2 h-4 w-4" />
+                  Sign In
+                </Link>
+                <Link
+                  href="/auth/signup"
+                  className="hidden md:inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-all duration-300 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
+                >
+                  <UserPlus className="mr-2 h-4 w-4" />
+                  Sign Up
+                </Link>
+              </>
+            )}
+            {isDashboardPage && (
+              <Link
+                href="/dashboard"
+                className="hidden md:inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-all duration-300 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
+              >
+                Dashboard
+              </Link>
+            )}
             <Button
               variant="ghost"
               size="icon"
@@ -92,4 +118,3 @@ function NavLink({ href, label, isActive }: NavLinkProps) {
     </Link>
   )
 }
-

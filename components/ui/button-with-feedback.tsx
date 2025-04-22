@@ -5,6 +5,7 @@ import { Loader2 } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 
+// Update the button variants to use our new color scheme
 const buttonVariants = cva(
   "relative inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-95",
   {
@@ -73,4 +74,3 @@ const ButtonWithFeedback = React.forwardRef<HTMLButtonElement, ButtonProps>(
 ButtonWithFeedback.displayName = "ButtonWithFeedback"
 
 export { ButtonWithFeedback, buttonVariants }
-

@@ -11,6 +11,7 @@ import { motion } from "framer-motion"
 import FadeInSection from "@/components/fade-in-section"
 import HoverCardEffect from "@/components/hover-card-effect"
 import { useState } from "react"
+import Image from "next/image"
 
 export default function ContactPage() {
   const [formState, setFormState] = useState({
@@ -93,7 +94,7 @@ export default function ContactPage() {
                     {
                       icon: <MapPin className="h-6 w-6 text-primary" />,
                       title: "Our Location",
-                      details: ["1234 Fashion Avenue, Suite 500", "New York, NY 10001"],
+                      details: ["Fashion Fusion Headquarters", "B-12, Sector 63", "Noida, Uttar Pradesh 201301"],
                     },
                     {
                       icon: <Mail className="h-6 w-6 text-primary" />,
@@ -107,7 +108,7 @@ export default function ContactPage() {
                     {
                       icon: <Phone className="h-6 w-6 text-primary" />,
                       title: "Call Us",
-                      details: ["Main Office: +1 (555) 123-4567", "Partnership Inquiries: +1 (555) 987-6543"],
+                      details: ["Main Office: +91 120 4567890", "Partnership Inquiries: +91 98765 43210"],
                     },
                   ].map((contact, index) => (
                     <motion.div
@@ -138,8 +139,7 @@ export default function ContactPage() {
                 </div>
                 <div className="mt-12">
                   <h3 className="font-bold mb-4">Business Hours</h3>
-                  <p className="text-muted-foreground">Monday - Friday: 9:00 AM - 6:00 PM EST</p>
-                  <p className="text-muted-foreground">Saturday: 10:00 AM - 2:00 PM EST</p>
+                  <p className="text-muted-foreground">Monday - Saturday: 10:00 AM - 7:00 PM IST</p>
                   <p className="text-muted-foreground">Sunday: Closed</p>
                 </div>
               </div>
@@ -165,7 +165,7 @@ export default function ContactPage() {
                   <>
                     <h2 className="text-2xl font-bold mb-6">Send Us a Message</h2>
                     <form className="space-y-6" onSubmit={handleSubmit}>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <div className="space-y-2">
                           <label htmlFor="firstName" className="text-sm font-medium">
                             First Name
@@ -275,7 +275,12 @@ export default function ContactPage() {
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.3 }}
               >
-                <p className="text-muted-foreground">Interactive Map Would Be Displayed Here</p>
+                <Image
+                  src="https://images.unsplash.com/photo-1577563908411-5077b6dc7624?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=800&q=80"
+                  alt="Contact our team"
+                  fill
+                  className="object-cover rounded-lg"
+                />
               </motion.div>
               <motion.div className="absolute top-4 right-4 z-10" whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                 <Button variant="outline" size="sm" className="bg-background/80 backdrop-blur-sm">
@@ -308,7 +313,7 @@ export default function ContactPage() {
               {
                 question: "What are your minimum order quantities?",
                 answer:
-                  "Our standard MOQ is 100 units per style, but this can vary based on your partnership tier and specific products. Premium and Elite partners enjoy lower MOQs.",
+                  "Our standard MOQ is 50 units per style, but this can vary based on your partnership tier and specific products. Premium and Elite partners enjoy lower MOQs.",
               },
               {
                 question: "Do you offer custom manufacturing?",
@@ -316,9 +321,9 @@ export default function ContactPage() {
                   "Yes, we offer custom manufacturing services for partners looking to create unique pieces or private label collections. Contact our partnerships team to discuss your specific needs.",
               },
               {
-                question: "What is your shipping policy?",
+                question: "What is your shipping policy across India?",
                 answer:
-                  "Shipping times and costs vary based on location and order size. Standard partners receive regular shipping, while Premium and Elite partners enjoy priority and expedited options.",
+                  "We have regional warehouses in Delhi, Mumbai, Kolkata, and Bangalore with specialized delivery routes covering 20+ states. Most locations receive deliveries within 24-48 hours.",
               },
             ].map((faq, index) => (
               <FadeInSection key={index} delay={index * 0.05} direction={index % 2 === 0 ? "left" : "right"}>
@@ -347,11 +352,11 @@ export default function ContactPage() {
             transition={{ duration: 0.8 }}
           >
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-6 text-white">
-              Ready to elevate your fashion business?
+              Ready to join India's retail revolution?
             </h2>
             <p className="max-w-2xl text-primary-foreground/90 mb-8">
-              Join hundreds of successful retailers who have partnered with Fashion Fusion to access premium products,
-              competitive pricing, and flexible ordering.
+              Join thousands of successful retailers who have partnered with Fashion Fusion to access premium products,
+              diverse inventory, and local logistics support.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
@@ -371,4 +376,3 @@ export default function ContactPage() {
     </div>
   )
 }
-

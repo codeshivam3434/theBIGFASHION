@@ -51,6 +51,25 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Updated brand colors for Silicon Valley tech aesthetic
+        brand: {
+          DEFAULT: "#3b82f6", // Blue 500
+          light: "#60a5fa", // Blue 400
+          dark: "#1e40af", // Blue 800
+          accent: "#f59e0b", // Amber 500 - for accents and CTAs
+          success: "#10b981", // Emerald 500
+          warning: "#f59e0b", // Amber 500
+          error: "#ef4444", // Red 500
+          gray: "#64748b", // Slate 500
+        },
+        // Fashion-specific colors
+        fashion: {
+          primary: "#3b82f6", // Blue 500
+          secondary: "#60a5fa", // Blue 400
+          accent: "#f59e0b", // Amber 500
+          neutral: "#f8fafc", // Slate 50
+          dark: "#1e293b", // Slate 800
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -66,28 +85,12 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: 0 },
         },
-        float: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-10px)" },
-        },
-        pulse: {
-          "0%, 100%": { opacity: 1 },
-          "50%": { opacity: 0.5 },
-        },
-        shimmer: {
-          "0%": { backgroundPosition: "-700px 0" },
-          "100%": { backgroundPosition: "700px 0" },
-        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
-        float: "float 3s ease-in-out infinite",
-        pulse: "pulse 2s ease-in-out infinite",
-        shimmer: "shimmer 2s infinite linear",
       },
     },
   },
   plugins: [require("tailwindcss-animate")],
 }
-
