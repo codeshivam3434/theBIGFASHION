@@ -184,15 +184,15 @@ export default function ShippingPolicyPage() {
             <h2 className="text-2xl font-bold">8. Contact Us</h2>
             <p>If you have any questions about our shipping policy, please contact us:</p>
             <p>
-              Fashion Fusion
+             The BIGFASHION
               <br />
-              123 Fashion Avenue, Suite 500
+              B-12, Sector 63,Andheri East,
               <br />
-              New York, NY 10001
+              Mumbai, Maharashtra-401208
               <br />
-              Email: shipping@fashionfusion.com
+              Email: shipping.thebigfashion.com
               <br />
-              Phone: +1 (555) 123-4567
+              Phone: +91 - 7033383119
             </p>
           </div>
         </FadeInSection>

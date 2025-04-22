@@ -181,9 +181,10 @@ export default function TermsPage() {
             <h2 className="text-2xl font-bold">10. Contact Us</h2>
             <p>If you have any questions about these Terms, please contact us:</p>
             <ul className="list-disc pl-6 space-y-2">
-              <li>By email: legal@fashionfusion.com</li>
-              <li>By phone: +1 (555) 123-4567</li>
-              <li>By mail: 123 Fashion Avenue, Suite 500, New York, NY 10001</li>
+              <li>By email: legal.thebigfashion@gmail.com</li>
+              <li>By phone: +91 7033383119</li>
+              <li>By mail: B-12, Sector 63,Andheri East,
+Mumbai, Maharashtra 401208</li>
             </ul>
           </div>
         </FadeInSection>
