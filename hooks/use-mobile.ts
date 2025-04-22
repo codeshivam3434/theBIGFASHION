@@ -2,8 +2,7 @@
 
 import { useState, useEffect } from "react"
 
-// Fix: Export the hook properly
-export function useIsMobile() {
+export const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
@@ -21,6 +20,3 @@ export function useIsMobile() {
 
   return isMobile
 }
-
-// Add this for backward compatibility with any components using the old import style
-export default useIsMobile
