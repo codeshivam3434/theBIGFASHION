@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
+import { useState, useRef } from "react"
 import Link from "next/link"
 import { motion, useScroll, useTransform } from "framer-motion"
 import {
@@ -10,29 +10,29 @@ import {
   BarChart3,
   Truck,
   Zap,
-  LineChart,
   Users,
   CheckCircle,
   ChevronRight,
-  Clock,
   Sparkles,
 } from "lucide-react"
 import { ButtonWithFeedback } from "@/components/ui/button-with-feedback"
 import { Button } from "@/components/ui/button"
 import FadeInSection from "@/components/fade-in-section"
 import ScrollToTop from "@/components/scroll-to-top"
-import { OptimizedImage } from "@/components/ui/optimized-image"
+import { EnhancedImage } from "@/components/ui/enhanced-image"
 import { getCategoryImage } from "@/lib/image-repository"
-import { VideoBackground } from "@/components/ui/video-background"
 import { VideoTestimonialsSection } from "@/components/video-testimonials-section"
 import { videoTestimonials } from "@/data/video-testimonials"
+import { VisualExplainer } from "@/components/visual-explainer"
+import { ProcessFlow } from "@/components/process-flow"
+import { BeforeAfterComparison } from "@/components/before-after-comparison"
+import { imageSizes } from "@/lib/image-sizing"
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState({
     demo: false,
     contact: false,
   })
-  const [activeTestimonial, setActiveTestimonial] = useState(0)
   const heroRef = useRef(null)
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -57,14 +57,7 @@ export default function Home() {
     }, 1000)
   }
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveTestimonial((prev) => (prev + 1) % testimonials.length)
-    }, 5000)
-    return () => clearInterval(interval)
-  }, [])
-
-  // Replace the testimonials array with this updated version that uses our image repository
+  // Testimonials with consistent image sizing
   const testimonials = [
     {
       quote:
@@ -91,17 +84,21 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero Section with Video Background */}
+      {/* Hero Section with High-Quality Background Image */}
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Video Background */}
-        <VideoBackground
-          src="/videos/fashion-showcase.mp4"
-          overlayOpacity={0.7}
-          priority={true}
-          fallbackImage="/images/hero-fallback.jpg"
-          mobileImage="/images/hero-mobile.jpg"
-          posterImage="/images/hero-poster.jpg"
-        />
+        {/* Replace video background with high-quality image */}
+        <div className="absolute inset-0 z-0">
+          <EnhancedImage
+            src="/vibrant-retail-experience.png"
+            alt="Fashion retail store"
+            fill
+            priority
+            quality="high"
+            objectFit="cover"
+            className="brightness-[0.7]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40 z-10"></div>
+        </div>
 
         <motion.div className="container relative z-20 px-4 py-32 md:py-40 text-center" style={{ opacity, scale, y }}>
           <motion.div
@@ -123,7 +120,7 @@ export default function Home() {
             Empower Your Retail Business with <span className="text-primary">Risk-Free</span> Technology
           </motion.h1>
           <motion.p
-            className="mt-6 text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto"
+            className="mt-6 text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
@@ -169,7 +166,7 @@ export default function Home() {
               (text, i) => (
                 <div key={i} className="flex items-center">
                   <CheckCircle className="h-5 w-5 text-primary mr-2" />
-                  <span className="text-gray-300 text-sm">{text}</span>
+                  <span className="text-gray-200 text-sm">{text}</span>
                 </div>
               ),
             )}
@@ -186,65 +183,55 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Problem Statement Section */}
-      <section className="py-20 bg-gradient-to-b from-background to-muted/30">
-        <div className="container px-4">
-          <FadeInSection>
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">The Challenges Facing Fashion Retailers Today</h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Small and medium retailers in Tier 2 & 3 cities face unique obstacles that limit their growth potential.
-              </p>
-            </div>
-          </FadeInSection>
+      {/* Problem Statement Section - Visual Explainer */}
+      <VisualExplainer
+        title="The Challenges Facing Fashion Retailers Today"
+        subtitle="Small and medium retailers in Tier 2 & 3 cities face unique obstacles that limit their growth potential."
+        steps={[
+          {
+            title: "Inventory Risk",
+            description:
+              "Unsold inventory ties up capital and reduces profitability, creating significant financial pressure.",
+            icon: <TrendingUp className="h-6 w-6" />,
+            illustration: "/fashion-glut.png",
+            color: "primary",
+          },
+          {
+            title: "Limited Market Insights",
+            description:
+              "Without data analytics, retailers struggle to understand customer preferences and market trends.",
+            icon: <BarChart3 className="h-6 w-6" />,
+            illustration: "/bewildered-business-analysis.png",
+            color: "purple-500",
+          },
+          {
+            title: "Complex Supply Chain",
+            description: "Managing suppliers, logistics, and inventory becomes overwhelming without proper systems.",
+            icon: <Truck className="h-6 w-6" />,
+            illustration: "/interconnected-fashion-flow.png",
+            color: "blue-500",
+          },
+        ]}
+        className="py-20 bg-gradient-to-b from-background to-muted/30"
+      />
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: <Clock className="h-10 w-10 text-primary" />,
-                title: "Inventory Risk",
-                description:
-                  "Unsold inventory ties up capital and reduces profitability, creating significant financial pressure.",
-              },
-              {
-                icon: <LineChart className="h-10 w-10 text-primary" />,
-                title: "Limited Market Insights",
-                description:
-                  "Without data analytics, retailers struggle to understand customer preferences and market trends.",
-              },
-              {
-                icon: <Truck className="h-10 w-10 text-primary" />,
-                title: "Complex Supply Chain",
-                description:
-                  "Managing suppliers, logistics, and inventory becomes overwhelming without proper systems.",
-              },
-            ].map((item, index) => (
-              <FadeInSection key={index} delay={index * 0.1} direction="up">
-                <motion.div
-                  className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 h-full"
-                  whileHover={{ y: -10, boxShadow: "0 20px 40px rgba(0,0,0,0.1)" }}
-                >
-                  <div className="rounded-full bg-primary/10 p-4 inline-block mb-6">{item.icon}</div>
-                  <h3 className="text-2xl font-bold mb-4">{item.title}</h3>
-                  <p className="text-muted-foreground">{item.description}</p>
-                </motion.div>
-              </FadeInSection>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Retailer Success Stories with Video */}
 
-      {/* Solution Section with Video Background */}
+      {/* Solution Section with High-Quality Background */}
       <section className="py-20 relative overflow-hidden">
-        <VideoBackground
-          src="/videos/retail-analytics.mp4"
-          overlayOpacity={0.9}
-          overlayColor="#000"
-          fallbackImage="/images/solution-fallback.jpg"
-          mobileImage="/images/solution-mobile.jpg"
-          posterImage="/images/solution-poster.jpg"
-        />
-        <div className="container px-4 relative z-10">
+        <div className="absolute inset-0 z-0">
+          <EnhancedImage
+            src="/fashion-retail-insights.png"
+            alt="Retail analytics solution"
+            fill
+            quality="high"
+            objectFit="cover"
+            className="brightness-[0.3]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40 z-10"></div>
+        </div>
+
+        <div className="container px-4 relative z-20">
           <FadeInSection>
             <div className="text-center mb-16">
               <span className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20 mb-4">
@@ -263,12 +250,14 @@ export default function Home() {
               <div className="relative">
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary to-purple-600 rounded-lg blur opacity-25"></div>
                 <div className="relative bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl">
-                  <OptimizedImage
-                    src={getCategoryImage("feature", 0).src}
+                  <EnhancedImage
+                    src="/fashion-retail-dashboard.png"
                     alt="Platform dashboard"
-                    width={800}
-                    height={600}
+                    width={imageSizes.feature.large.width}
+                    height={imageSizes.feature.large.height}
                     className="w-full h-auto"
+                    quality="high"
+                    rounded="lg"
                   />
                 </div>
               </div>
@@ -334,125 +323,113 @@ export default function Home() {
         </div>
       </section>
 
-      {/* How It Works */}
-      <section className="py-20 bg-muted/30">
-        <div className="container px-4">
-          <FadeInSection>
-            <div className="text-center mb-16">
-              <span className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20 mb-4">
-                Simple Process
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">How It Works</h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Our streamlined process makes it easy to transform your retail business
-              </p>
-            </div>
-          </FadeInSection>
+      {/* How It Works - Process Flow */}
+      <ProcessFlow
+        title="How It Works"
+        subtitle="Our streamlined process makes it easy to transform your retail business"
+        steps={[
+          {
+            number: "01",
+            title: "Connect",
+            description: "Schedule a consultation with our team to discuss your business needs.",
+            icon: <Users className="h-6 w-6 text-primary" />,
+          },
+          {
+            number: "02",
+            title: "Onboard",
+            description: "We'll set up your account and integrate our platform with your business.",
+            icon: <Zap className="h-6 w-6 text-primary" />,
+          },
+          {
+            number: "03",
+            title: "Optimize",
+            description: "Use our tools to streamline operations and make data-driven decisions.",
+            icon: <BarChart3 className="h-6 w-6 text-primary" />,
+          },
+          {
+            number: "04",
+            title: "Scale",
+            description: "Grow your business with our ongoing support and advanced features.",
+            icon: <TrendingUp className="h-6 w-6 text-primary" />,
+          },
+        ]}
+        className="py-20 bg-muted/30"
+      />
 
-          <div className="relative">
-            {/* Connection Line */}
-            <div className="absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-primary/50 via-primary to-primary/50 hidden md:block"></div>
-
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
-              {[
-                {
-                  number: "01",
-                  title: "Connect",
-                  description: "Schedule a consultation with our team to discuss your business needs.",
-                },
-                {
-                  number: "02",
-                  title: "Onboard",
-                  description: "We'll set up your account and integrate our platform with your business.",
-                },
-                {
-                  number: "03",
-                  title: "Optimize",
-                  description: "Use our tools to streamline operations and make data-driven decisions.",
-                },
-                {
-                  number: "04",
-                  title: "Scale",
-                  description: "Grow your business with our ongoing support and advanced features.",
-                },
-              ].map((step, index) => (
-                <FadeInSection key={index} delay={index * 0.1} direction="up">
-                  <motion.div
-                    className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 h-full flex flex-col items-center text-center relative"
-                    whileHover={{ y: -10, boxShadow: "0 20px 40px rgba(0,0,0,0.1)" }}
-                  >
-                    <div className="absolute -top-6 bg-primary text-white w-12 h-12 rounded-full flex items-center justify-center text-xl font-bold">
-                      {step.number}
-                    </div>
-                    <h3 className="text-2xl font-bold mt-6 mb-4">{step.title}</h3>
-                    <p className="text-muted-foreground">{step.description}</p>
-                  </motion.div>
-                </FadeInSection>
-              ))}
-            </div>
-          </div>
-
-          <div className="mt-16 text-center">
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <ButtonWithFeedback size="lg" onClick={handleDemoClick} className="px-8">
-                Get Started Today
-              </ButtonWithFeedback>
-            </motion.div>
-          </div>
+      <div className="container px-4 pb-20 bg-muted/30">
+        <div className="text-center">
+          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+            <ButtonWithFeedback size="lg" onClick={handleDemoClick} className="px-8">
+              Get Started Today
+            </ButtonWithFeedback>
+          </motion.div>
         </div>
-      </section>
+      </div>
 
-      {/* Features Section */}
+      {/* Before/After Comparison */}
+      <BeforeAfterComparison
+        title="Transform Your Retail Business"
+        subtitle="See the difference our platform makes for fashion retailers"
+        beforeTitle="Traditional Approach"
+        afterTitle="With Our Platform"
+        beforeImage="/retail-inventory-overload.png"
+        afterImage="/modern-retail-inventory.png"
+        beforePoints={[
+          "Capital tied up in unsold inventory",
+          "Manual tracking of sales and stock",
+          "Limited visibility into customer preferences",
+          "Reactive approach to market trends",
+          "Complex supplier management",
+          "High operational overhead",
+        ]}
+        afterPoints={[
+          "Risk-free inventory model - pay only for what sells",
+          "Real-time digital inventory management",
+          "Data-driven customer insights",
+          "Proactive trend identification and forecasting",
+          "Streamlined supply chain with full visibility",
+          "Reduced operational costs with automation",
+        ]}
+        className="py-20 bg-gradient-to-b from-muted/30 to-background"
+      />
+
+      {/* Features Section - Reduced to 3 Key Features */}
       <section className="py-20">
         <div className="container px-4">
           <FadeInSection>
             <div className="text-center mb-16">
               <span className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20 mb-4">
-                Powerful Features
+                Key Features
               </span>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">Everything You Need to Succeed</h2>
               <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Our comprehensive platform offers all the tools and features you need to transform your retail business
+                Our comprehensive platform offers powerful tools to transform your retail business
               </p>
             </div>
           </FadeInSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             {[
               {
                 icon: <BarChart3 className="h-8 w-8 text-primary" />,
-                title: "Inventory Management",
+                title: "Advanced Analytics",
                 description:
-                  "Real-time tracking, low-stock alerts, and automated reordering to optimize your inventory.",
+                  "Gain powerful insights with real-time dashboards and reports to track performance, identify trends, and make data-driven decisions that boost your bottom line.",
               },
               {
-                icon: <LineChart className="h-8 w-8 text-primary" />,
-                title: "Sales Analytics",
+                icon: <ShieldCheck className="h-8 w-8 text-primary" />,
+                title: "Risk-Free Inventory",
                 description:
-                  "Comprehensive dashboards and reports to track performance and identify growth opportunities.",
-              },
-              {
-                icon: <Truck className="h-8 w-8 text-primary" />,
-                title: "Flexible Ordering",
-                description: "Place orders with customizable MOQs tailored to your specific business needs.",
+                  "Our revolutionary model eliminates financial risk with a pay-for-what-sells approach, freeing up your capital and allowing you to offer a wider product range.",
               },
               {
                 icon: <Zap className="h-8 w-8 text-primary" />,
-                title: "Premium FrontStore",
-                description: "Offer your customers a high-quality shopping experience with our customizable interface.",
-              },
-              {
-                icon: <Users className="h-8 w-8 text-primary" />,
-                title: "Customer Insights",
-                description: "Understand your customers better with detailed demographic and behavioral data.",
-              },
-              {
-                icon: <TrendingUp className="h-8 w-8 text-primary" />,
-                title: "Growth Tools",
-                description: "Access marketing templates, promotion strategies, and business expansion resources.",
+                title: "Streamlined Operations",
+                description:
+                  "Automate your entire business workflow from inventory management to order processing and customer insights, saving time and reducing operational costs.",
               },
             ].map((feature, index) => (
-              <FadeInSection key={index} delay={index * 0.05} direction="up">
+              <FadeInSection key={index} delay={index * 0.1} direction="up">
                 <motion.div
                   className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 h-full"
                   whileHover={{ y: -5, boxShadow: "0 15px 30px rgba(0,0,0,0.1)" }}
@@ -470,18 +447,22 @@ export default function Home() {
       {/* Video Testimonials Section */}
       <VideoTestimonialsSection testimonials={videoTestimonials} />
 
-      {/* CTA Section with Video Background */}
+      {/* CTA Section with High-Quality Background */}
       <section className="py-20 relative overflow-hidden">
-        <VideoBackground
-          src="/videos/fashion-retail.mp4"
-          overlayOpacity={0.8}
-          overlayColor="#000"
-          fallbackImage="/images/cta-fallback.jpg"
-          mobileImage="/images/cta-mobile.jpg"
-          posterImage="/images/cta-poster.jpg"
-        />
-        <div className="container px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-white">
+        <div className="absolute inset-0 z-0">
+          <EnhancedImage
+            src="/tech-chic-boutique.png"
+            alt="Fashion retail success"
+            fill
+            quality="high"
+            objectFit="cover"
+            className="brightness-[0.3]"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40 z-10"></div>
+        </div>
+
+        <div className="container px-4 relative z-20">
+          <div className="max-w-4xl mx-auto text-center text-white bg-black/30 p-10 rounded-2xl backdrop-blur-sm">
             <motion.h2
               className="text-3xl md:text-5xl font-bold mb-6"
               initial={{ opacity: 0, y: 20 }}
@@ -512,7 +493,7 @@ export default function Home() {
               <Button
                 size="lg"
                 variant="secondary"
-                className="text-primary font-bold text-base px-8 py-6"
+                className="text-primary font-bold text-base px-8 py-6 hover:bg-secondary/90"
                 onClick={handleDemoClick}
               >
                 Schedule a Demo
@@ -521,84 +502,12 @@ export default function Home() {
               <Button
                 size="lg"
                 variant="outline"
-                className="text-white border-white hover:bg-white/10 text-base px-8 py-6"
+                className="text-white border-white hover:bg-white/20 font-medium text-base px-8 py-6"
                 onClick={handleContactClick}
               >
                 Contact Sales
               </Button>
             </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="py-20">
-        <div className="container px-4">
-          <FadeInSection>
-            <div className="text-center mb-16">
-              <span className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20 mb-4">
-                Common Questions
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Frequently Asked Questions</h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Everything you need to know about our platform and services
-              </p>
-            </div>
-          </FadeInSection>
-
-          <div className="max-w-3xl mx-auto">
-            {[
-              {
-                question: "How does the risk-free logistics model work?",
-                answer:
-                  "Our risk-free logistics model allows retailers to access inventory without the traditional upfront investment. You only pay for products after they sell, eliminating the risk of unsold inventory. We manage the supply chain, warehousing, and distribution, while you focus on selling and growing your business.",
-              },
-              {
-                question: "What size retailers can benefit from your platform?",
-                answer:
-                  "Our platform is specifically designed for small and medium-sized fashion retailers in Tier 2 and Tier 3 cities of Uttar Pradesh. Whether you have a single store or multiple locations, our scalable solutions can be tailored to meet your specific needs and growth objectives.",
-              },
-              {
-                question: "How long does implementation take?",
-                answer:
-                  "Most retailers are fully onboarded within 1-2 weeks. Our streamlined implementation process includes account setup, inventory integration, staff training, and customization of your dashboard. We provide hands-on support throughout the entire process to ensure a smooth transition.",
-              },
-              {
-                question: "What kind of analytics does the platform provide?",
-                answer:
-                  "Our platform offers comprehensive analytics including sales performance, inventory turnover, customer demographics, purchasing patterns, and market trends. These insights help you make data-driven decisions to optimize inventory, improve marketing, and increase profitability.",
-              },
-              {
-                question: "Is there a minimum contract period?",
-                answer:
-                  "We offer flexible partnership options with no long-term commitments required. You can choose from monthly or annual plans based on your business needs, with the ability to upgrade or adjust your services as your business grows.",
-              },
-            ].map((faq, index) => (
-              <FadeInSection key={index} delay={index * 0.1}>
-                <motion.div
-                  className="mb-6 bg-white dark:bg-gray-800 rounded-lg shadow-md overflow-hidden"
-                  whileHover={{ y: -3, boxShadow: "0 10px 30px rgba(0,0,0,0.1)" }}
-                >
-                  <details className="group">
-                    <summary className="flex justify-between items-center p-6 cursor-pointer">
-                      <h3 className="text-xl font-semibold">{faq.question}</h3>
-                      <ChevronRight className="h-5 w-5 transition-transform duration-300 group-open:rotate-90" />
-                    </summary>
-                    <div className="px-6 pb-6 pt-0">
-                      <p className="text-muted-foreground">{faq.answer}</p>
-                    </div>
-                  </details>
-                </motion.div>
-              </FadeInSection>
-            ))}
-          </div>
-
-          <div className="mt-12 text-center">
-            <p className="text-muted-foreground mb-4">Still have questions?</p>
-            <Link href="/contact" className="text-primary font-medium hover:underline inline-flex items-center">
-              Contact our team
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
           </div>
         </div>
       </section>

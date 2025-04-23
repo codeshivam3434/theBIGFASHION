@@ -3,12 +3,15 @@
 import { useState } from "react"
 import Image from "next/image"
 import { motion } from "framer-motion"
-import { ShieldCheck, BarChart3, Zap, Layers, Monitor, Smartphone, CheckCircle } from "lucide-react"
+import { BarChart3 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { ButtonWithFeedback } from "@/components/ui/button-with-feedback"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import FadeInSection from "@/components/fade-in-section"
 import { VideoBackground } from "@/components/ui/video-background"
+import { FeatureComparison } from "@/components/feature-comparison"
+import { SolutionShowcase } from "@/components/solution-showcase"
+import { LineChart, TrendingUp, Users } from "lucide-react"
+import { InteractiveFeatureCards } from "@/components/interactive-feature-cards"
 
 export default function SolutionsPage() {
   const [isLoading, setIsLoading] = useState({
@@ -29,43 +32,6 @@ export default function SolutionsPage() {
       window.location.href = "/contact"
     }, 1000)
   }
-
-  // Solution features with icons and descriptions
-  const solutionFeatures = [
-    {
-      icon: <ShieldCheck className="h-10 w-10 text-primary" />,
-      title: "Risk-Free Logistics",
-      description: "Eliminate inventory risk with our revolutionary model",
-      features: [
-        "No upfront inventory investment",
-        "Flexible payment terms",
-        "Managed warehousing and distribution",
-        "Rapid restocking of bestsellers",
-      ],
-    },
-    {
-      icon: <Layers className="h-10 w-10 text-primary" />,
-      title: "Supply Chain Management",
-      description: "Streamline your entire supply chain from sourcing to delivery",
-      features: [
-        "End-to-end visibility",
-        "Automated ordering",
-        "Quality control processes",
-        "Optimized delivery routes",
-      ],
-    },
-    {
-      icon: <BarChart3 className="h-10 w-10 text-primary" />,
-      title: "Business Intelligence",
-      description: "Make data-driven decisions with comprehensive analytics",
-      features: [
-        "Sales performance tracking",
-        "Customer behavior analysis",
-        "Market trend identification",
-        "Predictive inventory forecasting",
-      ],
-    },
-  ]
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -128,7 +94,7 @@ export default function SolutionsPage() {
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary to-purple-600 rounded-lg blur opacity-25"></div>
                 <div className="relative bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl">
                   <Image
-                    src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=900&q=80"
+                    src="/images/solutions/analytics-dashboard.png"
                     alt="Platform dashboard"
                     width={800}
                     height={600}
@@ -141,7 +107,7 @@ export default function SolutionsPage() {
         </div>
       </section>
 
-      {/* Core Solutions */}
+      {/* Core Solutions - Data Infographic */}
       <section className="py-20 bg-muted/30">
         <div className="container px-4">
           <FadeInSection>
@@ -154,254 +120,129 @@ export default function SolutionsPage() {
             </div>
           </FadeInSection>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {solutionFeatures.map((solution, index) => (
-              <FadeInSection key={index} delay={index * 0.1} direction="up">
-                <motion.div
-                  className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 h-full overflow-hidden"
-                  whileHover={{ y: -10, boxShadow: "0 20px 40px rgba(0,0,0,0.1)" }}
-                >
-                  <div className="p-8">
-                    <div className="rounded-full bg-primary/10 p-4 inline-block mb-6">{solution.icon}</div>
-                    <h3 className="text-2xl font-bold mb-4">{solution.title}</h3>
-                    <p className="text-muted-foreground mb-6">{solution.description}</p>
-                    <ul className="space-y-2">
-                      {solution.features.map((feature, i) => (
-                        <li key={i} className="flex items-start">
-                          <CheckCircle className="h-5 w-5 text-primary mr-2 flex-shrink-0 mt-0.5" />
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </motion.div>
-              </FadeInSection>
-            ))}
+          <FeatureComparison
+            title="How We're Different"
+            subtitle="Our approach eliminates traditional retail challenges"
+            traditionalTitle="Traditional Wholesale"
+            ourTitle="Our Platform"
+            features={[
+              {
+                name: "Inventory Risk",
+                description: "Financial exposure from unsold stock",
+                traditional: true,
+                our: false,
+              },
+              {
+                name: "Minimum Order Quantities",
+                description: "Large upfront purchases required",
+                traditional: true,
+                our: false,
+              },
+              {
+                name: "Market Analytics",
+                description: "Data-driven decision making",
+                traditional: false,
+                our: true,
+              },
+              {
+                name: "Supply Chain Visibility",
+                description: "End-to-end tracking and management",
+                traditional: false,
+                our: true,
+              },
+              {
+                name: "Growth Support",
+                description: "Tools and resources for scaling",
+                traditional: false,
+                our: true,
+              },
+            ]}
+          />
+
+          <div className="mt-16">
+            <SolutionShowcase
+              solutions={[
+                {
+                  title: "Risk-Free Logistics",
+                  description:
+                    "Eliminate inventory risk with our revolutionary model that ensures you only pay for what sells.",
+                  image: "/automated-warehouse-efficiency.png",
+                  features: [
+                    "No upfront inventory investment",
+                    "Flexible payment terms",
+                    "Managed warehousing and distribution",
+                    "Rapid restocking of bestsellers",
+                  ],
+                  color: "primary",
+                },
+                {
+                  title: "Supply Chain Management",
+                  description:
+                    "Streamline your entire supply chain from sourcing to delivery with our integrated platform.",
+                  image: "/digital-supply-chain-overview.png",
+                  features: [
+                    "End-to-end visibility",
+                    "Automated ordering",
+                    "Quality control processes",
+                    "Optimized delivery routes",
+                  ],
+                  color: "blue-500",
+                },
+                {
+                  title: "Business Intelligence",
+                  description:
+                    "Make data-driven decisions with comprehensive analytics that reveal insights and opportunities.",
+                  image: "/fashion-retail-insights.png",
+                  features: [
+                    "Sales performance tracking",
+                    "Customer behavior analysis",
+                    "Market trend identification",
+                    "Predictive inventory forecasting",
+                  ],
+                  color: "purple-500",
+                },
+              ]}
+            />
           </div>
         </div>
       </section>
 
-      {/* Platform Features */}
-      <section className="py-20">
-        <div className="container px-4">
-          <FadeInSection>
-            <div className="text-center mb-16">
-              <span className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20 mb-4">
-                Platform Features
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Everything You Need</h2>
-              <div className="w-24 h-1 bg-primary rounded-full mx-auto mt-4 mb-6"></div>
-            </div>
-          </FadeInSection>
-
-          <Tabs defaultValue="inventory" className="w-full">
-            <div className="flex justify-center mb-8">
-              <TabsList className="grid grid-cols-2 md:grid-cols-4 w-full max-w-3xl">
-                <TabsTrigger value="inventory">Inventory</TabsTrigger>
-                <TabsTrigger value="analytics">Analytics</TabsTrigger>
-                <TabsTrigger value="ordering">Ordering</TabsTrigger>
-                <TabsTrigger value="frontstore">FrontStore</TabsTrigger>
-              </TabsList>
-            </div>
-
-            <TabsContent value="inventory" className="mt-0">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div>
-                  <h3 className="text-2xl md:text-3xl font-bold mb-6">Inventory Management System</h3>
-                  <p className="text-muted-foreground mb-6">
-                    Our intuitive inventory management system gives you complete control and visibility over your stock
-                    levels, helping you optimize inventory and reduce costs.
-                  </p>
-                  <ul className="space-y-4">
-                    {[
-                      "Real-time inventory tracking across all locations",
-                      "Low-stock alerts and automated reordering",
-                      "Barcode scanning for quick stock updates",
-                      "Detailed product categorization and tagging",
-                      "Inventory valuation and reporting",
-                    ].map((feature, i) => (
-                      <li key={i} className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-primary mr-3 flex-shrink-0 mt-0.5" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="relative">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-primary to-purple-600 rounded-lg blur opacity-25"></div>
-                  <div className="relative bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl">
-                    <Image
-                      src="https://images.unsplash.com/photo-1553413077-190dd305871c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=800&q=80"
-                      alt="Inventory management dashboard"
-                      width={800}
-                      height={600}
-                      className="w-full h-auto"
-                    />
-                  </div>
-                </div>
-              </div>
-            </TabsContent>
-
-            <TabsContent value="analytics" className="mt-0">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div className="order-2 lg:order-1 relative">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-primary to-purple-600 rounded-lg blur opacity-25"></div>
-                  <div className="relative bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl">
-                    <Image
-                      src="/images/solutions/analytics-dashboard.png"
-                      alt="Analytics dashboard"
-                      width={800}
-                      height={600}
-                      className="w-full h-auto"
-                    />
-                  </div>
-                </div>
-                <div className="order-1 lg:order-2">
-                  <h3 className="text-2xl md:text-3xl font-bold mb-6">Comprehensive Analytics</h3>
-                  <p className="text-muted-foreground mb-6">
-                    Make data-driven decisions with our powerful analytics tools that provide deep insights into your
-                    business performance.
-                  </p>
-                  <ul className="space-y-4">
-                    {[
-                      "Sales performance tracking by product, category, and time period",
-                      "Customer demographic and behavioral analysis",
-                      "Profit margin and revenue reporting",
-                      "Trend identification and forecasting",
-                      "Customizable dashboards and reports",
-                    ].map((feature, i) => (
-                      <li key={i} className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-primary mr-3 flex-shrink-0 mt-0.5" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </TabsContent>
-
-            <TabsContent value="ordering" className="mt-0">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div>
-                  <h3 className="text-2xl md:text-3xl font-bold mb-6">Flexible Ordering System</h3>
-                  <p className="text-muted-foreground mb-6">
-                    Our ordering system adapts to your business needs with flexible MOQs and streamlined processes.
-                  </p>
-                  <ul className="space-y-4">
-                    {[
-                      "Customizable Minimum Order Quantities (MOQs)",
-                      "Bulk ordering capabilities with volume discounts",
-                      "Scheduled recurring orders",
-                      "Order tracking and history",
-                      "Integrated payment processing",
-                    ].map((feature, i) => (
-                      <li key={i} className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-primary mr-3 flex-shrink-0 mt-0.5" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="relative">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-primary to-purple-600 rounded-lg blur opacity-25"></div>
-                  <div className="relative bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl">
-                    <Image
-                      src="/images/solutions/ordering-system.png"
-                      alt="Ordering system"
-                      width={800}
-                      height={600}
-                      className="w-full h-auto"
-                    />
-                  </div>
-                </div>
-              </div>
-            </TabsContent>
-
-            <TabsContent value="frontstore" className="mt-0">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div className="order-2 lg:order-1 relative">
-                  <div className="absolute -inset-1 bg-gradient-to-r from-primary to-purple-600 rounded-lg blur opacity-25"></div>
-                  <div className="relative bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl">
-                    <Image
-                      src="/images/solutions/frontstore-interface.png"
-                      alt="FrontStore interface"
-                      width={800}
-                      height={600}
-                      className="w-full h-auto"
-                    />
-                  </div>
-                </div>
-                <div className="order-1 lg:order-2">
-                  <h3 className="text-2xl md:text-3xl font-bold mb-6">Premium FrontStore Experience</h3>
-                  <p className="text-muted-foreground mb-6">
-                    Provide your customers with a high-quality shopping experience that rivals big MNC services.
-                  </p>
-                  <ul className="space-y-4">
-                    {[
-                      "Customizable storefront with your branding",
-                      "Professional product displays and catalogs",
-                      "Integrated promotions and discounts",
-                      "Customer account management",
-                      "Mobile-responsive design for all devices",
-                    ].map((feature, i) => (
-                      <li key={i} className="flex items-start">
-                        <CheckCircle className="h-5 w-5 text-primary mr-3 flex-shrink-0 mt-0.5" />
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-            </TabsContent>
-          </Tabs>
-        </div>
-      </section>
-
-      {/* Multi-Device Support */}
-      <section className="py-20 bg-muted/30">
-        <div className="container px-4">
-          <FadeInSection>
-            <div className="text-center mb-16">
-              <span className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20 mb-4">
-                Accessibility
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Access Anywhere, Anytime</h2>
-              <div className="w-24 h-1 bg-primary rounded-full mx-auto mt-4 mb-6"></div>
-            </div>
-          </FadeInSection>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: <Monitor className="h-10 w-10 text-primary" />,
-                title: "Desktop",
-                description: "Full-featured dashboard with comprehensive tools and analytics for in-depth management.",
-              },
-              {
-                icon: <Smartphone className="h-10 w-10 text-primary" />,
-                title: "Mobile",
-                description: "Responsive mobile interface for on-the-go inventory management and sales tracking.",
-              },
-              {
-                icon: <Zap className="h-10 w-10 text-primary" />,
-                title: "Offline Mode",
-                description: "Continue working even without internet connection with our offline capabilities.",
-              },
-            ].map((device, index) => (
-              <FadeInSection key={index} delay={index * 0.1} direction="up">
-                <motion.div
-                  className="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 h-full text-center"
-                  whileHover={{ y: -10, boxShadow: "0 20px 40px rgba(0,0,0,0.1)" }}
-                >
-                  <div className="rounded-full bg-primary/10 p-4 inline-block mb-6">{device.icon}</div>
-                  <h3 className="text-2xl font-bold mb-4">{device.title}</h3>
-                  <p className="text-muted-foreground">{device.description}</p>
-                </motion.div>
-              </FadeInSection>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Interactive Feature Cards */}
+      <InteractiveFeatureCards
+        title="Key Platform Capabilities"
+        subtitle="Explore the powerful features that drive retail success"
+        features={[
+          {
+            title: "Inventory Management",
+            description: "Real-time tracking, low-stock alerts, and automated reordering to optimize your inventory.",
+            icon: <BarChart3 className="h-6 w-6" />,
+            image: "/inventory-management-feature.png",
+            color: "primary",
+          },
+          {
+            title: "Sales Analytics",
+            description: "Comprehensive dashboards and reports to track performance and identify growth opportunities.",
+            icon: <LineChart className="h-6 w-6" />,
+            image: "/sales-analytics-feature.png",
+            color: "blue-500",
+          },
+          {
+            title: "Customer Insights",
+            description: "Understand your customers better with detailed demographic and behavioral data.",
+            icon: <Users className="h-6 w-6" />,
+            image: "/customer-insights-feature.png",
+            color: "purple-500",
+          },
+          {
+            title: "Growth Tools",
+            description: "Access marketing templates, promotion strategies, and business expansion resources.",
+            icon: <TrendingUp className="h-6 w-6" />,
+            image: "/growth-tools-feature.png",
+            color: "green-500",
+          },
+        ]}
+        className="py-20"
+      />
 
       {/* CTA Section with Video Background */}
       <section className="py-20 relative overflow-hidden">

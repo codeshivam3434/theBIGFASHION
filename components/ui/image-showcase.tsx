@@ -1,8 +1,8 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { OptimizedImage } from "./optimized-image"
+import { EnhancedImage } from "./enhanced-image"
 import { Button } from "./button"
 import { cn } from "@/lib/utils"
 import { ChevronLeft, ChevronRight } from "lucide-react"
@@ -19,6 +19,7 @@ interface ImageShowcaseProps {
   interval?: number
   maxImages?: number
   aspectRatio?: string
+  rounded?: boolean | "sm" | "md" | "lg" | "xl" | "full"
 }
 
 export function ImageShowcase({
@@ -31,6 +32,7 @@ export function ImageShowcase({
   interval = 5000,
   maxImages = 6,
   aspectRatio = "aspect-video",
+  rounded = "lg",
 }: ImageShowcaseProps) {
   const images = imageRepository[category].slice(0, maxImages)
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -44,7 +46,7 @@ export function ImageShowcase({
   }
 
   // Set up autoplay
-  useState(() => {
+  useEffect(() => {
     if (!autoplay) return
 
     const timer = setInterval(() => {
@@ -52,7 +54,7 @@ export function ImageShowcase({
     }, interval)
 
     return () => clearInterval(timer)
-  })
+  }, [autoplay, interval])
 
   return (
     <div className={cn("relative", className)}>
@@ -72,13 +74,13 @@ export function ImageShowcase({
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <OptimizedImage
+            <EnhancedImage
               src={images[currentIndex].src}
               alt={images[currentIndex].alt}
               width={images[currentIndex].width}
               height={images[currentIndex].height}
               aspectRatio={aspectRatio}
-              className="rounded-lg"
+              rounded={rounded}
               priority
             />
           </motion.div>

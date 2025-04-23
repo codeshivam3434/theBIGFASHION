@@ -45,12 +45,12 @@ export default function NavBar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/80 backdrop-blur-md shadow-md py-2" : "bg-transparent py-4"
+        isScrolled ? "bg-background/90 backdrop-blur-md shadow-md py-2" : "bg-transparent py-4"
       }`}
     >
       <div className="container flex items-center justify-between">
         <Link href="/" className="flex items-center">
-          <TheBigFashionLogo className="h-10 w-auto" />
+          <TheBigFashionLogo className={`h-10 w-auto ${isScrolled ? "text-primary" : "text-white"}`} />
         </Link>
 
         {/* Desktop Navigation */}
@@ -61,7 +61,11 @@ export default function NavBar() {
               <Link key={item.name} href={item.href}>
                 <motion.div
                   className={`relative px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center ${
-                    isActive ? "text-primary" : "text-foreground/80 hover:text-primary hover:bg-primary/5"
+                    isActive
+                      ? "text-primary"
+                      : isScrolled
+                        ? "text-foreground/80 hover:text-primary hover:bg-primary/5"
+                        : "text-white hover:text-primary hover:bg-white/10"
                   }`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -79,7 +83,7 @@ export default function NavBar() {
             )
           })}
           <div className="ml-4">
-            <Button asChild size="sm">
+            <Button asChild size="sm" variant={isScrolled ? "default" : "secondary"}>
               <Link href="/auth/login">Login</Link>
             </Button>
           </div>
@@ -87,7 +91,9 @@ export default function NavBar() {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden p-2 rounded-md text-foreground/80 hover:text-primary hover:bg-primary/5"
+          className={`md:hidden p-2 rounded-md ${
+            isScrolled ? "text-foreground/80" : "text-white"
+          } hover:text-primary hover:bg-primary/5`}
           onClick={() => setIsOpen(!isOpen)}
           aria-label={isOpen ? "Close menu" : "Open menu"}
         >

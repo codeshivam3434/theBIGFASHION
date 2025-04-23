@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { ChevronLeft, ChevronRight, Expand, X } from "lucide-react"
-import { OptimizedImage } from "./optimized-image"
+import { EnhancedImage } from "./enhanced-image"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
@@ -16,9 +16,17 @@ interface ImageGalleryProps {
   }>
   className?: string
   aspectRatio?: string
+  rounded?: boolean | "sm" | "md" | "lg" | "xl" | "full"
+  thumbnailSize?: "small" | "medium" | "large"
 }
 
-export function ImageGallery({ images, className, aspectRatio = "aspect-video" }: ImageGalleryProps) {
+export function ImageGallery({
+  images,
+  className,
+  aspectRatio = "aspect-video",
+  rounded = "md",
+  thumbnailSize = "medium",
+}: ImageGalleryProps) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [isOpen, setIsOpen] = useState(false)
 
@@ -30,16 +38,31 @@ export function ImageGallery({ images, className, aspectRatio = "aspect-video" }
     setCurrentIndex((prev) => (prev - 1 + images.length) % images.length)
   }
 
+  // Get thumbnail size class
+  const getThumbnailSizeClass = () => {
+    switch (thumbnailSize) {
+      case "small":
+        return "h-16"
+      case "medium":
+        return "h-20"
+      case "large":
+        return "h-24"
+      default:
+        return "h-20"
+    }
+  }
+
   return (
     <>
       <div className={cn("relative group", className)}>
-        <OptimizedImage
+        <EnhancedImage
           src={images[currentIndex].src}
           alt={images[currentIndex].alt}
           width={images[currentIndex].width}
           height={images[currentIndex].height}
           aspectRatio={aspectRatio}
-          className="rounded-lg"
+          rounded={rounded}
+          priority
         />
 
         {images.length > 1 && (
@@ -93,6 +116,33 @@ export function ImageGallery({ images, className, aspectRatio = "aspect-video" }
         )}
       </div>
 
+      {/* Thumbnails row */}
+      {images.length > 1 && (
+        <div className="mt-4 flex gap-2 overflow-x-auto pb-2">
+          {images.map((image, index) => (
+            <button
+              key={index}
+              className={cn(
+                "flex-shrink-0 transition-all",
+                getThumbnailSizeClass(),
+                index === currentIndex ? "ring-2 ring-primary" : "opacity-70 hover:opacity-100",
+                rounded && typeof rounded === "boolean" ? "rounded-md" : `rounded-${rounded}`,
+              )}
+              onClick={() => setCurrentIndex(index)}
+            >
+              <EnhancedImage
+                src={image.src}
+                alt={image.alt}
+                width={Math.round(image.width / 4)}
+                height={Math.round(image.height / 4)}
+                className="h-full w-auto"
+                rounded={rounded}
+              />
+            </button>
+          ))}
+        </div>
+      )}
+
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="max-w-4xl p-0 overflow-hidden bg-transparent border-none">
           <div className="relative bg-background rounded-lg p-1">
@@ -107,7 +157,7 @@ export function ImageGallery({ images, className, aspectRatio = "aspect-video" }
             </Button>
 
             <div className="relative">
-              <OptimizedImage
+              <EnhancedImage
                 src={images[currentIndex].src}
                 alt={images[currentIndex].alt}
                 width={images[currentIndex].width}

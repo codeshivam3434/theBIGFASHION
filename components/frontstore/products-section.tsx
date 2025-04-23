@@ -21,9 +21,10 @@ import {
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Badge } from "@/components/ui/badge"
 import { Edit, Plus, Trash2, Upload } from "lucide-react"
-// Update the imports at the top to include our new components
-import { OptimizedImage } from "@/components/ui/optimized-image"
+// Update the imports to use EnhancedImage
+import { EnhancedImage } from "@/components/ui/enhanced-image"
 import { getCategoryImage } from "@/lib/image-repository"
+import { imageSizes } from "@/lib/image-sizing"
 
 // Replace the mockProducts array with this updated version that uses our image repository
 const mockProducts = [
@@ -105,12 +106,13 @@ export function ProductsSection({ preview = false }: ProductsSectionProps) {
           {products.map((product) => (
             <Card key={product.id} className="overflow-hidden">
               <div className="relative">
-                <OptimizedImage
+                <EnhancedImage
                   src={product.images[0] || "/placeholder.svg"}
                   alt={product.name}
-                  width={400}
-                  height={300}
+                  width={imageSizes.product.medium.width}
+                  height={imageSizes.product.medium.height}
                   aspectRatio="aspect-[4/3]"
+                  rounded="t-lg"
                 />
                 {product.featured && <Badge className="absolute top-2 right-2 bg-primary">Featured</Badge>}
                 {!product.inStock && (
@@ -259,12 +261,13 @@ function ProductsTable({
             <tr key={product.id} className="border-b">
               <td className="p-2">
                 <div className="relative h-12 w-12 rounded overflow-hidden">
-                  <OptimizedImage
+                  <EnhancedImage
                     src={product.images[0] || "/placeholder.svg"}
                     alt={product.name}
-                    width={48}
-                    height={48}
+                    width={imageSizes.product.thumbnail.width}
+                    height={imageSizes.product.thumbnail.height}
                     aspectRatio="aspect-square"
+                    rounded
                   />
                 </div>
               </td>
@@ -422,12 +425,13 @@ function ProductForm({
           <Label>Product Image</Label>
           <div className="flex items-center gap-4">
             <div className="relative h-24 w-24 rounded border overflow-hidden">
-              <OptimizedImage
+              <EnhancedImage
                 src={formData.images[0] || "/placeholder.svg"}
                 alt="Product image"
-                width={96}
-                height={96}
+                width={imageSizes.product.thumbnail.width}
+                height={imageSizes.product.thumbnail.height}
                 aspectRatio="aspect-square"
+                rounded
               />
             </div>
             <Button variant="outline" type="button">
