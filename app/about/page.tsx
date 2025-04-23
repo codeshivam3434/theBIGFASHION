@@ -12,6 +12,7 @@ import {
   BarChart3,
   Package,
   Clock,
+  ChevronDown,
 } from "lucide-react"
 import { motion } from "framer-motion"
 import Link from "next/link"
@@ -22,7 +23,7 @@ import TeamSection from "@/components/team-section"
 import { VideoBackground } from "@/components/ui/video-background"
 import { ProcessFlow } from "@/components/process-flow"
 import { AnimatedStats } from "@/components/animated-stats"
-import { EnhancedImage } from "@/components/enhanced-image"
+import { EnhancedImage } from "@/components/ui/enhanced-image"
 
 export default function AboutPage() {
   // Core values with icons - using consistent styling
@@ -97,84 +98,165 @@ export default function AboutPage() {
   ]
 
   // Floating particles animation
-  const FloatingParticles = ({ className = "" }) => (
-    <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}>
-      {[...Array(20)].map((_, i) => (
-        <div
-          key={i}
-          className={`absolute rounded-full bg-white/10 backdrop-blur-sm animate-float-${
-            i % 3 === 0 ? "slow" : i % 3 === 1 ? "" : "fast"
-          }`}
-          style={{
-            width: `${Math.random() * 40 + 10}px`,
-            height: `${Math.random() * 40 + 10}px`,
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            animationDelay: `${Math.random() * 5}s`,
-          }}
-        />
-      ))}
-    </div>
-  )
+  const FloatingParticles = ({ className = "", density = 20, size = { min: 10, max: 40 } }) => {
+    return (
+      <div className={`absolute inset-0 overflow-hidden pointer-events-none ${className}`}>
+        {[...Array(density)].map((_, i) => {
+          const particleSize = Math.random() * (size.max - size.min) + size.min
+          const left = Math.random() * 100
+          const top = Math.random() * 100
+          const duration = Math.random() * 15 + 10
+          const delay = Math.random() * 5
+
+          return (
+            <div
+              key={i}
+              className="absolute rounded-full bg-white/10 backdrop-blur-sm"
+              style={{
+                width: `${particleSize}px`,
+                height: `${particleSize}px`,
+                left: `${left}%`,
+                top: `${top}%`,
+                animation: `float ${duration}s ease-in-out ${delay}s infinite alternate`,
+              }}
+            />
+          )
+        })}
+      </div>
+    )
+  }
 
   return (
     <div className="flex min-h-screen flex-col">
-      {/* Hero Section with Video Background */}
-      <section className="relative">
+      {/* Enhanced Hero Section with Video Background */}
+      <section className="relative min-h-screen flex items-center">
         <VideoBackground
           src="https://v0.blob.com/fashion-production-video.mp4"
           fallbackImage="/garment-warehouse-operations.png"
-          overlayOpacity={0.8}
-          overlayColor="from-purple-dark/90 via-magenta-dark/90 to-magenta/90"
+          overlayOpacity={0.9}
+          overlayColor="from-purple-dark/95 via-magenta-dark/95 to-magenta/90"
           priority={true}
         />
-        <FloatingParticles />
+
+        {/* Enhanced floating particles with different sizes and densities */}
+        <FloatingParticles density={15} size={{ min: 20, max: 60 }} />
+        <FloatingParticles density={25} size={{ min: 5, max: 15 }} className="opacity-70" />
+
+        {/* Add this right after the FloatingParticles components */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-[500px] bg-white/5 blur-[100px] rounded-full"></div>
+        </div>
+
+        {/* Decorative light beams */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute top-0 left-1/4 w-1/2 h-full bg-gradient-to-b from-magenta/30 via-transparent to-transparent opacity-30 blur-3xl transform -rotate-12"></div>
+          <div className="absolute top-0 right-1/4 w-1/2 h-full bg-gradient-to-b from-purple/30 via-transparent to-transparent opacity-30 blur-3xl transform rotate-12"></div>
+        </div>
+
         <div className="container relative z-10 flex flex-col items-center justify-center py-24 md:py-32 text-center text-white">
-          <motion.span
-            className="inline-flex items-center rounded-full bg-white/10 backdrop-blur-sm px-4 py-1 text-sm font-medium text-white ring-1 ring-inset ring-white/20 mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+          {/* Animated badge */}
+          <motion.div
+            className="mb-8"
+            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.5 }}
           >
-            Our Story
-          </motion.span>
+            <span className="inline-flex items-center rounded-full bg-white/10 backdrop-blur-md px-4 py-1.5 text-sm font-medium text-white ring-1 ring-inset ring-white/20">
+              <span className="mr-2 h-2 w-2 rounded-full bg-magenta animate-pulse"></span>
+              Our Story
+            </span>
+          </motion.div>
+
+          {/* Main heading with enhanced gradient and text shadow */}
           <motion.h1
-            className="max-w-4xl text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/80"
+            className="max-w-4xl text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/95 drop-shadow-[0_2px_15px_rgba(255,255,255,0.4)] mb-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
             Revolutionizing Fashion Wholesale in India
           </motion.h1>
+
+          {/* Animated underline */}
           <motion.div
-            className="mt-6 max-w-2xl text-lg md:text-xl text-white/90"
+            className="h-1 w-24 bg-gradient-to-r from-magenta via-purple to-magenta rounded-full mb-8"
+            initial={{ width: 0, opacity: 0 }}
+            animate={{ width: 96, opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          />
+
+          {/* Enhanced description box */}
+          <motion.div
+            className="mt-6 max-w-2xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <span className="inline-block px-6 py-3 bg-white/10 backdrop-blur-sm rounded-lg border border-white/10">
-              Empowering retailers with technology, logistics, and market insights since 2018
-            </span>
+            <div className="px-8 py-5 bg-gradient-to-r from-magenta-dark/70 to-purple-dark/70 backdrop-blur-xl rounded-xl border border-white/30 shadow-[0_10px_40px_-15px_rgba(255,255,255,0.2)]">
+              <p className="text-lg md:text-xl text-white font-semibold leading-relaxed">
+                Empowering retailers with technology, logistics, and market insights since 2018
+              </p>
+            </div>
           </motion.div>
 
-          {/* Animated scroll indicator */}
+          {/* Key stats highlights */}
           <motion.div
-            className="absolute bottom-10 left-1/2 -translate-x-1/2"
-            initial={{ opacity: 0, y: -10 }}
+            className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 mt-12 w-full max-w-4xl"
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8, repeat: Number.POSITIVE_INFINITY, repeatType: "reverse" }}
+            transition={{ duration: 0.8, delay: 0.8 }}
           >
-            <div className="w-8 h-12 rounded-full border-2 border-white/30 flex justify-center pt-2">
+            {[
+              { value: "10,000+", label: "Retailers" },
+              { value: "42%", label: "Efficiency Increase" },
+              { value: "35%", label: "Cost Reduction" },
+              { value: "28%", label: "Less Dead Stock" },
+            ].map((stat, index) => (
               <motion.div
-                className="w-1 h-2 bg-white rounded-full"
+                key={index}
+                className="flex flex-col items-center p-3 rounded-lg bg-white/10 backdrop-blur-md border border-white/20 shadow-lg"
+                whileHover={{
+                  y: -5,
+                  backgroundColor: "rgba(255,255,255,0.15)",
+                  transition: { duration: 0.2 },
+                }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, delay: 0.8 + index * 0.1 }}
+              >
+                <span className="text-xl md:text-2xl font-bold text-white">{stat.value}</span>
+                <span className="text-xs md:text-sm text-white/90 mt-1">{stat.label}</span>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Enhanced scroll indicator */}
+          <motion.div
+            className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 1.2, repeat: Number.POSITIVE_INFINITY, repeatType: "reverse" }}
+          >
+            <span className="text-white text-sm mb-2 font-medium">Discover Our Story</span>
+            <div className="w-10 h-14 rounded-full border-2 border-white/50 flex justify-center items-start pt-3 relative">
+              <motion.div
+                className="w-1.5 h-3 bg-white rounded-full"
                 animate={{ y: [0, 8, 0] }}
                 transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, repeatType: "loop" }}
               />
+              <motion.div
+                className="absolute -bottom-6"
+                animate={{ y: [0, 5, 0] }}
+                transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, repeatType: "loop" }}
+              >
+                <ChevronDown className="h-5 w-5 text-white" />
+              </motion.div>
             </div>
           </motion.div>
         </div>
       </section>
 
+      {/* Rest of the page content remains the same */}
       {/* Key Differentiators - FEATURED PROMINENTLY */}
       <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-purple-dark via-background to-background"></div>
@@ -382,20 +464,27 @@ export default function AboutPage() {
 
                   {/* Animated particles */}
                   <div className="absolute inset-0 overflow-hidden">
-                    {[...Array(8)].map((_, i) => (
-                      <div
-                        key={i}
-                        className="absolute rounded-full bg-white/10 animate-float"
-                        style={{
-                          width: `${Math.random() * 20 + 5}px`,
-                          height: `${Math.random() * 20 + 5}px`,
-                          left: `${Math.random() * 100}%`,
-                          top: `${Math.random() * 100}%`,
-                          animationDelay: `${Math.random() * 3}s`,
-                          animationDuration: `${Math.random() * 3 + 6}s`,
-                        }}
-                      />
-                    ))}
+                    {[...Array(8)].map((_, i) => {
+                      const size = Math.random() * 20 + 5
+                      const left = Math.random() * 100
+                      const top = Math.random() * 100
+                      const duration = Math.random() * 3 + 6
+                      const delay = Math.random() * 3
+
+                      return (
+                        <div
+                          key={i}
+                          className="absolute rounded-full bg-white/10"
+                          style={{
+                            width: `${size}px`,
+                            height: `${size}px`,
+                            left: `${left}%`,
+                            top: `${top}%`,
+                            animation: `float ${duration}s ease-in-out ${delay}s infinite alternate`,
+                          }}
+                        />
+                      )
+                    })}
                   </div>
 
                   {/* Content */}
