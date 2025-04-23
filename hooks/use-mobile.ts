@@ -2,15 +2,16 @@
 
 import { useState, useEffect } from "react"
 
-export const useMobile = () => {
+// Export with the name that's being imported elsewhere
+export const useIsMobile = () => {
   const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768)
+      setIsMobile(window.innerWidth < 768) // Adjust breakpoint as needed
     }
 
-    handleResize()
+    handleResize() // Initial check
     window.addEventListener("resize", handleResize)
 
     return () => {
@@ -20,3 +21,6 @@ export const useMobile = () => {
 
   return isMobile
 }
+
+// For backward compatibility, also export as useMobile
+export const useMobile = useIsMobile
