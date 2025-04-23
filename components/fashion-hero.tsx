@@ -10,7 +10,7 @@ export default function FashionHero() {
   const [isLoading, setIsLoading] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(0)
 
-  const headlines = ["Transform Your Fashion Business", "Streamline Your Supply Chain", "Boost Your Retail Performance"]
+  const headlines = ["Reinvent Operation", "Simplify Supply Chain", "Enhance Retail Results"]
 
   const subheadlines = [
     "Connect with suppliers, streamline operations, and scale your fashion business with our all-in-one B2B platform",
