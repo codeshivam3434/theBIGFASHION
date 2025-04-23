@@ -51,16 +51,29 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Custom brand colors
-        magenta: {
-          DEFAULT: "#d4145a",
-          light: "#e83a7a",
-          dark: "#8A0068",
+        // Updated brand colors to match the pink/red fashion theme
+        brand: {
+          DEFAULT: "hsl(330 80% 45%)", // Primary color
+          light: "hsl(330 80% 65%)", // Lighter shade
+          dark: "hsl(330 80% 35%)", // Darker shade
+          accent: "hsl(330 80% 55%)", // Accent shade
+          success: "#10b981", // Emerald 500
+          warning: "#f59e0b", // Amber 500
+          error: "#ef4444", // Red 500
+          gray: "#64748b", // Slate 500
         },
-        purple: {
-          DEFAULT: "#7928CA",
-          light: "#9F7AEA",
-          dark: "#553C9A",
+        // Fashion-specific colors updated to match primary theme
+        fashion: {
+          primary: "hsl(330 80% 45%)", // Primary color
+          secondary: "hsl(330 80% 55%)", // Secondary shade
+          accent: "hsl(330 90% 50%)", // Accent shade
+          neutral: "#f8fafc", // Slate 50
+          dark: "#1e293b", // Slate 800
+          gradient: {
+            start: "hsl(330 80% 75%)", // Light shade
+            mid: "hsl(330 80% 55%)", // Medium shade
+            end: "hsl(330 80% 35%)", // Dark shade
+          },
         },
       },
       borderRadius: {
@@ -79,35 +92,26 @@ module.exports = {
         },
         float: {
           "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-20px)" },
+          "50%": { transform: "translateY(-10px)" },
         },
         shimmer: {
-          "0%": { backgroundPosition: "-100% 0" },
-          "100%": { backgroundPosition: "100% 0" },
+          "0%": { backgroundPosition: "-1000px 0" },
+          "100%": { backgroundPosition: "1000px 0" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         float: "float 6s ease-in-out infinite",
-        "float-slow": "float 8s ease-in-out infinite",
-        "float-fast": "float 4s ease-in-out infinite",
-        shimmer: "shimmer 2s infinite",
+        shimmer: "shimmer 2s infinite linear",
       },
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "fashion-gradient": "linear-gradient(135deg, hsl(330 80% 75%) 0%, hsl(330 80% 55%) 50%, hsl(330 80% 35%) 100%)",
+        "fashion-gradient-hover":
+          "linear-gradient(135deg, hsl(330 80% 70%) 0%, hsl(330 80% 50%) 50%, hsl(330 80% 30%) 100%)",
+        "fashion-pattern": "url('/kaleidoscope-threads.png')",
       },
     },
   },
-  safelist: [
-    "from-[#8A0068]",
-    "to-[#d4145a]",
-    "from-[#d4145a]",
-    "to-[#7928CA]",
-    "from-[#7928CA]",
-    "to-[#8A0068]",
-    "from-pink-500",
-    "to-purple-600",
-  ],
   plugins: [require("tailwindcss-animate")],
 }

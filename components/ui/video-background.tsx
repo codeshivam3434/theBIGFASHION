@@ -1,80 +1,121 @@
 "use client"
 
-import type React from "react"
-
 import { useEffect, useRef, useState } from "react"
 import { cn } from "@/lib/utils"
 
 interface VideoBackgroundProps {
   src: string
+  fallbackImage?: string
   overlayOpacity?: number
   overlayColor?: string
   className?: string
+  priority?: boolean
+  mobileImage?: string
   posterImage?: string
-  muted?: boolean
-  loop?: boolean
-  autoPlay?: boolean
-  children?: React.ReactNode
 }
 
 export function VideoBackground({
   src,
-  overlayOpacity = 0.5,
-  overlayColor = "#000",
+  fallbackImage = "/placeholder.svg?height=1080&width=1920",
+  overlayOpacity = 0.6,
+  overlayColor = "black",
   className,
+  priority = false,
+  mobileImage,
   posterImage,
-  muted = true,
-  loop = true,
-  autoPlay = true,
-  children,
 }: VideoBackgroundProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [isLoaded, setIsLoaded] = useState(false)
+  const [hasError, setHasError] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
-    const videoElement = videoRef.current
-
-    if (!videoElement) return
-
-    const handleLoadedData = () => {
-      setIsLoaded(true)
+    // Check if we're on a mobile device
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768)
     }
 
-    videoElement.addEventListener("loadeddata", handleLoadedData)
+    checkMobile()
+    window.addEventListener("resize", checkMobile)
 
     return () => {
-      videoElement.removeEventListener("loadeddata", handleLoadedData)
+      window.removeEventListener("resize", checkMobile)
     }
   }, [])
 
-  // Determine if the overlay is a gradient or a solid color
-  const isGradient = overlayColor.includes("gradient")
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    const handleCanPlay = () => {
+      setIsLoaded(true)
+    }
+
+    const handleError = () => {
+      setHasError(true)
+      console.error("Video failed to load:", src)
+    }
+
+    video.addEventListener("canplay", handleCanPlay)
+    video.addEventListener("error", handleError)
+
+    return () => {
+      video.removeEventListener("canplay", handleCanPlay)
+      video.removeEventListener("error", handleError)
+    }
+  }, [src])
+
+  // If on mobile and a mobile image is provided, show that instead of video
+  if (isMobile && mobileImage) {
+    return (
+      <div className={cn("absolute inset-0 overflow-hidden", className)}>
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${mobileImage})` }} />
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundColor: overlayColor,
+            opacity: overlayOpacity,
+          }}
+        />
+      </div>
+    )
+  }
 
   return (
     <div className={cn("absolute inset-0 overflow-hidden", className)}>
-      <video
-        ref={videoRef}
-        className={cn(
-          "absolute inset-0 w-full h-full object-cover transition-opacity duration-1000",
-          isLoaded ? "opacity-100" : "opacity-0",
-        )}
-        autoPlay={autoPlay}
-        muted={muted}
-        loop={loop}
-        playsInline
-        poster={posterImage}
-      >
-        <source src={src} type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
+      {/* Fallback image shown until video loads or if video fails */}
+      {(!isLoaded || hasError) && (
+        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${fallbackImage})` }} />
+      )}
 
-      {/* Overlay */}
+      {/* Video element */}
+      {!hasError && (
+        <video
+          ref={videoRef}
+          autoPlay
+          loop
+          muted
+          playsInline
+          poster={posterImage || fallbackImage}
+          className={cn(
+            "absolute inset-0 w-full h-full object-cover transition-opacity duration-1000",
+            isLoaded ? "opacity-100" : "opacity-0",
+          )}
+          preload={priority ? "auto" : "metadata"}
+        >
+          <source src={src} type="video/mp4" />
+          {/* Add additional source elements for different formats if needed */}
+        </video>
+      )}
+
+      {/* Overlay to ensure text readability */}
       <div
         className="absolute inset-0"
-        style={isGradient ? { background: overlayColor } : { backgroundColor: overlayColor, opacity: overlayOpacity }}
+        style={{
+          backgroundColor: overlayColor,
+          opacity: overlayOpacity,
+        }}
       />
-
-      {children}
     </div>
   )
 }

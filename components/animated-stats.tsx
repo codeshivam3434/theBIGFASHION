@@ -1,145 +1,86 @@
 "use client"
 
-import { useState, useEffect, useRef } from "react"
-import { motion } from "framer-motion"
+import { useEffect, useState, useRef } from "react"
+import { motion, useInView } from "framer-motion"
 import { cn } from "@/lib/utils"
 
-interface AnimatedStatsProps {
-  stats: {
-    value: number
-    suffix?: string
-    prefix?: string
-    label: string
-    color?: string
-  }[]
-  className?: string
-  cardClassName?: string
-  textClassName?: string
-  labelClassName?: string
+interface StatItem {
+  value: number
+  suffix?: string
+  prefix?: string
+  label: string
+  color?: string
 }
 
-export function AnimatedStats({
-  stats,
-  className = "",
-  cardClassName = "",
-  textClassName = "",
-  labelClassName = "",
-}: AnimatedStatsProps) {
+interface AnimatedStatsProps {
+  title?: string
+  subtitle?: string
+  stats: StatItem[]
+  className?: string
+}
+
+export function AnimatedStats({ title, subtitle, stats, className }: AnimatedStatsProps) {
   return (
-    <div className={cn("grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6", className)}>
-      {stats.map((stat, index) => (
-        <AnimatedStat
-          key={index}
-          stat={stat}
-          delay={index * 0.1}
-          cardClassName={cardClassName}
-          textClassName={textClassName}
-          labelClassName={labelClassName}
-        />
-      ))}
+    <div className={cn("py-12", className)}>
+      <div className="container px-4">
+        {(title || subtitle) && (
+          <div className="text-center mb-12">
+            {title && <h2 className="text-3xl md:text-4xl font-bold mb-4">{title}</h2>}
+            {subtitle && <p className="text-xl text-muted-foreground max-w-2xl mx-auto">{subtitle}</p>}
+          </div>
+        )}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {stats.map((stat, index) => (
+            <AnimatedStat key={index} stat={stat} index={index} />
+          ))}
+        </div>
+      </div>
     </div>
   )
 }
 
-interface AnimatedStatProps {
-  stat: {
-    value: number
-    suffix?: string
-    prefix?: string
-    label: string
-    color?: string
-  }
-  delay: number
-  cardClassName?: string
-  textClassName?: string
-  labelClassName?: string
-}
-
-function AnimatedStat({ stat, delay, cardClassName = "", textClassName = "", labelClassName = "" }: AnimatedStatProps) {
+function AnimatedStat({ stat, index }: { stat: StatItem; index: number }) {
   const [count, setCount] = useState(0)
-  const countRef = useRef<HTMLDivElement>(null)
-  const [isInView, setIsInView] = useState(false)
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: "-100px" })
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsInView(true)
+    if (isInView) {
+      let start = 0
+      const end = stat.value
+      const duration = 2000 // 2 seconds
+      const increment = end / (duration / 16) // 60fps
+
+      const timer = setInterval(() => {
+        start += increment
+        if (start >= end) {
+          setCount(end)
+          clearInterval(timer)
+        } else {
+          setCount(Math.floor(start))
         }
-      },
-      { threshold: 0.1 },
-    )
+      }, 16)
 
-    if (countRef.current) {
-      observer.observe(countRef.current)
+      return () => clearInterval(timer)
     }
-
-    return () => {
-      if (countRef.current) {
-        observer.unobserve(countRef.current)
-      }
-    }
-  }, [])
-
-  useEffect(() => {
-    if (!isInView) return
-
-    let start = 0
-    const end = stat.value
-    const duration = 2000
-    const startTime = Date.now()
-
-    const animateCount = () => {
-      const now = Date.now()
-      const elapsedTime = now - startTime
-      const progress = Math.min(elapsedTime / duration, 1)
-
-      // Easing function for smoother animation
-      const easeOutQuart = (t: number) => 1 - Math.pow(1 - t, 4)
-      const easedProgress = easeOutQuart(progress)
-
-      const currentCount = Math.floor(easedProgress * end)
-
-      if (currentCount !== start) {
-        start = currentCount
-        setCount(currentCount)
-      }
-
-      if (progress < 1) {
-        requestAnimationFrame(animateCount)
-      }
-    }
-
-    const timeout = setTimeout(() => {
-      requestAnimationFrame(animateCount)
-    }, delay * 1000)
-
-    return () => clearTimeout(timeout)
-  }, [isInView, stat.value, delay])
-
-  const colorClasses = {
-    primary: "text-primary",
-    secondary: "text-secondary",
-    magenta: "text-magenta",
-    purple: "text-purple",
-  }
+  }, [isInView, stat.value])
 
   return (
     <motion.div
-      ref={countRef}
+      ref={ref}
+      className="text-center p-6 rounded-xl"
       initial={{ opacity: 0, y: 20 }}
-      animate={isInView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.6, delay }}
-      className={cn("p-6 rounded-xl flex flex-col items-center justify-center text-center", cardClassName)}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      <div className="text-4xl md:text-5xl font-bold mb-2">
-        <span className={cn(stat.color ? colorClasses[stat.color as keyof typeof colorClasses] : "", textClassName)}>
-          {stat.prefix}
-          {count}
-          {stat.suffix}
-        </span>
+      <div className={`text-4xl md:text-5xl font-bold mb-2 ${stat.color ? `text-${stat.color}` : "text-primary"}`}>
+        {stat.prefix && <span>{stat.prefix}</span>}
+        <span>{isInView ? count : 0}</span>
+        {stat.suffix && <span>{stat.suffix}</span>}
       </div>
-      <div className={cn("text-sm md:text-base", labelClassName)}>{stat.label}</div>
+      <p className="text-lg text-muted-foreground">{stat.label}</p>
     </motion.div>
   )
 }

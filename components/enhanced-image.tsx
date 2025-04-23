@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Image from "next/image"
+import { Skeleton } from "@/components/ui/skeleton"
 import { cn } from "@/lib/utils"
 
 interface EnhancedImageProps {
@@ -10,73 +11,103 @@ interface EnhancedImageProps {
   width?: number
   height?: number
   className?: string
+  containerClassName?: string
+  aspectRatio?: string
+  objectFit?: "cover" | "contain" | "fill" | "none" | "scale-down"
+  objectPosition?: string
   priority?: boolean
-  rounded?: "none" | "sm" | "md" | "lg" | "xl" | "2xl" | "3xl" | "full"
-  glowColor?: "magenta" | "purple" | "primary" | "none"
-  glowOnHover?: boolean
+  quality?: number | string
+  fallbackSrc?: string
+  sizes?: string
+  fill?: boolean
+  rounded?: boolean | "sm" | "md" | "lg" | "xl" | "full"
+  loading?: "eager" | "lazy"
+  placeholder?: "blur" | "empty" | "data:image/..."
+  blurDataURL?: string
+  onLoad?: () => void
+  onError?: () => void
 }
 
 export function EnhancedImage({
   src,
   alt,
-  width = 800,
-  height = 600,
+  width,
+  height,
   className,
+  containerClassName,
+  aspectRatio = "aspect-video",
+  objectFit = "cover",
+  objectPosition = "center",
   priority = false,
-  rounded = "none",
-  glowColor = "none",
-  glowOnHover = true,
-  ...props
+  quality = 75,
+  fallbackSrc = "/placeholder.svg",
+  sizes = "100vw",
+  fill = false,
+  rounded = false,
+  loading,
+  placeholder = "empty",
+  blurDataURL,
+  onLoad,
+  onError,
 }: EnhancedImageProps) {
-  const [isLoaded, setIsLoaded] = useState(false)
+  const [isLoading, setIsLoading] = useState(!priority)
+  const [error, setError] = useState(false)
 
-  const roundedClasses = {
-    none: "",
-    sm: "rounded-sm",
-    md: "rounded-md",
-    lg: "rounded-lg",
-    xl: "rounded-xl",
-    "2xl": "rounded-2xl",
-    "3xl": "rounded-3xl",
-    full: "rounded-full",
+  const getQualityValue = (): number => {
+    if (typeof quality === "number") return quality
+    switch (quality) {
+      case "low":
+        return 60
+      case "medium":
+        return 75
+      case "high":
+        return 90
+      case "auto":
+      default:
+        return 75
+    }
   }
 
-  const glowClasses = {
-    none: "",
-    magenta: "shadow-[0_0_30px_rgba(212,20,90,0.3)]",
-    purple: "shadow-[0_0_30px_rgba(121,40,202,0.3)]",
-    primary: "shadow-[0_0_30px_rgba(var(--primary),0.3)]",
+  const getRoundedClass = (): string => {
+    if (!rounded) return ""
+    if (rounded === true) return "rounded-md"
+    return `rounded-${rounded}`
   }
 
   return (
-    <div
-      className={cn(
-        "relative overflow-hidden transition-all duration-500",
-        roundedClasses[rounded],
-        glowOnHover ? `hover:${glowClasses[glowColor]}` : glowColor !== "none" ? glowClasses[glowColor] : "",
-        className,
-      )}
-    >
-      <div
-        className={cn(
-          "absolute inset-0 bg-gray-200 animate-pulse",
-          roundedClasses[rounded],
-          !isLoaded ? "opacity-100" : "opacity-0 transition-opacity duration-300",
-        )}
-      />
+    <div className={cn("relative overflow-hidden", aspectRatio, getRoundedClass(), containerClassName)}>
+      {isLoading && <Skeleton className="absolute inset-0" />}
       <Image
-        src={src || "/placeholder.svg"}
+        src={error ? fallbackSrc : src}
         alt={alt}
         width={width}
         height={height}
-        priority={priority}
-        onLoad={() => setIsLoaded(true)}
         className={cn(
-          "w-full h-auto object-cover transition-opacity duration-300",
-          roundedClasses[rounded],
-          !isLoaded ? "opacity-0" : "opacity-100",
+          "transition-opacity duration-500",
+          isLoading ? "opacity-0" : "opacity-100",
+          getRoundedClass(),
+          className,
         )}
-        {...props}
+        style={{
+          objectFit,
+          objectPosition,
+        }}
+        sizes={sizes}
+        quality={getQualityValue()}
+        priority={priority}
+        fill={fill}
+        loading={loading}
+        placeholder={placeholder as any}
+        blurDataURL={blurDataURL}
+        onLoadingComplete={() => {
+          setIsLoading(false)
+          onLoad?.()
+        }}
+        onError={() => {
+          setError(true)
+          setIsLoading(false)
+          onError?.()
+        }}
       />
     </div>
   )
