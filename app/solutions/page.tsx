@@ -8,10 +8,7 @@ import { Button } from "@/components/ui/button"
 import { ButtonWithFeedback } from "@/components/ui/button-with-feedback"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import FadeInSection from "@/components/fade-in-section"
-
-// Update the imports at the top to include our new components
-import { OptimizedImage } from "@/components/ui/optimized-image"
-import { getCategoryImage } from "@/lib/image-repository"
+import { VideoBackground } from "@/components/ui/video-background"
 
 export default function SolutionsPage() {
   const [isLoading, setIsLoading] = useState({
@@ -33,16 +30,53 @@ export default function SolutionsPage() {
     }, 1000)
   }
 
+  // Solution features with icons and descriptions
+  const solutionFeatures = [
+    {
+      icon: <ShieldCheck className="h-10 w-10 text-primary" />,
+      title: "Risk-Free Logistics",
+      description: "Eliminate inventory risk with our revolutionary model",
+      features: [
+        "No upfront inventory investment",
+        "Flexible payment terms",
+        "Managed warehousing and distribution",
+        "Rapid restocking of bestsellers",
+      ],
+    },
+    {
+      icon: <Layers className="h-10 w-10 text-primary" />,
+      title: "Supply Chain Management",
+      description: "Streamline your entire supply chain from sourcing to delivery",
+      features: [
+        "End-to-end visibility",
+        "Automated ordering",
+        "Quality control processes",
+        "Optimized delivery routes",
+      ],
+    },
+    {
+      icon: <BarChart3 className="h-10 w-10 text-primary" />,
+      title: "Business Intelligence",
+      description: "Make data-driven decisions with comprehensive analytics",
+      features: [
+        "Sales performance tracking",
+        "Customer behavior analysis",
+        "Market trend identification",
+        "Predictive inventory forecasting",
+      ],
+    },
+  ]
+
   return (
     <div className="flex min-h-screen flex-col">
       {/* Hero Section */}
       <section className="relative py-20 md:py-28 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-background/0 z-0"></div>
+        <VideoBackground src="/videos/retail-analytics.mp4" overlayOpacity={0.9} overlayColor="#000" />
         <div className="container px-4 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <motion.h1
-                className="text-4xl md:text-5xl font-bold mb-6"
+                className="text-4xl md:text-5xl font-bold mb-6 text-white"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
@@ -50,7 +84,7 @@ export default function SolutionsPage() {
                 Comprehensive Solutions for Fashion Retailers
               </motion.h1>
               <motion.p
-                className="text-xl text-muted-foreground mb-8"
+                className="text-xl text-gray-300 mb-8"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2 }}
@@ -78,6 +112,7 @@ export default function SolutionsPage() {
                   onClick={handleContactClick}
                   isLoading={isLoading.contact}
                   loadingText="Connecting..."
+                  className="text-white border-white hover:bg-white/10"
                 >
                   Contact Sales
                 </ButtonWithFeedback>
@@ -92,8 +127,8 @@ export default function SolutionsPage() {
               <div className="relative">
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary to-purple-600 rounded-lg blur opacity-25"></div>
                 <div className="relative bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl">
-                  <OptimizedImage
-                    src={getCategoryImage("feature", 0).src}
+                  <Image
+                    src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=900&q=80"
                     alt="Platform dashboard"
                     width={800}
                     height={600}
@@ -111,51 +146,16 @@ export default function SolutionsPage() {
         <div className="container px-4">
           <FadeInSection>
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Our Core Solutions</h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Designed specifically for fashion retailers in Tier 2 and Tier 3 cities
-              </p>
+              <span className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20 mb-4">
+                Core Solutions
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">Designed for Fashion Retailers</h2>
+              <div className="w-24 h-1 bg-primary rounded-full mx-auto mt-4 mb-6"></div>
             </div>
           </FadeInSection>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: <ShieldCheck className="h-10 w-10 text-primary" />,
-                title: "Risk-Free Logistics",
-                description:
-                  "Eliminate inventory risk with our revolutionary model that ensures you only pay for what sells.",
-                features: [
-                  "No upfront inventory investment",
-                  "Flexible payment terms",
-                  "Managed warehousing and distribution",
-                  "Rapid restocking of bestsellers",
-                ],
-              },
-              {
-                icon: <Layers className="h-10 w-10 text-primary" />,
-                title: "Supply Chain Management",
-                description:
-                  "Streamline your entire supply chain from sourcing to delivery with our integrated platform.",
-                features: [
-                  "End-to-end visibility",
-                  "Automated ordering",
-                  "Quality control processes",
-                  "Optimized delivery routes",
-                ],
-              },
-              {
-                icon: <BarChart3 className="h-10 w-10 text-primary" />,
-                title: "Business Intelligence",
-                description: "Make data-driven decisions with our comprehensive analytics and reporting tools.",
-                features: [
-                  "Sales performance tracking",
-                  "Customer behavior analysis",
-                  "Market trend identification",
-                  "Predictive inventory forecasting",
-                ],
-              },
-            ].map((solution, index) => (
+            {solutionFeatures.map((solution, index) => (
               <FadeInSection key={index} delay={index * 0.1} direction="up">
                 <motion.div
                   className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-100 dark:border-gray-700 h-full overflow-hidden"
@@ -186,10 +186,11 @@ export default function SolutionsPage() {
         <div className="container px-4">
           <FadeInSection>
             <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Powerful Platform Features</h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Our comprehensive platform offers all the tools you need to manage and grow your retail business
-              </p>
+              <span className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20 mb-4">
+                Platform Features
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">Everything You Need</h2>
+              <div className="w-24 h-1 bg-primary rounded-full mx-auto mt-4 mb-6"></div>
             </div>
           </FadeInSection>
 
@@ -229,8 +230,8 @@ export default function SolutionsPage() {
                 <div className="relative">
                   <div className="absolute -inset-1 bg-gradient-to-r from-primary to-purple-600 rounded-lg blur opacity-25"></div>
                   <div className="relative bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl">
-                    <OptimizedImage
-                      src={getCategoryImage("feature", 1).src}
+                    <Image
+                      src="https://images.unsplash.com/photo-1553413077-190dd305871c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&h=800&q=80"
                       alt="Inventory management dashboard"
                       width={800}
                       height={600}
@@ -247,7 +248,7 @@ export default function SolutionsPage() {
                   <div className="absolute -inset-1 bg-gradient-to-r from-primary to-purple-600 rounded-lg blur opacity-25"></div>
                   <div className="relative bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl">
                     <Image
-                      src="/placeholder.svg?height=600&width=800"
+                      src="/images/solutions/analytics-dashboard.png"
                       alt="Analytics dashboard"
                       width={800}
                       height={600}
@@ -305,7 +306,7 @@ export default function SolutionsPage() {
                   <div className="absolute -inset-1 bg-gradient-to-r from-primary to-purple-600 rounded-lg blur opacity-25"></div>
                   <div className="relative bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl">
                     <Image
-                      src="/placeholder.svg?height=600&width=800"
+                      src="/images/solutions/ordering-system.png"
                       alt="Ordering system"
                       width={800}
                       height={600}
@@ -322,7 +323,7 @@ export default function SolutionsPage() {
                   <div className="absolute -inset-1 bg-gradient-to-r from-primary to-purple-600 rounded-lg blur opacity-25"></div>
                   <div className="relative bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl">
                     <Image
-                      src="/placeholder.svg?height=600&width=800"
+                      src="/images/solutions/frontstore-interface.png"
                       alt="FrontStore interface"
                       width={800}
                       height={600}
@@ -361,11 +362,11 @@ export default function SolutionsPage() {
         <div className="container px-4">
           <FadeInSection>
             <div className="text-center mb-16">
+              <span className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20 mb-4">
+                Accessibility
+              </span>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">Access Anywhere, Anytime</h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Our platform works seamlessly across all your devices, giving you the flexibility to manage your
-                business from anywhere
-              </p>
+              <div className="w-24 h-1 bg-primary rounded-full mx-auto mt-4 mb-6"></div>
             </div>
           </FadeInSection>
 
@@ -402,42 +403,56 @@ export default function SolutionsPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-20">
-        <div className="container px-4">
-          <div className="max-w-4xl mx-auto bg-gradient-to-r from-primary to-purple-600 rounded-2xl overflow-hidden shadow-xl">
-            <div className="grid grid-cols-1 md:grid-cols-2">
-              <div className="p-8 md:p-12 text-white">
-                <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Retail Business?</h2>
-                <p className="mb-6 text-white/90">
-                  Schedule a demo today and see how our platform can help you streamline operations, reduce risk, and
-                  scale your business.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4">
-                  <Button size="lg" variant="secondary" className="text-primary font-bold" onClick={handleDemoClick}>
-                    Schedule a Demo
-                  </Button>
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="text-white border-white hover:bg-white/10"
-                    onClick={handleContactClick}
-                  >
-                    Contact Sales
-                  </Button>
-                </div>
-              </div>
-              <div className="relative hidden md:block">
-                <OptimizedImage
-                  src={getCategoryImage("feature", 2).src}
-                  alt="Platform demo"
-                  width={600}
-                  height={600}
-                  aspectRatio="aspect-square"
-                  className="h-full"
-                />
-              </div>
-            </div>
+      {/* CTA Section with Video Background */}
+      <section className="py-20 relative overflow-hidden">
+        <VideoBackground src="/videos/fashion-retail.mp4" overlayOpacity={0.8} overlayColor="#000" />
+        <div className="container px-4 relative z-10">
+          <div className="max-w-4xl mx-auto text-center text-white">
+            <motion.h2
+              className="text-3xl md:text-5xl font-bold mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              Ready to Transform Your Retail Business?
+            </motion.h2>
+
+            <motion.p
+              className="text-xl md:text-2xl mb-10 text-white/90"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
+              Join hundreds of successful retailers who have revolutionized their businesses with our platform.
+            </motion.p>
+
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.4 }}
+            >
+              <Button
+                size="lg"
+                variant="secondary"
+                className="text-primary font-bold text-base px-8 py-6"
+                onClick={handleDemoClick}
+              >
+                Schedule a Demo
+              </Button>
+
+              <Button
+                size="lg"
+                variant="outline"
+                className="text-white border-white hover:bg-white/10 text-base px-8 py-6"
+                onClick={handleContactClick}
+              >
+                Contact Sales
+              </Button>
+            </motion.div>
           </div>
         </div>
       </section>

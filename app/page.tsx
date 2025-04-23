@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
-import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
+import { motion, useScroll, useTransform } from "framer-motion"
 import {
   ArrowRight,
   ShieldCheck,
@@ -21,10 +21,11 @@ import { ButtonWithFeedback } from "@/components/ui/button-with-feedback"
 import { Button } from "@/components/ui/button"
 import FadeInSection from "@/components/fade-in-section"
 import ScrollToTop from "@/components/scroll-to-top"
-
-// Update the imports at the top to include our new components
 import { OptimizedImage } from "@/components/ui/optimized-image"
 import { getCategoryImage } from "@/lib/image-repository"
+import { VideoBackground } from "@/components/ui/video-background"
+import { VideoTestimonialsSection } from "@/components/video-testimonials-section"
+import { videoTestimonials } from "@/data/video-testimonials"
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState({
@@ -90,18 +91,17 @@ export default function Home() {
 
   return (
     <>
-      {/* Hero Section */}
+      {/* Hero Section with Video Background */}
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Background Video */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-black/70 z-10"></div>
-          <video autoPlay loop muted playsInline className="absolute w-full h-full object-cover">
-            <source
-              src="https://assets.mixkit.co/videos/preview/mixkit-fashion-model-with-a-black-and-white-outfit-39880-large.mp4"
-              type="video/mp4"
-            />
-          </video>
-        </div>
+        {/* Video Background */}
+        <VideoBackground
+          src="/videos/fashion-showcase.mp4"
+          overlayOpacity={0.7}
+          priority={true}
+          fallbackImage="/images/hero-fallback.jpg"
+          mobileImage="/images/hero-mobile.jpg"
+          posterImage="/images/hero-poster.jpg"
+        />
 
         <motion.div className="container relative z-20 px-4 py-32 md:py-40 text-center" style={{ opacity, scale, y }}>
           <motion.div
@@ -234,17 +234,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Solution Section */}
+      {/* Solution Section with Video Background */}
       <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-background/0 z-0"></div>
+        <VideoBackground
+          src="/videos/retail-analytics.mp4"
+          overlayOpacity={0.9}
+          overlayColor="#000"
+          fallbackImage="/images/solution-fallback.jpg"
+          mobileImage="/images/solution-mobile.jpg"
+          posterImage="/images/solution-poster.jpg"
+        />
         <div className="container px-4 relative z-10">
           <FadeInSection>
             <div className="text-center mb-16">
               <span className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20 mb-4">
                 Our Solution
               </span>
-              <h2 className="text-3xl md:text-5xl font-bold mb-6">A Revolutionary Approach to Retail</h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              <h2 className="text-3xl md:text-5xl font-bold mb-6 text-white">A Revolutionary Approach to Retail</h2>
+              <p className="text-xl text-gray-300 max-w-3xl mx-auto">
                 We've built a comprehensive platform that addresses every challenge facing fashion retailers in Tier 2 &
                 3 cities.
               </p>
@@ -269,7 +276,7 @@ export default function Home() {
 
             <FadeInSection direction="right">
               <div>
-                <h3 className="text-2xl md:text-3xl font-bold mb-6">The Ultimate Retail Tech Platform</h3>
+                <h3 className="text-2xl md:text-3xl font-bold mb-6 text-white">The Ultimate Retail Tech Platform</h3>
 
                 <div className="space-y-6">
                   {[
@@ -308,8 +315,8 @@ export default function Home() {
                         {feature.icon}
                       </div>
                       <div>
-                        <h4 className="text-xl font-semibold mb-2">{feature.title}</h4>
-                        <p className="text-muted-foreground">{feature.description}</p>
+                        <h4 className="text-xl font-semibold mb-2 text-white">{feature.title}</h4>
+                        <p className="text-gray-300">{feature.description}</p>
                       </div>
                     </motion.div>
                   ))}
@@ -460,98 +467,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Testimonials */}
-      <section className="py-20 bg-gradient-to-b from-muted/30 to-background">
-        <div className="container px-4">
-          <FadeInSection>
-            <div className="text-center mb-16">
-              <span className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20 mb-4">
-                Success Stories
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">What Our Partners Say</h2>
-              <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-                Hear from retailers who have transformed their businesses with our platform
-              </p>
-            </div>
-          </FadeInSection>
+      {/* Video Testimonials Section */}
+      <VideoTestimonialsSection testimonials={videoTestimonials} />
 
-          <div className="max-w-4xl mx-auto">
-            <div className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 md:p-12">
-              <div className="absolute -top-5 -left-5">
-                <div className="text-6xl text-primary">"</div>
-              </div>
-
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={activeTestimonial}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.5 }}
-                  className="pt-6"
-                >
-                  <p className="text-xl md:text-2xl italic mb-8">{testimonials[activeTestimonial].quote}</p>
-
-                  <div className="flex items-center">
-                    <div className="mr-4 rounded-full overflow-hidden w-16 h-16 border-2 border-primary">
-                      <OptimizedImage
-                        src={testimonials[activeTestimonial].image || "/placeholder.svg"}
-                        alt={testimonials[activeTestimonial].name}
-                        width={64}
-                        height={64}
-                        aspectRatio="aspect-square"
-                        className="w-full h-full"
-                      />
-                    </div>
-                    <div>
-                      <h4 className="text-lg font-bold">{testimonials[activeTestimonial].name}</h4>
-                      <p className="text-muted-foreground">{testimonials[activeTestimonial].position}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              </AnimatePresence>
-
-              <div className="absolute bottom-12 right-12 flex space-x-2">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setActiveTestimonial(index)}
-                    className={`w-3 h-3 rounded-full transition-colors duration-300 ${
-                      index === activeTestimonial ? "bg-primary" : "bg-gray-300 dark:bg-gray-600"
-                    }`}
-                    aria-label={`View testimonial ${index + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-            {[
-              { label: "Retail Partners", value: "500+" },
-              { label: "Cities Served", value: "20+" },
-              { label: "Avg. Growth Rate", value: "40%" },
-              { label: "Customer Satisfaction", value: "98%" },
-            ].map((stat, index) => (
-              <FadeInSection key={index} delay={index * 0.1} direction="up">
-                <motion.div whileHover={{ y: -5 }} className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
-                  <h3 className="text-3xl md:text-4xl font-bold text-primary mb-2">{stat.value}</h3>
-                  <p className="text-muted-foreground">{stat.label}</p>
-                </motion.div>
-              </FadeInSection>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
+      {/* CTA Section with Video Background */}
       <section className="py-20 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-primary to-purple-600 opacity-90"></div>
-        <div
-          className="absolute inset-0 bg-cover bg-center mix-blend-overlay opacity-20"
-          style={{ backgroundImage: `url(${getCategoryImage("background", 0).src})` }}
-        ></div>
-
+        <VideoBackground
+          src="/videos/fashion-retail.mp4"
+          overlayOpacity={0.8}
+          overlayColor="#000"
+          fallbackImage="/images/cta-fallback.jpg"
+          mobileImage="/images/cta-mobile.jpg"
+          posterImage="/images/cta-poster.jpg"
+        />
         <div className="container px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center text-white">
             <motion.h2

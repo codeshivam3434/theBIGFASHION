@@ -1,30 +1,52 @@
-# Clothing business website
+# Fashion Fusion Website
 
-*Automatically synced with your [v0.dev](https://v0.dev) deployments*
+This is the codebase for the Fashion Fusion website, a platform for fashion retailers in Tier 2 & 3 cities.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/codeshivam3434s-projects/v0-clothing-business-website)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.dev-black?style=for-the-badge)](https://v0.dev/chat/projects/sVsSCUzAe6v)
+## Getting Started
 
-## Overview
+1. Clone the repository
+2. Install dependencies: `npm install`
+3. Run the development server: `npm run dev`
+4. Open [http://localhost:3000](http://localhost:3000) in your browser
 
-This repository will stay in sync with your deployed chats on [v0.dev](https://v0.dev).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.dev](https://v0.dev).
+## Project Structure
 
-## Deployment
+- `/app`: Next.js app router pages
+- `/components`: Reusable React components
+- `/public`: Static assets (images, videos, etc.)
+- `/data`: Data files for content management
+- `/docs`: Documentation files
 
-Your project is live at:
+## Updating Content
 
-**[https://vercel.com/codeshivam3434s-projects/v0-clothing-business-website](https://vercel.com/codeshivam3434s-projects/v0-clothing-business-website)**
+### Video Content
 
-## Build your app
+See [docs/updating-videos.md](./docs/updating-videos.md) for detailed instructions on how to update video backgrounds and testimonials.
 
-Continue building your app on:
+### Images
 
-**[https://v0.dev/chat/projects/sVsSCUzAe6v](https://v0.dev/chat/projects/sVsSCUzAe6v)**
+Images are stored in the `/public/images` directory. To update an image, replace the file with the same name or update the reference in the code.
 
-## How It Works
+## Responsive Design
 
-1. Create and modify your project using [v0.dev](https://v0.dev)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+The website is designed to be fully responsive across all devices:
+
+- Mobile: 320px - 767px
+- Tablet: 768px - 1023px
+- Desktop: 1024px and above
+
+Video backgrounds automatically switch to static images on mobile devices to improve performance.
+
+## Performance Optimization
+
+- Videos are lazy-loaded and only play when in viewport
+- Mobile devices show static images instead of videos
+- All images are optimized and use responsive sizing
+- Animations are optimized for performance
+
+## Accessibility
+
+- All videos have proper controls and can be paused
+- Videos are muted by default with options to unmute
+- All interactive elements are keyboard accessible
+- Proper ARIA attributes are used throughout

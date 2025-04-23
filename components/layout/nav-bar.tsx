@@ -3,118 +3,141 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { motion } from "framer-motion"
-import { Menu, LogIn, UserPlus } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
+import { Menu, X, ChevronDown, Home, Info, Lightbulb, Store, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { MobileMenu } from "@/components/mobile-menu"
+import TheBigFashionLogo from "@/components/the-big-fashion-logo"
+import { useMobile } from "@/hooks/use-mobile"
 
 export default function NavBar() {
+  const [isOpen, setIsOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const pathname = usePathname()
+  const isMobile = useMobile()
 
-  // Check if we're on an auth page to hide the auth buttons
-  const isAuthPage = pathname.startsWith("/auth")
-  // Check if we're on a dashboard page to hide the auth buttons
-  const isDashboardPage = pathname.startsWith("/dashboard")
+  // Navigation items with icons for visual appeal
+  const navItems = [
+    { name: "Home", href: "/", icon: <Home className="h-4 w-4 mr-1" /> },
+    { name: "About", href: "/about", icon: <Info className="h-4 w-4 mr-1" /> },
+    { name: "Solutions", href: "/solutions", icon: <Lightbulb className="h-4 w-4 mr-1" /> },
+    { name: "For Retailers", href: "/partners", icon: <Store className="h-4 w-4 mr-1" /> },
+    { name: "Contact", href: "/contact", icon: <Phone className="h-4 w-4 mr-1" /> },
+  ]
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20)
+      if (window.scrollY > 10) {
+        setIsScrolled(true)
+      } else {
+        setIsScrolled(false)
+      }
     }
 
-    window.addEventListener("scroll", handleScroll, { passive: true })
-    handleScroll() // Check initial position
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll)
-    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  useEffect(() => {
+    // Close mobile menu when route changes
+    setIsOpen(false)
+  }, [pathname])
+
   return (
-    <>
-      <motion.header
-        className={`sticky top-0 z-50 w-full backdrop-blur transition-all duration-300 ${
-          isScrolled ? "bg-background/95 border-b shadow-sm" : "bg-transparent"
-        }`}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ type: "spring", stiffness: 300, damping: 30 }}
-      >
-        <div className="container flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center gap-2">
-            <span className="text-xl font-bold hidden sm:inline-block">THE</span>
-            <span className="text-xl font-bold text-primary hidden sm:inline-block">BIG FASHION</span>
-            <span className="text-xl font-bold sm:hidden">THE BIG</span>
-          </Link>
-          <nav className="hidden md:flex gap-8">
-            <NavLink href="/" label="Home" isActive={pathname === "/"} />
-            <NavLink href="/about" label="About Us" isActive={pathname.startsWith("/about")} />
-            <NavLink href="/solutions" label="Solutions" isActive={pathname.startsWith("/solutions")} />
-            <NavLink href="/partners" label="For Retailers" isActive={pathname.startsWith("/partners")} />
-            <NavLink href="/contact" label="Contact" isActive={pathname.startsWith("/contact")} />
-          </nav>
-          <div className="flex items-center gap-4">
-            {!isAuthPage && !isDashboardPage && (
-              <>
-                <Link
-                  href="/auth/login"
-                  className="hidden md:inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? "bg-background/80 backdrop-blur-md shadow-md py-2" : "bg-transparent py-4"
+      }`}
+    >
+      <div className="container flex items-center justify-between">
+        <Link href="/" className="flex items-center">
+          <TheBigFashionLogo className="h-10 w-auto" />
+        </Link>
+
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center space-x-1">
+          {navItems.map((item) => {
+            const isActive = pathname === item.href
+            return (
+              <Link key={item.name} href={item.href}>
+                <motion.div
+                  className={`relative px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center ${
+                    isActive ? "text-primary" : "text-foreground/80 hover:text-primary hover:bg-primary/5"
+                  }`}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <LogIn className="mr-2 h-4 w-4" />
-                  Sign In
-                </Link>
-                <Link
-                  href="/auth/signup"
-                  className="hidden md:inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-all duration-300 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
-                >
-                  <UserPlus className="mr-2 h-4 w-4" />
-                  Sign Up
-                </Link>
-              </>
-            )}
-            {isDashboardPage && (
-              <Link
-                href="/dashboard"
-                className="hidden md:inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow transition-all duration-300 hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/20 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-1"
-              >
-                Dashboard
+                  {item.icon}
+                  {item.name}
+                  {isActive && (
+                    <motion.div
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
+                      layoutId="navbar-indicator"
+                    />
+                  )}
+                </motion.div>
               </Link>
-            )}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden"
-              onClick={() => setMobileMenuOpen(true)}
-              aria-label="Menu"
-            >
-              <Menu className="h-6 w-6" />
+            )
+          })}
+          <div className="ml-4">
+            <Button asChild size="sm">
+              <Link href="/auth/login">Login</Link>
             </Button>
           </div>
-        </div>
-      </motion.header>
-      <MobileMenu isOpen={mobileMenuOpen} onClose={() => setMobileMenuOpen(false)} />
-    </>
-  )
-}
+        </nav>
 
-interface NavLinkProps {
-  href: string
-  label: string
-  isActive: boolean
-}
+        {/* Mobile Menu Button */}
+        <button
+          className="md:hidden p-2 rounded-md text-foreground/80 hover:text-primary hover:bg-primary/5"
+          onClick={() => setIsOpen(!isOpen)}
+          aria-label={isOpen ? "Close menu" : "Open menu"}
+        >
+          {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </button>
+      </div>
 
-function NavLink({ href, label, isActive }: NavLinkProps) {
-  return (
-    <Link href={href} className="relative text-sm font-medium transition-colors hover:text-primary">
-      {label}
-      {isActive && (
-        <motion.div
-          className="absolute -bottom-1 left-0 h-0.5 w-full bg-primary"
-          layoutId="navbar-indicator"
-          transition={{ type: "spring", stiffness: 300, damping: 30 }}
-        />
-      )}
-    </Link>
+      {/* Mobile Navigation */}
+      <AnimatePresence>
+        {isOpen && isMobile && (
+          <motion.div
+            className="fixed inset-0 top-[60px] bg-background z-40 overflow-y-auto"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="container py-6 space-y-6">
+              <nav className="flex flex-col space-y-4">
+                {navItems.map((item) => {
+                  const isActive = pathname === item.href
+                  return (
+                    <Link key={item.name} href={item.href}>
+                      <motion.div
+                        className={`flex items-center justify-between p-3 rounded-md ${
+                          isActive
+                            ? "bg-primary/10 text-primary"
+                            : "text-foreground/80 hover:bg-primary/5 hover:text-primary"
+                        }`}
+                        whileTap={{ scale: 0.98 }}
+                      >
+                        <div className="flex items-center">
+                          {item.icon}
+                          <span className="ml-2 font-medium">{item.name}</span>
+                        </div>
+                        <ChevronDown className="h-4 w-4" />
+                      </motion.div>
+                    </Link>
+                  )
+                })}
+              </nav>
+              <div className="pt-4 border-t">
+                <Button className="w-full" asChild>
+                  <Link href="/auth/login">Login</Link>
+                </Button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </header>
   )
 }
