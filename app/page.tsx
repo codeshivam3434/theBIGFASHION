@@ -193,7 +193,7 @@ export default function Home() {
       <section className="py-16 bg-background">
         <div className="container">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Retailers Choose Fashion Fusion</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Retailers Choose BIG FASHION</h2>
             <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
               Our platform is specifically designed to solve the unique challenges of fashion retailers in Tier 2 & 3
               cities

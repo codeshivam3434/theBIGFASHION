@@ -1,33 +1,21 @@
-"use client"
-
-import { motion } from "framer-motion"
+import Image from "next/image"
+import { cn } from "@/lib/utils"
 
 interface TheBigFashionLogoProps {
   className?: string
-  size?: "sm" | "md" | "lg"
-  variant?: "default" | "white"
 }
 
-export function TheBigFashionLogo({ className = "", size = "md", variant = "default" }: TheBigFashionLogoProps) {
-  const sizeClasses = {
-    sm: "h-8",
-    md: "h-10",
-    lg: "h-12",
-  }
-
-  const textColor = variant === "white" ? "text-white" : "text-primary"
-
+export default function TheBigFashionLogo({ className }: TheBigFashionLogoProps) {
   return (
-    <motion.div
-      className={`flex items-center ${className}`}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
-      <span className={`font-bold ${textColor} ${sizeClasses[size]}`}>FASHION FUSION</span>
-    </motion.div>
+    <div className={cn("relative", className)}>
+      <Image
+        src="/images/big-fashion-logo.png"
+        alt="BIG FASHION"
+        width={120}
+        height={40}
+        className="h-auto w-auto"
+        priority
+      />
+    </div>
   )
 }
-
-// Add default export for compatibility
-export default TheBigFashionLogo

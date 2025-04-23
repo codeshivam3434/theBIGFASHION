@@ -51,21 +51,21 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Updated brand colors for Silicon Valley tech aesthetic
+        // Updated brand colors to match the magenta logo
         brand: {
-          DEFAULT: "#3b82f6", // Blue 500
-          light: "#60a5fa", // Blue 400
-          dark: "#1e40af", // Blue 800
+          DEFAULT: "#d4145a", // Magenta from the logo
+          light: "#e83a7a", // Lighter magenta
+          dark: "#a80f45", // Darker magenta
           accent: "#f59e0b", // Amber 500 - for accents and CTAs
           success: "#10b981", // Emerald 500
           warning: "#f59e0b", // Amber 500
           error: "#ef4444", // Red 500
           gray: "#64748b", // Slate 500
         },
-        // Fashion-specific colors
+        // Fashion-specific colors updated to match logo
         fashion: {
-          primary: "#3b82f6", // Blue 500
-          secondary: "#60a5fa", // Blue 400
+          primary: "#d4145a", // Magenta from the logo
+          secondary: "#e83a7a", // Lighter magenta
           accent: "#f59e0b", // Amber 500
           neutral: "#f8fafc", // Slate 50
           dark: "#1e293b", // Slate 800
