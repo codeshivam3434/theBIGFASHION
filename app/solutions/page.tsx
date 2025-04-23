@@ -95,7 +95,7 @@ export default function SolutionsPage() {
                 <div className="relative bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl">
                   <Image
                     src="/images/solutions/analytics-dashboard.png"
-                    alt="Platform dashboard"
+                    alt="Comprehensive fashion retail analytics dashboard showing sales metrics, inventory status, and business performance indicators - Solutions Hero section"
                     width={800}
                     height={600}
                     className="w-full h-auto"
@@ -216,29 +216,33 @@ export default function SolutionsPage() {
             title: "Inventory Management",
             description: "Real-time tracking, low-stock alerts, and automated reordering to optimize your inventory.",
             icon: <BarChart3 className="h-6 w-6" />,
-            image: "/inventory-management-feature.png",
+            image: "/images/inventory-management-retail.png",
             color: "primary",
+            alt: "Fashion retail inventory management system showing staff using digital tools to track clothing items with organized racks in the background - Key Platform Capabilities section",
           },
           {
             title: "Sales Analytics",
             description: "Comprehensive dashboards and reports to track performance and identify growth opportunities.",
             icon: <LineChart className="h-6 w-6" />,
-            image: "/sales-analytics-feature.png",
+            image: "/images/sales-analytics-dashboard.png",
             color: "blue-500",
+            alt: "Fashion retail sales analytics dashboard displaying performance metrics, trend charts, and KPIs for clothing sales - Key Platform Capabilities section",
           },
           {
             title: "Customer Insights",
             description: "Understand your customers better with detailed demographic and behavioral data.",
             icon: <Users className="h-6 w-6" />,
-            image: "/customer-insights-feature.png",
+            image: "/images/customer-insights-retail.png",
             color: "purple-500",
+            alt: "Fashion retail customer segmentation analysis showing demographic data, shopping patterns, and preference insights - Key Platform Capabilities section",
           },
           {
             title: "Growth Tools",
             description: "Access marketing templates, promotion strategies, and business expansion resources.",
             icon: <TrendingUp className="h-6 w-6" />,
-            image: "/growth-tools-feature.png",
+            image: "/images/retail-growth-strategies.png",
             color: "green-500",
+            alt: "Fashion retailer planning business expansion with marketing materials, growth charts, and promotional strategy documents - Key Platform Capabilities section",
           },
         ]}
         className="py-20"

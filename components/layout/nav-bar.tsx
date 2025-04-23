@@ -45,12 +45,15 @@ export default function NavBar() {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? "bg-background/90 backdrop-blur-md shadow-md py-2" : "bg-transparent py-4"
+        isScrolled ? "bg-white backdrop-blur-md shadow-md py-2" : "bg-white py-4"
       }`}
     >
       <div className="container flex items-center justify-between max-w-screen-2xl mx-auto px-4">
         <Link href="/" className="flex items-center flex-shrink-0 mr-10 min-w-[120px]">
-          <TheBigFashionLogo className={`h-10 w-auto ${isScrolled ? "text-primary" : "text-primary"}`} />
+          <TheBigFashionLogo
+            size={isScrolled ? "sm" : "md"}
+            className={`transition-all duration-300 ${isScrolled ? "scale-90" : "scale-100"}`}
+          />
         </Link>
 
         {/* Desktop Navigation */}
@@ -145,8 +148,11 @@ export default function NavBar() {
                 })}
               </nav>
               <div className="pt-4 border-t">
-                <Button className="w-full" asChild>
+                <Button className="w-full mb-2" asChild>
                   <Link href="/auth/login">Login</Link>
+                </Button>
+                <Button className="w-full" variant="outline" asChild>
+                  <Link href="/auth/signup">Sign Up</Link>
                 </Button>
               </div>
             </div>

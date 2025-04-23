@@ -5,6 +5,7 @@ import type React from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react"
+import TheBigFashionLogo from "@/components/the-big-fashion-logo"
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -14,9 +15,8 @@ export default function Footer() {
       <div className="container py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <Link href="/" className="flex items-center gap-2 text-xl font-bold">
-              <span>THE</span>
-              <span className="text-primary">BIG FASHION</span>
+            <Link href="/" className="flex items-center gap-2">
+              <TheBigFashionLogo size="md" variant="default" />
             </Link>
             <p className="text-sm text-muted-foreground">
               Revolutionizing India's clothing wholesale industry since 2018. Empowering retailers with diverse
@@ -53,14 +53,16 @@ export default function Footer() {
             <h3 className="font-semibold mb-4">Contact</h3>
             <ul className="space-y-2">
               <li className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-                THE BIG FASHION Headquarters
+                BIG FASHION Headquarters
               </li>
-              <li className="text-sm text-muted-foreground transition-colors hover:text-foreground">B-12, Sector 63,Andheri East,</li>
+              <li className="text-sm text-muted-foreground transition-colors hover:text-foreground">
+                B-12, Sector 63, Andheri East,
+              </li>
               <li className="text-sm text-muted-foreground transition-colors hover:text-foreground">
                 Mumbai, Maharashtra 401208
               </li>
               <li className="text-sm text-muted-foreground transition-colors hover:text-foreground hover:underline">
-                <a href="mailto:thebigfashion@gmail.com">thebigfashion@gmail.com</a>
+                <a href="mailto:bigfashion@gmail.com">bigfashion@gmail.com</a>
               </li>
               <li className="text-sm text-muted-foreground transition-colors hover:text-foreground hover:underline">
                 <a href="tel:+917033383119">+91 7033383119</a>
@@ -70,7 +72,7 @@ export default function Footer() {
         </div>
         <div className="mt-12 pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-muted-foreground">© {currentYear} THE BIG FASHION. All rights reserved.</p>
+            <p className="text-sm text-muted-foreground">© {currentYear} BIG FASHION Pvt Ltd. All rights reserved.</p>
             <div className="flex gap-6">
               <Link href="/terms" className="text-xs text-muted-foreground hover:text-foreground hover:underline">
                 Terms of Service

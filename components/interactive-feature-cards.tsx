@@ -5,6 +5,7 @@ import type React from "react"
 import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
+import Image from "next/image"
 
 interface FeatureCard {
   title: string
@@ -12,6 +13,7 @@ interface FeatureCard {
   icon: React.ReactNode
   image: string
   color?: string
+  alt?: string
 }
 
 interface InteractiveFeatureCardsProps {
@@ -91,10 +93,14 @@ export function InteractiveFeatureCards({ title, subtitle, features, className }
                           className={`absolute -inset-1 bg-gradient-to-r from-${feature.color || "primary"} to-${feature.color || "primary"}/60 rounded-lg blur opacity-25`}
                         ></div>
                         <div className="relative bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl h-full">
-                          <img
+                          <Image
                             src={feature.image || "/placeholder.svg"}
-                            alt={feature.title}
-                            className="w-full h-full object-cover"
+                            alt={feature.alt || feature.title}
+                            width={600}
+                            height={400}
+                            quality={90}
+                            loading="eager"
+                            className="w-full h-auto rounded-lg shadow-lg object-cover"
                           />
                         </div>
                       </div>

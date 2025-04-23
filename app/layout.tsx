@@ -18,8 +18,8 @@ export const metadata = {
   },
   description: siteConfig.description,
   keywords: ["wholesale clothing", "fashion retail", "retail technology", "inventory management", "fashion analytics"],
-  authors: [{ name: "THE BIG FASHION Team" }],
-  creator: "THE BIG FASHION",
+  authors: [{ name: "BIG FASHION Team" }],
+  creator: "BIG FASHION",
   metadataBase: new URL(siteConfig.url),
   openGraph: {
     type: "website",
