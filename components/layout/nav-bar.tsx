@@ -48,24 +48,24 @@ export default function NavBar() {
         isScrolled ? "bg-background/90 backdrop-blur-md shadow-md py-2" : "bg-transparent py-4"
       }`}
     >
-      <div className="container flex items-center justify-between">
-        <Link href="/" className="flex items-center">
-          <TheBigFashionLogo className={`h-10 w-auto ${isScrolled ? "text-primary" : "text-white"}`} />
+      <div className="container flex items-center justify-between max-w-screen-2xl mx-auto px-4">
+        <Link href="/" className="flex items-center flex-shrink-0 mr-10 min-w-[120px]">
+          <TheBigFashionLogo className={`h-10 w-auto ${isScrolled ? "text-primary" : "text-primary"}`} />
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-1">
+        <nav className="hidden md:flex items-center justify-end flex-grow space-x-4">
           {navItems.map((item) => {
             const isActive = pathname === item.href
             return (
-              <Link key={item.name} href={item.href}>
+              <Link key={item.name} href={item.href} className="flex-shrink-0">
                 <motion.div
                   className={`relative px-3 py-2 rounded-md text-sm font-medium transition-colors flex items-center ${
                     isActive
                       ? "text-primary bg-primary/10 font-semibold"
                       : isScrolled
-                        ? "text-foreground/80 hover:text-primary hover:bg-primary/5"
-                        : "text-white hover:text-primary hover:bg-white/10"
+                        ? "text-gray-800 hover:text-primary hover:bg-primary/5"
+                        : "text-gray-800 hover:text-primary hover:bg-white/10"
                   }`}
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -85,11 +85,16 @@ export default function NavBar() {
               </Link>
             )
           })}
-          <div className="ml-4 flex space-x-2">
-            <Button asChild size="sm" variant={isScrolled ? "outline" : "secondary"}>
+          <div className="ml-4 flex space-x-2 flex-shrink-0">
+            <Button
+              asChild
+              size="sm"
+              variant={isScrolled ? "outline" : "outline"}
+              className="text-gray-800 border-gray-800 hover:text-primary hover:border-primary"
+            >
               <Link href="/auth/login">Login</Link>
             </Button>
-            <Button asChild size="sm" variant={isScrolled ? "default" : "secondary"}>
+            <Button asChild size="sm" variant="default">
               <Link href="/auth/signup">Sign Up</Link>
             </Button>
           </div>
@@ -97,9 +102,7 @@ export default function NavBar() {
 
         {/* Mobile Menu Button */}
         <button
-          className={`md:hidden p-2 rounded-md ${
-            isScrolled ? "text-foreground/80" : "text-white"
-          } hover:text-primary hover:bg-primary/5`}
+          className={`md:hidden p-2 rounded-md text-gray-800 hover:text-primary hover:bg-primary/5`}
           onClick={() => setIsOpen(!isOpen)}
           aria-label={isOpen ? "Close menu" : "Open menu"}
         >
@@ -127,7 +130,7 @@ export default function NavBar() {
                         className={`flex items-center justify-between p-3 rounded-md ${
                           isActive
                             ? "bg-primary/10 text-primary"
-                            : "text-foreground/80 hover:bg-primary/5 hover:text-primary"
+                            : "text-gray-800 hover:bg-primary/5 hover:text-primary"
                         }`}
                         whileTap={{ scale: 0.98 }}
                       >
