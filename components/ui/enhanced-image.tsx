@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Skeleton } from "@/components/ui/skeleton"
 import { cn } from "@/lib/utils"
 import { useBreakpoint } from "@/hooks/use-breakpoint"
+import { useInView } from "react-intersection-observer"
 
 type ImageQuality = "low" | "medium" | "high" | "auto"
 
@@ -145,21 +146,32 @@ export function EnhancedImage({
     return `rounded-${rounded}`
   }
 
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    rootMargin: "200px 0px",
+  })
+
   // Generate placeholder blur data URL if not provided
   useEffect(() => {
     const w = getResponsiveWidth() || 100
     const h = getResponsiveHeight() || 100
 
     if (!blurDataURL && placeholder === "blur" && !priority) {
+      // Create a more sophisticated blur placeholder
+      const color = error ? "#e5e7eb" : "#cbd5e1"
       const svg = `
-        <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg">
-          <rect width="${w}" height="${h}" fill="#e5e7eb"/>
-        </svg>
-      `
+      <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg">
+        <rect width="${w}" height="${h}" fill="${color}"/>
+        <filter id="b" x="0" y="0">
+          <feGaussianBlur stdDeviation="10" />
+        </filter>
+        <rect width="${w}" height="${h}" fill="${color}" filter="url(#b)" opacity="0.5"/>
+      </svg>
+    `
       const encodedSvg = btoa(svg)
       setImageSrc(`data:image/svg+xml;base64,${encodedSvg}`)
     }
-  }, [blurDataURL, placeholder, priority])
+  }, [blurDataURL, placeholder, priority, src, error])
 
   // Reset to original source when it changes
   useEffect(() => {
@@ -172,40 +184,45 @@ export function EnhancedImage({
   const responsiveHeight = getResponsiveHeight()
 
   return (
-    <div className={cn("relative overflow-hidden", !fill && aspectRatio, getRoundedClass(), containerClassName)}>
+    <div
+      ref={ref}
+      className={cn("relative overflow-hidden", !fill && aspectRatio, getRoundedClass(), containerClassName)}
+    >
       {isLoading && <Skeleton className="absolute inset-0" />}
-      <Image
-        src={error ? fallbackSrc : imageSrc}
-        alt={alt}
-        width={fill ? undefined : responsiveWidth}
-        height={fill ? undefined : responsiveHeight}
-        className={cn(
-          "transition-opacity duration-500",
-          isLoading ? "opacity-0" : "opacity-100",
-          getRoundedClass(),
-          className,
-        )}
-        style={{
-          objectFit,
-          objectPosition,
-        }}
-        sizes={sizes}
-        quality={getQualityValue()}
-        priority={priority}
-        fill={fill}
-        loading={loading}
-        placeholder={placeholder as any}
-        blurDataURL={blurDataURL}
-        onLoadingComplete={() => {
-          setIsLoading(false)
-          onLoad?.()
-        }}
-        onError={() => {
-          setError(true)
-          setIsLoading(false)
-          onError?.()
-        }}
-      />
+      {(inView || priority) && (
+        <Image
+          src={error ? fallbackSrc : imageSrc}
+          alt={alt}
+          width={fill ? undefined : responsiveWidth}
+          height={fill ? undefined : responsiveHeight}
+          className={cn(
+            "transition-opacity duration-500",
+            isLoading ? "opacity-0" : "opacity-100",
+            getRoundedClass(),
+            className,
+          )}
+          style={{
+            objectFit,
+            objectPosition,
+          }}
+          sizes={sizes}
+          quality={getQualityValue()}
+          priority={priority}
+          fill={fill}
+          loading={loading || (priority ? "eager" : "lazy")}
+          placeholder={placeholder as any}
+          blurDataURL={blurDataURL}
+          onLoadingComplete={() => {
+            setIsLoading(false)
+            onLoad?.()
+          }}
+          onError={() => {
+            setError(true)
+            setIsLoading(false)
+            onError?.()
+          }}
+        />
+      )}
     </div>
   )
 }

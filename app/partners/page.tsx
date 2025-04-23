@@ -5,7 +5,7 @@ import type React from "react"
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { ArrowRight, BarChart3, CheckCircle, Clock, Globe, Shield, TrendingUp } from "lucide-react"
+import { BarChart3, CheckCircle, Clock, Globe, Shield, TrendingUp } from "lucide-react"
 import { motion } from "framer-motion"
 
 import { Button } from "@/components/ui/button"
@@ -14,6 +14,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import FadeInSection from "@/components/fade-in-section"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 
 export default function PartnersPage() {
   const [formState, setFormState] = useState({
@@ -100,7 +101,12 @@ export default function PartnersPage() {
             </div>
             <div className="hidden lg:flex lg:items-center lg:justify-end">
               <div className="relative h-[400px] w-full overflow-hidden rounded-lg shadow-2xl">
-                <Image src="/digital-retail-experience.png" alt="Modern Retail Experience" fill className="object-cover" />
+                <Image
+                  src="/digital-retail-experience.png"
+                  alt="Modern Retail Experience"
+                  fill
+                  className="object-cover"
+                />
               </div>
             </div>
           </div>
@@ -363,58 +369,62 @@ export default function PartnersPage() {
         </div>
       </section>
 
-      {/* Case Study */}
+      {/* FAQ Section */}
       <section className="bg-gray-50 py-20">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
-            <FadeInSection direction="left">
-              <div className="relative h-[400px] overflow-hidden rounded-lg shadow-xl lg:h-full">
-                <Image src="/vibrant-indian-retail.png" alt="Success Story" fill className="object-cover" />
-              </div>
-            </FadeInSection>
-            <FadeInSection direction="right" delay={0.2}>
-              <div className="flex flex-col justify-center">
-                <div className="mb-6 inline-flex rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary">
-                  Partner Success Story
-                </div>
-                <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                  How Trendsetters Mumbai Increased Revenue by 47%
-                </h2>
-                <p className="mt-6 text-lg text-gray-600">
-                  "Partnering with THE BIG FASHION transformed our retail operations. Their analytics platform
-                  identified untapped market opportunities, while their inventory management system eliminated stockouts
-                  during peak seasons. The result was a 47% increase in annual revenue and a 30% reduction in
-                  operational costs."
-                </p>
-                <div className="mt-8 flex items-center">
-                  <div className="mr-4 h-12 w-12 overflow-hidden rounded-full">
-                    <Image
-                      src="/confident-executive.png"
-                      alt="Meera Patel"
-                      width={48}
-                      height={48}
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">Meera Patel</p>
-                    <p className="text-sm text-gray-600">Founder, Trendsetters Mumbai</p>
-                  </div>
-                </div>
-                <div className="mt-8">
-                  <Button
-                    className="group"
-                    variant="outline"
-                    onClick={() => {
-                      document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" })
-                    }}
-                  >
-                    Read Full Case Study{" "}
-                    <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Button>
-                </div>
-              </div>
-            </FadeInSection>
+          <FadeInSection>
+            <div className="mx-auto max-w-3xl text-center">
+              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+                Frequently Asked Questions
+              </h2>
+              <p className="mt-4 text-xl text-gray-600">
+                Find answers to common questions about our partnership program.
+              </p>
+            </div>
+          </FadeInSection>
+
+          <div className="mt-16 mx-auto max-w-3xl">
+            <Accordion type="single" collapsible className="w-full">
+              {[
+                {
+                  question: "What are the requirements to become a partner?",
+                  answer:
+                    "We partner with established retailers with a physical store or online presence. While we don't have strict revenue requirements, we evaluate each application based on business potential, market alignment, and growth objectives.",
+                },
+                {
+                  question: "How long does the implementation process take?",
+                  answer:
+                    "Standard implementation typically takes 2-3 weeks, including system integration, data migration, and team training. Premium and Enterprise implementations are tailored to your specific requirements and may include custom features.",
+                },
+                {
+                  question: "Do you offer exclusivity for certain products or regions?",
+                  answer:
+                    "Yes, Premium and Enterprise partners can negotiate exclusivity arrangements for specific product lines or geographic territories, subject to minimum volume commitments and performance metrics.",
+                },
+                {
+                  question: "What kind of support do partners receive?",
+                  answer:
+                    "All partners receive implementation support, training, and ongoing technical assistance. Premium and Enterprise partners benefit from dedicated account management, strategic business consulting, and priority support channels.",
+                },
+                {
+                  question: "How are shipping and logistics handled?",
+                  answer:
+                    "We operate regional warehouses in Delhi, Mumbai, Kolkata, and Bangalore with specialized delivery routes covering 20+ states. Most locations receive deliveries within 24-48 hours, with expedited options available for Premium and Enterprise partners.",
+                },
+                {
+                  question: "Can I integrate your system with my existing software?",
+                  answer:
+                    "Yes, our platform offers standard integrations with major ERP, POS, and e-commerce systems. Enterprise partnerships include custom integration services for proprietary or legacy systems.",
+                },
+              ].map((faq, index) => (
+                <AccordionItem key={index} value={`item-${index}`}>
+                  <AccordionTrigger className="text-left text-lg font-medium text-gray-900">
+                    {faq.question}
+                  </AccordionTrigger>
+                  <AccordionContent className="text-gray-600">{faq.answer}</AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
           </div>
         </div>
       </section>
@@ -570,66 +580,6 @@ export default function PartnersPage() {
                 </CardContent>
               </Card>
             </FadeInSection>
-          </div>
-        </div>
-      </section>
-
-      {/* FAQ Section */}
-      <section className="bg-gray-50 py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeInSection>
-            <div className="mx-auto max-w-3xl text-center">
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                Frequently Asked Questions
-              </h2>
-              <p className="mt-4 text-xl text-gray-600">
-                Find answers to common questions about our partnership program.
-              </p>
-            </div>
-          </FadeInSection>
-
-          <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2">
-            {[
-              {
-                question: "What are the requirements to become a partner?",
-                answer:
-                  "We partner with established retailers with a physical store or online presence. While we don't have strict revenue requirements, we evaluate each application based on business potential, market alignment, and growth objectives.",
-              },
-              {
-                question: "How long does the implementation process take?",
-                answer:
-                  "Standard implementation typically takes 2-3 weeks, including system integration, data migration, and team training. Premium and Enterprise implementations are tailored to your specific requirements and may include custom features.",
-              },
-              {
-                question: "Do you offer exclusivity for certain products or regions?",
-                answer:
-                  "Yes, Premium and Enterprise partners can negotiate exclusivity arrangements for specific product lines or geographic territories, subject to minimum volume commitments and performance metrics.",
-              },
-              {
-                question: "What kind of support do partners receive?",
-                answer:
-                  "All partners receive implementation support, training, and ongoing technical assistance. Premium and Enterprise partners benefit from dedicated account management, strategic business consulting, and priority support channels.",
-              },
-              {
-                question: "How are shipping and logistics handled?",
-                answer:
-                  "We operate regional warehouses in Delhi, Mumbai, Kolkata, and Bangalore with specialized delivery routes covering 20+ states. Most locations receive deliveries within 24-48 hours, with expedited options available for Premium and Enterprise partners.",
-              },
-              {
-                question: "Can I integrate your system with my existing software?",
-                answer:
-                  "Yes, our platform offers standard integrations with major ERP, POS, and e-commerce systems. Enterprise partnerships include custom integration services for proprietary or legacy systems.",
-              },
-            ].map((faq, index) => (
-              <FadeInSection key={index} delay={index * 0.1}>
-                <Card className="h-full border-0 shadow-lg transition-all duration-200 hover:shadow-xl">
-                  <CardContent className="p-6">
-                    <h3 className="text-lg font-bold text-gray-900">{faq.question}</h3>
-                    <p className="mt-2 text-gray-600">{faq.answer}</p>
-                  </CardContent>
-                </Card>
-              </FadeInSection>
-            ))}
           </div>
         </div>
       </section>

@@ -11,7 +11,7 @@ import { motion } from "framer-motion"
 import FadeInSection from "@/components/fade-in-section"
 import HoverCardEffect from "@/components/hover-card-effect"
 import { useState } from "react"
-import Image from "next/image"
+import { ButtonHierarchy } from "@/components/ui/button-hierarchy"
 
 export default function ContactPage() {
   const [formState, setFormState] = useState({
@@ -94,8 +94,11 @@ export default function ContactPage() {
                     {
                       icon: <MapPin className="h-6 w-6 text-primary" />,
                       title: "Our Location",
-                      details: ["Fashion Fusion Headquarters", "B-12, Sector 63, Andheri East",
-                      "Mumbai, Maharashtra 401208"],
+                      details: [
+                        "Fashion Fusion Headquarters",
+                        "B-12, Sector 63, Andheri East",
+                        "Mumbai, Maharashtra 401208",
+                      ],
                     },
                     {
                       icon: <Mail className="h-6 w-6 text-primary" />,
@@ -249,14 +252,17 @@ export default function ContactPage() {
                           required
                         />
                       </div>
-                      <ButtonWithFeedback
+                      <ButtonHierarchy
                         type="submit"
-                        className="w-full"
+                        hierarchy="primary"
+                        size="lg"
+                        fullWidth
+                        className="mt-6"
                         isLoading={isSubmitting}
-                        loadingText="Sending Message..."
+                        loadingText="Sending message..."
                       >
                         Send Message
-                      </ButtonWithFeedback>
+                      </ButtonHierarchy>
                     </form>
                   </>
                 )}
@@ -266,7 +272,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-       {/* Map Section */}
+      {/* Map Section */}
       <section className="py-12">
         <div className="container">
           <FadeInSection>
@@ -302,7 +308,6 @@ export default function ContactPage() {
           </FadeInSection>
         </div>
       </section>
-
 
       {/* FAQ Section */}
       <section className="bg-muted/50 py-16">

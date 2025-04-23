@@ -22,11 +22,11 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          className="fixed inset-0 z-50 bg-background flex flex-col"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -20 }}
-          transition={{ duration: 0.2 }}
+          className="fixed inset-y-0 right-0 z-50 w-[80%] max-w-sm bg-background shadow-xl flex flex-col"
+          initial={{ x: "100%" }}
+          animate={{ x: 0 }}
+          exit={{ x: "100%" }}
+          transition={{ duration: 0.3, ease: "easeInOut" }}
         >
           <div className="flex items-center justify-between h-16 px-4 border-b">
             <Link href="/" className="flex items-center gap-2 text-xl font-bold" onClick={onClose}>
@@ -38,12 +38,22 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
               <span className="sr-only">Close</span>
             </Button>
           </div>
-          <div className="flex flex-col gap-1 p-4">
-            <MobileMenuLink href="/" label="Home" onClick={onClose} />
-            <MobileMenuLink href="/about" label="About Us" onClick={onClose} />
-            <MobileMenuLink href="/solutions" label="Solution" onClick={onClose} />
-            <MobileMenuLink href="/partners" label="For Retailers" onClick={onClose} />
-            <MobileMenuLink href="/contact" label="Contact" onClick={onClose} />
+          <div className="flex flex-col gap-1 p-4 overflow-y-auto">
+            {[
+              { href: "/", label: "Home" },
+              { href: "/about", label: "About Us" },
+              { href: "/solutions", label: "Solution" },
+              { href: "/partners", label: "For Retailers" },
+              { href: "/contact", label: "Contact" },
+            ].map((item) => (
+              <MobileMenuLink
+                key={item.href}
+                href={item.href}
+                label={item.label}
+                onClick={onClose}
+                isActive={item.href === pathname}
+              />
+            ))}
           </div>
           <div className="mt-auto p-4 border-t">
             {!isAuthPage && !isDashboardPage && (
@@ -86,17 +96,21 @@ interface MobileMenuLinkProps {
   href: string
   label: string
   onClick: () => void
+  isActive?: boolean
 }
 
-function MobileMenuLink({ href, label, onClick }: MobileMenuLinkProps) {
+function MobileMenuLink({ href, label, onClick, isActive = false }: MobileMenuLinkProps) {
   return (
     <motion.div initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.2 }}>
       <Link
         href={href}
-        className="flex h-12 items-center px-4 text-base font-medium border-b border-border/40 hover:bg-muted"
+        className={`flex h-12 items-center px-4 text-base font-medium border-b border-border/40 hover:bg-muted ${
+          isActive ? "bg-primary/10 text-primary font-semibold" : ""
+        }`}
         onClick={onClick}
       >
         {label}
+        {isActive && <div className="ml-auto w-1 h-6 bg-primary rounded-full" />}
       </Link>
     </motion.div>
   )

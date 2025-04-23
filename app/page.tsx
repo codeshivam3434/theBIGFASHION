@@ -15,8 +15,6 @@ import {
   ChevronRight,
   Sparkles,
 } from "lucide-react"
-import { ButtonWithFeedback } from "@/components/ui/button-with-feedback"
-import { Button } from "@/components/ui/button"
 import FadeInSection from "@/components/fade-in-section"
 import ScrollToTop from "@/components/scroll-to-top"
 import { EnhancedImage } from "@/components/ui/enhanced-image"
@@ -27,6 +25,8 @@ import { VisualExplainer } from "@/components/visual-explainer"
 import { ProcessFlow } from "@/components/process-flow"
 import { BeforeAfterComparison } from "@/components/before-after-comparison"
 import { imageSizes } from "@/lib/image-sizing"
+import { HomePageJsonLd, ProductJsonLd, FAQJsonLd } from "./structured-data"
+import { ButtonHierarchy } from "@/components/ui/button-hierarchy"
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState({
@@ -84,13 +84,18 @@ export default function Home() {
 
   return (
     <>
+      {/* Structured Data for SEO */}
+      <HomePageJsonLd />
+      <ProductJsonLd />
+      <FAQJsonLd />
+
       {/* Hero Section with High-Quality Background Image */}
       <section ref={heroRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Replace video background with high-quality image */}
         <div className="absolute inset-0 z-0">
           <EnhancedImage
             src="/vibrant-retail-experience.png"
-            alt="Fashion retail store"
+            alt="Fashion retail store with modern technology integration"
             fill
             priority
             quality="high"
@@ -108,7 +113,7 @@ export default function Home() {
             className="inline-block mb-6"
           >
             <span className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20">
-              <Sparkles className="mr-1 h-3 w-3" /> Revolutionizing Fashion Retail
+              <Sparkles className="mr-1 h-3 w-3" /> India's #1 Fashion Retail Platform
             </span>
           </motion.div>
           <motion.h1
@@ -117,7 +122,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Empower Your Retail Business with <span className="text-primary">Risk-Free</span> Technology
+            Grow Your Retail Business <span className="text-primary">Without Financial Risk</span>
           </motion.h1>
           <motion.p
             className="mt-6 text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto"
@@ -125,8 +130,8 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            The ultimate tech platform for fashion retailers in Tier 2 & 3 cities. Streamline operations, eliminate
-            risk, and scale your business.
+            Our revolutionary platform helps fashion retailers in Tier 2 & 3 cities increase sales by 40% while
+            eliminating inventory risk.
           </motion.p>
           <motion.div
             className="mt-10 flex flex-col sm:flex-row gap-4 justify-center"
@@ -134,26 +139,24 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            <ButtonWithFeedback
+            <ButtonHierarchy
+              hierarchy="primary"
               size="lg"
-              variant="glow"
               onClick={handleDemoClick}
               isLoading={isLoading.demo}
               loadingText="Scheduling demo..."
-              className="text-base px-8 py-6"
+              className="text-base px-8 py-6 font-semibold"
             >
-              Schedule a Demo
-            </ButtonWithFeedback>
-            <ButtonWithFeedback
+              Get Started Free
+            </ButtonHierarchy>
+            <ButtonHierarchy
+              hierarchy="tertiary"
               size="lg"
-              variant="outlineGlow"
-              onClick={handleContactClick}
-              isLoading={isLoading.contact}
-              loadingText="Connecting..."
-              className="text-base px-8 py-6"
+              asChild
+              className="text-base text-white border-white hover:bg-white/10"
             >
-              Contact Sales
-            </ButtonWithFeedback>
+              <Link href="/solutions">See How It Works</Link>
+            </ButtonHierarchy>
           </motion.div>
 
           <motion.div
@@ -162,14 +165,17 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
-            {["Trusted by 500+ retailers", "Serving 20+ cities in UP", "40% average growth for partners"].map(
-              (text, i) => (
-                <div key={i} className="flex items-center">
-                  <CheckCircle className="h-5 w-5 text-primary mr-2" />
-                  <span className="text-gray-200 text-sm">{text}</span>
-                </div>
-              ),
-            )}
+            {[
+              "500+ retailers trust us",
+              "Serving 20+ cities in UP",
+              "40% average growth for partners",
+              "Zero inventory risk",
+            ].map((text, i) => (
+              <div key={i} className="flex items-center">
+                <CheckCircle className="h-5 w-5 text-primary mr-2" />
+                <span className="text-gray-200 text-sm">{text}</span>
+              </div>
+            ))}
           </motion.div>
         </motion.div>
 
@@ -180,6 +186,56 @@ export default function Home() {
           >
             <ArrowRight className="h-6 w-6 rotate-90 text-white" />
           </motion.div>
+        </div>
+      </section>
+
+      {/* Value Proposition Section - NEW */}
+      <section className="py-16 bg-background">
+        <div className="container">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Why Retailers Choose Fashion Fusion</h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Our platform is specifically designed to solve the unique challenges of fashion retailers in Tier 2 & 3
+              cities
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                icon: <ShieldCheck className="h-10 w-10 text-primary" />,
+                title: "Zero Financial Risk",
+                description:
+                  "Our revolutionary pay-for-what-sells model means you never pay for unsold inventory, eliminating your biggest business risk.",
+              },
+              {
+                icon: <BarChart3 className="h-10 w-10 text-primary" />,
+                title: "Data-Driven Decisions",
+                description:
+                  "Access powerful analytics that predict local trends and customer preferences before your competitors.",
+              },
+              {
+                icon: <Truck className="h-10 w-10 text-primary" />,
+                title: "Local Logistics Network",
+                description:
+                  "Our specialized delivery network reaches 20+ states with most deliveries arriving within 24-48 hours.",
+              },
+              {
+                icon: <TrendingUp className="h-10 w-10 text-primary" />,
+                title: "Proven Growth Results",
+                description:
+                  "Our partners see an average of 40% business growth within the first year of using our platform.",
+              },
+            ].map((item, index) => (
+              <FadeInSection key={index} delay={index * 0.1}>
+                <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md h-full flex flex-col">
+                  <div className="rounded-full bg-primary/10 p-4 w-fit mb-4">{item.icon}</div>
+                  <h3 className="text-xl font-bold mb-2">{item.title}</h3>
+                  <p className="text-muted-foreground flex-grow">{item.description}</p>
+                </div>
+              </FadeInSection>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -215,14 +271,12 @@ export default function Home() {
         className="py-20 bg-gradient-to-b from-background to-muted/30"
       />
 
-      {/* Retailer Success Stories with Video */}
-
       {/* Solution Section with High-Quality Background */}
       <section className="py-20 relative overflow-hidden">
         <div className="absolute inset-0 z-0">
           <EnhancedImage
             src="/fashion-retail-insights.png"
-            alt="Retail analytics solution"
+            alt="Retail analytics dashboard showing sales performance"
             fill
             quality="high"
             objectFit="cover"
@@ -252,7 +306,7 @@ export default function Home() {
                 <div className="relative bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl">
                   <EnhancedImage
                     src="/fashion-retail-dashboard.png"
-                    alt="Platform dashboard"
+                    alt="Platform dashboard showing sales analytics and inventory management"
                     width={imageSizes.feature.large.width}
                     height={imageSizes.feature.large.height}
                     className="w-full h-auto"
@@ -359,9 +413,9 @@ export default function Home() {
       <div className="container px-4 pb-20 bg-muted/30">
         <div className="text-center">
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <ButtonWithFeedback size="lg" onClick={handleDemoClick} className="px-8">
+            <ButtonHierarchy hierarchy="primary" size="lg" onClick={handleDemoClick} className="px-8">
               Get Started Today
-            </ButtonWithFeedback>
+            </ButtonHierarchy>
           </motion.div>
         </div>
       </div>
@@ -490,23 +544,22 @@ export default function Home() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <Button
+              <ButtonHierarchy
+                hierarchy="primary"
                 size="lg"
-                variant="secondary"
-                className="text-primary font-bold text-base px-8 py-6 hover:bg-secondary/90"
+                className="text-base px-8 py-6 hover:bg-secondary/90 bg-white text-primary hover:text-primary"
                 onClick={handleDemoClick}
               >
-                Schedule a Demo
-              </Button>
-
-              <Button
+                Get Started Free
+              </ButtonHierarchy>
+              <ButtonHierarchy
+                hierarchy="tertiary"
                 size="lg"
-                variant="outline"
+                asChild
                 className="text-white border-white hover:bg-white/20 font-medium text-base px-8 py-6"
-                onClick={handleContactClick}
               >
-                Contact Sales
-              </Button>
+                <Link href="/solutions">Learn More</Link>
+              </ButtonHierarchy>
             </motion.div>
           </div>
         </div>
