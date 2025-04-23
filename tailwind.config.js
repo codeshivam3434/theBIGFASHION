@@ -51,24 +51,16 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Updated brand colors to match the magenta logo
-        brand: {
-          DEFAULT: "#d4145a", // Magenta from the logo
-          light: "#e83a7a", // Lighter magenta
-          dark: "#a80f45", // Darker magenta
-          accent: "#f59e0b", // Amber 500 - for accents and CTAs
-          success: "#10b981", // Emerald 500
-          warning: "#f59e0b", // Amber 500
-          error: "#ef4444", // Red 500
-          gray: "#64748b", // Slate 500
+        // Custom brand colors
+        magenta: {
+          DEFAULT: "#d4145a",
+          light: "#e83a7a",
+          dark: "#8A0068",
         },
-        // Fashion-specific colors updated to match logo
-        fashion: {
-          primary: "#d4145a", // Magenta from the logo
-          secondary: "#e83a7a", // Lighter magenta
-          accent: "#f59e0b", // Amber 500
-          neutral: "#f8fafc", // Slate 50
-          dark: "#1e293b", // Slate 800
+        purple: {
+          DEFAULT: "#7928CA",
+          light: "#9F7AEA",
+          dark: "#553C9A",
         },
       },
       borderRadius: {
@@ -85,12 +77,37 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: 0 },
         },
+        float: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-20px)" },
+        },
+        shimmer: {
+          "0%": { backgroundPosition: "-100% 0" },
+          "100%": { backgroundPosition: "100% 0" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        float: "float 6s ease-in-out infinite",
+        "float-slow": "float 8s ease-in-out infinite",
+        "float-fast": "float 4s ease-in-out infinite",
+        shimmer: "shimmer 2s infinite",
+      },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
       },
     },
   },
+  safelist: [
+    "from-[#8A0068]",
+    "to-[#d4145a]",
+    "from-[#d4145a]",
+    "to-[#7928CA]",
+    "from-[#7928CA]",
+    "to-[#8A0068]",
+    "from-pink-500",
+    "to-purple-600",
+  ],
   plugins: [require("tailwindcss-animate")],
 }

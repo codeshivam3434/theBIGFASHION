@@ -89,16 +89,8 @@ export default function NavBar() {
             )
           })}
           <div className="ml-4 flex space-x-2 flex-shrink-0">
-            <Button
-              asChild
-              size="sm"
-              variant={isScrolled ? "outline" : "outline"}
-              className="text-gray-800 border-gray-800 hover:text-primary hover:border-primary"
-            >
-              <Link href="/auth/login">Login</Link>
-            </Button>
             <Button asChild size="sm" variant="default">
-              <Link href="/auth/signup">Sign Up</Link>
+              <Link href="/contact">Contact Us</Link>
             </Button>
           </div>
         </nav>
@@ -148,11 +140,8 @@ export default function NavBar() {
                 })}
               </nav>
               <div className="pt-4 border-t">
-                <Button className="w-full mb-2" asChild>
-                  <Link href="/auth/login">Login</Link>
-                </Button>
-                <Button className="w-full" variant="outline" asChild>
-                  <Link href="/auth/signup">Sign Up</Link>
+                <Button className="w-full" asChild>
+                  <Link href="/contact">Contact Us</Link>
                 </Button>
               </div>
             </div>
