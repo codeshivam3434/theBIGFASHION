@@ -23,6 +23,7 @@ import { EnhancedImage } from "@/components/ui/enhanced-image"
 import { HomePageJsonLd, ProductJsonLd, FAQJsonLd } from "./structured-data"
 import ScrollToTop from "@/components/scroll-to-top"
 import FashionHero from "@/components/fashion-hero"
+import MobileOptimizedDiagram from "@/components/mobile-optimized-diagram"
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState({
@@ -217,26 +218,35 @@ export default function Home() {
       {/* Hero Section */}
 
       {/* Rural Platform Diagram Section */}
-      <section className="py-20 bg-gray-50 w-full">
-        <div className="container mx-auto px-4 md:px-6 text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+      <section className="py-12 md:py-20 bg-gray-50 w-full overflow-hidden">
+        <div className="container mx-auto px-4 md:px-6 text-center mb-8 md:mb-12">
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-3 md:mb-4">
             India's only rural B2B
-            <br />
+            <br className="hidden sm:block" />
             eCommerce platform
           </h2>
-          <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-lg md:text-2xl text-gray-600 max-w-3xl mx-auto">
             BIGFASHION unlocks direct reach for brands to
-            <br />
+            <br className="hidden sm:block" />
             rural consumers through 10M+ stores
           </p>
         </div>
 
-        <div className="w-full max-w-6xl mx-auto px-4">
-          <div className="relative">
+        <div className="w-full max-w-6xl mx-auto px-2 md:px-4">
+          {/* Desktop version - hidden on small screens */}
+          <div className="relative hidden md:block">
             <img
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Blank%20diagram%20%285%29-KAZk449aqwuDO31JxCbQp5vX1XQo5s.png"
               alt="BIGFASHION ecosystem diagram showing the B2B fashion eCommerce platform connecting Dashboard, Clothes, Door2Door, Finance, and Fashion Store through the BIGFASHION TechStack, Logistics platform, Finance platform, advertising platform, and Customer Support"
               className="w-full h-auto object-contain"
+            />
+          </div>
+
+          {/* Mobile version - only shown on small screens */}
+          <div className="md:hidden">
+            <MobileOptimizedDiagram
+              imageSrc="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Blank%20diagram%20%285%29-KAZk449aqwuDO31JxCbQp5vX1XQo5s.png"
+              imageAlt="BIGFASHION ecosystem diagram showing the B2B fashion eCommerce platform connecting Dashboard, Clothes, Door2Door, Finance, and Fashion Store through the BIGFASHION TechStack, Logistics platform, Finance platform, advertising platform, and Customer Support"
             />
           </div>
         </div>

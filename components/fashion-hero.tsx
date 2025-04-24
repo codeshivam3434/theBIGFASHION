@@ -86,7 +86,7 @@ export default function FashionHero() {
       </div>
 
       {/* Hero content */}
-      <div className="container relative z-10 px-4 py-20 md:py-32 min-h-[90vh] flex flex-col justify-center">
+      <div className="container relative z-10 px-4 py-16 md:py-32 min-h-[90vh] flex flex-col justify-center">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="text-center lg:text-left">
             <motion.div
@@ -101,7 +101,7 @@ export default function FashionHero() {
               </span>
             </motion.div>
 
-            <div className="h-[120px] md:h-[150px] mb-6 flex items-center justify-center lg:justify-start">
+            <div className="h-[120px] md:h-[150px] mb-4 md:mb-6 flex items-center justify-center lg:justify-start">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentSlide}
@@ -118,7 +118,7 @@ export default function FashionHero() {
               </AnimatePresence>
             </div>
 
-            <div className="h-[80px] md:h-[100px] mb-8">
+            <div className="h-[100px] md:h-[100px] mb-6 md:mb-8">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentSlide}
@@ -126,9 +126,9 @@ export default function FashionHero() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.5, delay: 0.1 }}
-                  className="absolute max-w-xl"
+                  className="absolute max-w-xl mx-auto lg:mx-0"
                 >
-                  <p className="text-lg md:text-xl text-white/90 mx-auto lg:mx-0">{subheadlines[currentSlide]}</p>
+                  <p className="text-base md:text-xl text-white/90">{subheadlines[currentSlide]}</p>
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -186,7 +186,7 @@ export default function FashionHero() {
             </motion.div>
 
             {/* Slide indicators */}
-            <div className="flex justify-center lg:justify-start space-x-2 mb-8">
+            <div className="flex justify-center lg:justify-start space-x-2 mb-6 md:mb-8">
               {headlines.map((_, index) => (
                 <button
                   key={index}
@@ -245,7 +245,7 @@ export default function FashionHero() {
         </div>
 
         {/* Mobile benefit cards - only visible on mobile */}
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-4 lg:hidden">
+        <div className="mt-8 md:mt-12 grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 lg:hidden px-2">
           {keyBenefits.map((benefit, index) => (
             <motion.div
               key={index}
