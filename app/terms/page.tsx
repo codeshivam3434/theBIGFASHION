@@ -183,8 +183,7 @@ export default function TermsPage() {
             <ul className="list-disc pl-6 space-y-2">
               <li>By email: legal.thebigfashion@gmail.com</li>
               <li>By phone: +91 7033383119</li>
-              <li>By mail: B-12, Sector 63,Andheri East,
-Mumbai, Maharashtra 401208</li>
+              <li>By mail: B-12, Sector 63,Andheri East, Mumbai, Maharashtra 401208</li>
             </ul>
           </div>
         </FadeInSection>

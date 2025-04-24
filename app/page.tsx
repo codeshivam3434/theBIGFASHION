@@ -215,7 +215,32 @@ export default function Home() {
       <FAQJsonLd />
 
       {/* Hero Section */}
-      {/* <HeroSection /> */}
+
+      {/* Rural Platform Diagram Section */}
+      <section className="py-20 bg-gray-50 w-full">
+        <div className="container mx-auto px-4 md:px-6 text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
+            India's only rural B2B
+            <br />
+            eCommerce platform
+          </h2>
+          <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto">
+            BIGFASHION unlocks direct reach for brands to
+            <br />
+            rural consumers through 10M+ stores
+          </p>
+        </div>
+
+        <div className="w-full">
+          <div className="relative">
+            <img
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Blank%20diagram%20%282%29-NDD4kgN9eEzQPZeRTHnKXhW3e43LTL.png"
+              alt="BIGFASHION ecosystem diagram showing the B2B fashion eCommerce platform connecting dashboard, clothing, door-to-door delivery, finance, and fashion stores through various platform services"
+              className="w-full h-auto object-cover"
+            />
+          </div>
+        </div>
+      </section>
 
       {/* Key Metrics Section */}
       <section ref={statsRef} className="py-16 bg-white">

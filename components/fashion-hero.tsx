@@ -14,8 +14,8 @@ export default function FashionHero() {
 
   const subheadlines = [
     "Connect with suppliers, streamline operations, and scale your fashion business with our all-in-one B2B platform",
-    "Reduce lead times by 40% and eliminate stockouts with our intelligent inventory management",
-    "Increase sell-through rates and optimize margins with data-driven insights",
+    "Cut lead times by 40% and prevent stockouts with smart inventory management",
+    "Boost sell-through rates and enhance margins with data-driven insights",
   ]
 
   useEffect(() => {
@@ -221,7 +221,7 @@ export default function FashionHero() {
               {keyBenefits.map((benefit, index) => (
                 <motion.div
                   key={index}
-                  className="absolute bg-white rounded-lg shadow-xl p-4 w-48"
+                  className="absolute bg-white rounded-lg shadow-xl p-3 w-40"
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 + index * 0.2 }}
@@ -232,10 +232,10 @@ export default function FashionHero() {
                   }}
                 >
                   <div className="flex items-start">
-                    <div className="bg-primary p-2 rounded-full text-white mr-3">{benefit.icon}</div>
+                    <div className="bg-primary p-1.5 rounded-full text-white mr-2">{benefit.icon}</div>
                     <div>
-                      <h3 className="font-bold text-primary">{benefit.title}</h3>
-                      <p className="text-sm text-gray-600">{benefit.text}</p>
+                      <h3 className="font-bold text-primary text-sm">{benefit.title}</h3>
+                      <p className="text-xs text-gray-600">{benefit.text}</p>
                     </div>
                   </div>
                 </motion.div>
@@ -249,16 +249,16 @@ export default function FashionHero() {
           {keyBenefits.map((benefit, index) => (
             <motion.div
               key={index}
-              className="bg-white rounded-lg shadow-xl p-4"
+              className="bg-white rounded-lg shadow-xl p-3"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6 + index * 0.2 }}
             >
               <div className="flex items-start">
-                <div className="bg-primary p-2 rounded-full text-white mr-3">{benefit.icon}</div>
+                <div className="bg-primary p-1.5 rounded-full text-white mr-2">{benefit.icon}</div>
                 <div>
-                  <h3 className="font-bold text-primary">{benefit.title}</h3>
-                  <p className="text-sm text-gray-600">{benefit.text}</p>
+                  <h3 className="font-bold text-primary text-sm">{benefit.title}</h3>
+                  <p className="text-xs text-gray-600">{benefit.text}</p>
                 </div>
               </div>
             </motion.div>

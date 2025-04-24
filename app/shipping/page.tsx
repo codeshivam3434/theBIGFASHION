@@ -184,7 +184,7 @@ export default function ShippingPolicyPage() {
             <h2 className="text-2xl font-bold">8. Contact Us</h2>
             <p>If you have any questions about our shipping policy, please contact us:</p>
             <p>
-             The BIGFASHION
+              The BIGFASHION
               <br />
               B-12, Sector 63,Andheri East,
               <br />
