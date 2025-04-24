@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from "lucide-react"
+import { ZoomIn, ZoomOut } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 interface MobileOptimizedDiagramProps {
@@ -10,58 +10,43 @@ interface MobileOptimizedDiagramProps {
 }
 
 export default function MobileOptimizedDiagram({ imageSrc, imageAlt }: MobileOptimizedDiagramProps) {
-  const [scale, setScale] = useState(1)
-  const [position, setPosition] = useState(0)
+  const [isZoomed, setIsZoomed] = useState(false)
 
-  const zoomIn = () => setScale((prev) => Math.min(prev + 0.2, 2))
-  const zoomOut = () => setScale((prev) => Math.max(prev - 0.2, 0.8))
-
-  const moveLeft = () => setPosition((prev) => Math.min(prev + 20, 0))
-  const moveRight = () => setPosition((prev) => Math.max(prev - 20, -200))
+  const toggleZoom = () => {
+    setIsZoomed(!isZoomed)
+  }
 
   return (
     <div className="relative w-full">
-      {/* Controls */}
-      <div className="flex justify-between mb-2">
-        <div className="flex space-x-1">
-          <Button variant="outline" size="sm" className="h-8 w-8 p-0" onClick={zoomOut} disabled={scale <= 0.8}>
-            <ZoomOut className="h-4 w-4" />
-            <span className="sr-only">Zoom out</span>
-          </Button>
-          <Button variant="outline" size="sm" className="h-8 w-8 p-0" onClick={zoomIn} disabled={scale >= 2}>
-            <ZoomIn className="h-4 w-4" />
-            <span className="sr-only">Zoom in</span>
-          </Button>
-        </div>
-
-        <div className="flex space-x-1">
-          <Button variant="outline" size="sm" className="h-8 w-8 p-0" onClick={moveLeft} disabled={position >= 0}>
-            <ChevronLeft className="h-4 w-4" />
-            <span className="sr-only">Move left</span>
-          </Button>
-          <Button variant="outline" size="sm" className="h-8 w-8 p-0" onClick={moveRight} disabled={position <= -200}>
-            <ChevronRight className="h-4 w-4" />
-            <span className="sr-only">Move right</span>
-          </Button>
-        </div>
-      </div>
-
-      {/* Diagram container */}
-      <div className="overflow-hidden rounded-lg border border-gray-200 bg-white">
-        <div
-          className="transition-all duration-300 ease-in-out"
-          style={{
-            transform: `scale(${scale}) translateX(${position}px)`,
-            transformOrigin: "center left",
-            width: "max-content",
-            padding: "1rem",
-          }}
+      {/* Simple zoom toggle */}
+      <div className="absolute top-2 right-2 z-10">
+        <Button
+          variant="outline"
+          size="sm"
+          className="h-8 w-8 p-0 bg-white/80 backdrop-blur-sm"
+          onClick={toggleZoom}
+          aria-label={isZoomed ? "Zoom out" : "Zoom in"}
         >
-          <img src={imageSrc || "/placeholder.svg"} alt={imageAlt} className="h-auto max-h-[400px] w-auto" />
+          {isZoomed ? <ZoomOut className="h-4 w-4" /> : <ZoomIn className="h-4 w-4" />}
+        </Button>
+      </div>
+
+      {/* Diagram container with responsive behavior */}
+      <div
+        className={`relative overflow-hidden rounded-lg border border-gray-200 bg-white transition-all duration-300 ${
+          isZoomed ? "h-[70vh] overflow-auto" : "h-auto"
+        }`}
+      >
+        <div className={`transition-all duration-300 ease-in-out ${isZoomed ? "transform-none" : "transform-none"}`}>
+          <img
+            src={imageSrc || "/placeholder.svg"}
+            alt={imageAlt}
+            className={`w-full h-auto object-contain ${isZoomed ? "max-w-none" : "max-w-full"}`}
+          />
         </div>
       </div>
 
-      <p className="text-xs text-gray-500 text-center mt-2">Use controls to zoom and pan the diagram</p>
+      {isZoomed && <p className="text-xs text-gray-500 text-center mt-2">Scroll to view the entire diagram</p>}
     </div>
   )
 }
