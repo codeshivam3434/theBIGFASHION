@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
-import { motion, useScroll, AnimatePresence } from "framer-motion"
+import { motion, useScroll, AnimatePresence, useInView } from "framer-motion"
 import {
   ArrowRight,
   ShieldCheck,
@@ -24,6 +24,42 @@ import { HomePageJsonLd, ProductJsonLd, FAQJsonLd } from "./structured-data"
 import ScrollToTop from "@/components/scroll-to-top"
 import FashionHero from "@/components/fashion-hero"
 import MobileOptimizedDiagram from "@/components/mobile-optimized-diagram"
+import { AnimatedProcessFlow } from "@/components/animated-process-flow"
+
+// Animated counter component
+function AnimatedCounter({ value, duration = 2000, className = "", prefix = "", suffix = "" }) {
+  const [count, setCount] = useState(0)
+  const countRef = useRef(null)
+  const isInView = useInView(countRef, { once: true, margin: "-100px" })
+
+  useEffect(() => {
+    if (isInView) {
+      let start = 0
+      const end = Number.parseInt(value)
+      const increment = end / (duration / 16)
+
+      const timer = setInterval(() => {
+        start += increment
+        if (start >= end) {
+          setCount(end)
+          clearInterval(timer)
+        } else {
+          setCount(Math.floor(start))
+        }
+      }, 16)
+
+      return () => clearInterval(timer)
+    }
+  }, [isInView, value, duration])
+
+  return (
+    <div ref={countRef} className={className}>
+      {prefix}
+      {count}
+      {suffix}
+    </div>
+  )
+}
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState({
@@ -171,38 +207,170 @@ export default function Home() {
     },
   ]
 
-  // Key metrics
+  // Key metrics with numeric values for animation
   const metrics = [
-    { value: "500+", label: "Retail Partners", icon: <Users className="h-5 w-5 text-primary" /> },
-    { value: "40%", label: "Avg. Growth Rate", icon: <TrendingUp className="h-5 w-5 text-primary" /> },
-    { value: "20+", label: "Cities Served", icon: <Truck className="h-5 w-5 text-primary" /> },
-    { value: "₹0", label: "Inventory Risk", icon: <ShieldCheck className="h-5 w-5 text-primary" /> },
+    {
+      value: "500+",
+      numericValue: 500,
+      suffix: "+",
+      label: "Retail Partners",
+      icon: <Users className="h-5 w-5 text-primary" />,
+    },
+    {
+      value: "40%",
+      numericValue: 40,
+      suffix: "%",
+      label: "Avg. Growth Rate",
+      icon: <TrendingUp className="h-5 w-5 text-primary" />,
+    },
+    {
+      value: "20+",
+      numericValue: 20,
+      suffix: "+",
+      label: "Cities Served",
+      icon: <Truck className="h-5 w-5 text-primary" />,
+    },
+    {
+      value: "₹0",
+      numericValue: 0,
+      prefix: "₹",
+      label: "Inventory Risk",
+      icon: <ShieldCheck className="h-5 w-5 text-primary" />,
+    },
   ]
 
-  // Core features
-  const features = [
+  // Product offerings with visual icons
+  const productOfferings = [
     {
-      icon: <ShieldCheck className="h-10 w-10 text-primary" />,
-      title: "Zero Financial Risk",
+      icon: (
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="40" r="30" fill="#FEF3F2" />
+          <path
+            d="M40 25C32.8203 25 27 30.8203 27 38C27 41.6719 28.5859 44.9844 31.1328 47.1875L40 55L48.8672 47.1875C51.4141 44.9844 53 41.6719 53 38C53 30.8203 47.1797 25 40 25ZM40 42C37.7969 42 36 40.2031 36 38C36 35.7969 37.7969 34 40 34C42.2031 34 44 35.7969 44 38C44 40.2031 42.2031 42 40 42Z"
+            fill="#F04438"
+          />
+          <circle cx="40" cy="38" r="4" fill="#FEF3F2" />
+          <circle cx="60" cy="30" r="4" fill="#F04438" fillOpacity="0.7" />
+          <circle cx="65" cy="45" r="3" fill="#F04438" fillOpacity="0.5" />
+          <circle cx="20" cy="30" r="4" fill="#F04438" fillOpacity="0.7" />
+          <circle cx="15" cy="45" r="3" fill="#F04438" fillOpacity="0.5" />
+          <circle cx="30" cy="60" r="3" fill="#F04438" fillOpacity="0.6" />
+          <circle cx="50" cy="60" r="3" fill="#F04438" fillOpacity="0.6" />
+          <path
+            d="M40 25C40 25 35 15 25 20M40 25C40 25 45 15 55 20"
+            stroke="#F04438"
+            strokeOpacity="0.3"
+            strokeWidth="1.5"
+            strokeDasharray="2 2"
+          />
+          <path
+            d="M20 30C20 30 10 25 15 15M60 30C60 30 70 25 65 15"
+            stroke="#F04438"
+            strokeOpacity="0.3"
+            strokeWidth="1.5"
+            strokeDasharray="2 2"
+          />
+          <path
+            d="M15 45C15 45 5 45 5 35M65 45C65 45 75 45 75 35"
+            stroke="#F04438"
+            strokeOpacity="0.3"
+            strokeWidth="1.5"
+            strokeDasharray="2 2"
+          />
+          <path
+            d="M30 60C30 60 25 70 15 65M50 60C50 60 55 70 65 65"
+            stroke="#F04438"
+            strokeOpacity="0.3"
+            strokeWidth="1.5"
+            strokeDasharray="2 2"
+          />
+        </svg>
+      ),
+      title: "Fashion Supply Chain",
       description:
-        "Our revolutionary pay-for-what-sells model means you never pay for unsold inventory, eliminating your biggest business risk.",
+        "Largest rural B2B fashion eCommerce platform connecting brands directly to retailers across the country",
     },
     {
-      icon: <BarChart3 className="h-10 w-10 text-primary" />,
-      title: "Data-Driven Decisions",
+      icon: (
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="25" y="25" width="30" height="30" rx="2" fill="#FDF4ED" />
+          <rect x="32" y="32" width="16" height="16" rx="1" fill="#F79009" />
+          <path d="M40 32V48" stroke="white" strokeWidth="2" />
+          <path d="M48 40L32 40" stroke="white" strokeWidth="2" />
+          <circle cx="60" cy="30" r="4" fill="#F79009" fillOpacity="0.7" />
+          <circle cx="65" cy="45" r="3" fill="#F79009" fillOpacity="0.5" />
+          <circle cx="20" cy="30" r="4" fill="#F79009" fillOpacity="0.7" />
+          <circle cx="15" cy="45" r="3" fill="#F79009" fillOpacity="0.5" />
+          <path d="M25 40H15M65 40H55" stroke="#F79009" strokeOpacity="0.3" strokeWidth="1.5" strokeDasharray="2 2" />
+          <path d="M40 25V15M40 65V55" stroke="#F79009" strokeOpacity="0.3" strokeWidth="1.5" strokeDasharray="2 2" />
+          <path
+            d="M30 30L20 20M50 50L60 60"
+            stroke="#F79009"
+            strokeOpacity="0.3"
+            strokeWidth="1.5"
+            strokeDasharray="2 2"
+          />
+          <path
+            d="M50 30L60 20M30 50L20 60"
+            stroke="#F79009"
+            strokeOpacity="0.3"
+            strokeWidth="1.5"
+            strokeDasharray="2 2"
+          />
+        </svg>
+      ),
+      title: "Finance Solutions",
       description:
-        "Access powerful analytics that predict local trends and customer preferences before your competitors.",
+        "Innovative financial tools designed specifically for fashion retailers with zero-risk inventory financing",
     },
     {
-      icon: <Truck className="h-10 w-10 text-primary" />,
-      title: "Local Logistics Network",
+      icon: (
+        <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="40" cy="40" r="15" fill="#EFF8FF" />
+          <path d="M40 25V55" stroke="#2E90FA" strokeWidth="2" />
+          <path d="M55 40H25" stroke="#2E90FA" strokeWidth="2" />
+          <circle cx="40" cy="40" r="5" fill="#2E90FA" />
+          <circle cx="60" cy="30" r="3" fill="#2E90FA" fillOpacity="0.7" />
+          <circle cx="65" cy="45" r="2" fill="#2E90FA" fillOpacity="0.5" />
+          <circle cx="20" cy="30" r="3" fill="#2E90FA" fillOpacity="0.7" />
+          <circle cx="15" cy="45" r="2" fill="#2E90FA" fillOpacity="0.5" />
+          <circle cx="30" cy="60" r="2" fill="#2E90FA" fillOpacity="0.6" />
+          <circle cx="50" cy="60" r="2" fill="#2E90FA" fillOpacity="0.6" />
+          <circle cx="30" cy="20" r="2" fill="#2E90FA" fillOpacity="0.6" />
+          <circle cx="50" cy="20" r="2" fill="#2E90FA" fillOpacity="0.6" />
+          <path
+            d="M40 40C40 40 50 30 60 30"
+            stroke="#2E90FA"
+            strokeOpacity="0.3"
+            strokeWidth="1.5"
+            strokeDasharray="2 2"
+          />
+          <path
+            d="M40 40C40 40 50 50 60 45"
+            stroke="#2E90FA"
+            strokeOpacity="0.3"
+            strokeWidth="1.5"
+            strokeDasharray="2 2"
+          />
+          <path
+            d="M40 40C40 40 30 50 20 45"
+            stroke="#2E90FA"
+            strokeOpacity="0.3"
+            strokeWidth="1.5"
+            strokeDasharray="2 2"
+          />
+          <path
+            d="M40 40C40 40 30 30 20 30"
+            stroke="#2E90FA"
+            strokeOpacity="0.3"
+            strokeWidth="1.5"
+            strokeDasharray="2 2"
+          />
+        </svg>
+      ),
+      title: "Operations Handling",
       description:
-        "Our specialized delivery network reaches 20+ states with most deliveries arriving within 24-48 hours.",
-    },
-    {
-      icon: <TrendingUp className="h-10 w-10 text-primary" />,
-      title: "Proven Growth Results",
-      description: "Our partners see an average of 40% business growth within the first year of using our platform.",
+        "Comprehensive tools for inventory management, order processing, and business analytics tailored for fashion retail",
     },
   ]
 
@@ -223,10 +391,10 @@ export default function Home() {
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-3 md:mb-4">
             India's only rural B2B
             <br className="hidden sm:block" />
-            eCommerce platform
+            fashion platform
           </h2>
           <p className="text-lg md:text-2xl text-gray-600 max-w-3xl mx-auto">
-            BIGFASHION unlocks direct reach for brands to
+            BIGFASHION unlocks direct reach of fashion to
             <br className="hidden sm:block" />
             rural consumers through 10M+ stores
           </p>
@@ -252,7 +420,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Key Metrics Section */}
+      {/* Key Metrics Section with Animated Counters */}
       <section ref={statsRef} className="py-16 bg-white">
         <div className="container px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
@@ -267,7 +435,13 @@ export default function Home() {
                 <div className="flex justify-center mb-3">
                   <div className="rounded-full bg-primary/10 p-3">{metric.icon}</div>
                 </div>
-                <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-1">{metric.value}</h3>
+                <AnimatedCounter
+                  value={metric.numericValue}
+                  suffix={metric.suffix}
+                  prefix={metric.prefix}
+                  duration={2000}
+                  className="text-3xl md:text-4xl font-bold text-gray-900 mb-1"
+                />
                 <p className="text-sm text-gray-600">{metric.label}</p>
               </motion.div>
             ))}
@@ -275,7 +449,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Value Proposition Section */}
+      {/* Product Offerings Section */}
       <section ref={featuresRef} className="py-20 bg-gradient-to-b from-white to-gray-50">
         <div className="container px-4">
           <div className="text-center mb-16">
@@ -293,7 +467,7 @@ export default function Home() {
               animate={featuresInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              Revolutionizing Fashion Retail in Tier 2 & 3 Cities
+              Product Offerings
             </motion.h2>
             <motion.p
               className="text-xl text-gray-600 max-w-3xl mx-auto"
@@ -301,27 +475,65 @@ export default function Home() {
               animate={featuresInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              Our platform is specifically designed to solve the unique challenges of fashion retailers in emerging
-              markets
+              We offer transformative solutions for your fashion business
             </motion.p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {features.map((feature, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {productOfferings.map((offering, index) => (
               <motion.div
                 key={index}
-                className="bg-white rounded-xl p-8 shadow-md border border-gray-100 hover:shadow-lg transition-all duration-300 h-full flex flex-col"
+                className="bg-white rounded-xl p-8 shadow-md border border-gray-100 transition-all duration-300 h-full flex flex-col relative group overflow-hidden"
                 initial={{ opacity: 0, y: 30 }}
                 animate={featuresInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-                whileHover={{ y: -5 }}
+                whileHover={{
+                  y: -5,
+                  boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
+                  scale: 1.02,
+                }}
               >
-                <div className="rounded-full bg-primary/10 p-4 w-fit mb-6">{feature.icon}</div>
-                <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
-                <p className="text-gray-600 flex-grow">{feature.description}</p>
-                <div className="mt-6 pt-4 border-t border-gray-100">
-                  <Link href="/solutions" className="inline-flex items-center text-primary font-medium hover:underline">
-                    Learn more <ChevronRight className="ml-1 h-4 w-4" />
+                {/* Add a background gradient effect that appears on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+
+                {/* Add a border highlight effect */}
+                <div className="absolute inset-0 border-2 border-primary/0 rounded-xl group-hover:border-primary/20 transition-all duration-300"></div>
+
+                {/* Update the icon container with hover effects */}
+                <div className="flex justify-center mb-6 relative z-10">
+                  <motion.div
+                    className="relative w-40 h-40"
+                    whileHover={{ rotate: [0, -5, 5, -5, 0], scale: 1.05 }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-primary/5 rounded-full group-hover:from-primary/20 group-hover:to-primary/10 transition-all duration-300"></div>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
+                        {offering.icon}
+                      </motion.div>
+                    </div>
+                  </motion.div>
+                </div>
+
+                {/* Update the title with hover effect */}
+                <h3 className="text-xl font-bold mb-3 text-center group-hover:text-primary transition-colors duration-300">
+                  {offering.title}
+                </h3>
+
+                {/* Keep the description and learn more link */}
+                <p className="text-gray-600 text-center mb-6 relative z-10">{offering.description}</p>
+                <div className="mt-auto pt-4 border-t border-gray-100 text-center relative z-10">
+                  <Link
+                    href="/solutions"
+                    className="inline-flex items-center text-primary font-medium hover:underline group-hover:text-primary/80 transition-colors duration-300"
+                  >
+                    <span className="relative">
+                      Learn more
+                      <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+                    </span>
+                    <motion.span className="inline-flex ml-1" whileHover={{ x: 3 }} transition={{ duration: 0.2 }}>
+                      <ChevronRight className="h-4 w-4" />
+                    </motion.span>
                   </Link>
                 </div>
               </motion.div>
@@ -329,6 +541,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* How It Works Section - Replaced with Animated Process Flow */}
+      <AnimatedProcessFlow />
 
       {/* Solution Showcase Section */}
       <section ref={solutionRef} className="py-24 relative overflow-hidden bg-gray-900">
@@ -479,78 +694,6 @@ export default function Home() {
                 </div>
               </div>
             </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* How It Works Section */}
-      <section className="py-20 bg-white">
-        <div className="container px-4">
-          <div className="text-center mb-16">
-            <span className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20 mb-4">
-              Simple Process
-            </span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">How It Works</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Our streamlined process makes it easy to transform your retail business
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
-            {[
-              {
-                number: "01",
-                title: "Connect",
-                description: "Schedule a consultation with our team to discuss your business needs.",
-                icon: <Users className="h-6 w-6 text-primary" />,
-              },
-              {
-                number: "02",
-                title: "Onboard",
-                description: "We'll set up your account and integrate our platform with your business.",
-                icon: <Zap className="h-6 w-6 text-primary" />,
-              },
-              {
-                number: "03",
-                title: "Optimize",
-                description: "Use our tools to streamline operations and make data-driven decisions.",
-                icon: <BarChart3 className="h-6 w-6 text-primary" />,
-              },
-              {
-                number: "04",
-                title: "Scale",
-                description: "Grow your business with our ongoing support and advanced features.",
-                icon: <TrendingUp className="h-6 w-6 text-primary" />,
-              },
-            ].map((step, index) => (
-              <motion.div
-                key={index}
-                className="bg-white rounded-xl p-8 shadow-md border border-gray-100 hover:shadow-lg transition-all duration-300 h-full flex flex-col relative overflow-hidden"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <div className="absolute -top-6 -left-6 text-9xl font-bold text-gray-100 select-none">
-                  {step.number}
-                </div>
-                <div className="rounded-full bg-primary/10 p-4 w-fit mb-6 relative z-10">{step.icon}</div>
-                <h3 className="text-xl font-bold mb-3 relative z-10">{step.title}</h3>
-                <p className="text-gray-600 flex-grow relative z-10">{step.description}</p>
-
-                {index < 3 && (
-                  <div className="hidden lg:block absolute top-1/2 -right-4 transform -translate-y-1/2">
-                    <ArrowRight className="h-8 w-8 text-gray-300" />
-                  </div>
-                )}
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <Button onClick={handleDemoClick} className="bg-primary hover:bg-primary/90 text-white" size="lg">
-              Get Started Today
-            </Button>
           </div>
         </div>
       </section>
