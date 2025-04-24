@@ -231,12 +231,12 @@ export default function Home() {
           </p>
         </div>
 
-        <div className="w-full">
+        <div className="w-full max-w-6xl mx-auto px-4">
           <div className="relative">
             <img
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Blank%20diagram%20%282%29-NDD4kgN9eEzQPZeRTHnKXhW3e43LTL.png"
-              alt="BIGFASHION ecosystem diagram showing the B2B fashion eCommerce platform connecting dashboard, clothing, door-to-door delivery, finance, and fashion stores through various platform services"
-              className="w-full h-auto object-cover"
+              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Blank%20diagram%20%285%29-KAZk449aqwuDO31JxCbQp5vX1XQo5s.png"
+              alt="BIGFASHION ecosystem diagram showing the B2B fashion eCommerce platform connecting Dashboard, Clothes, Door2Door, Finance, and Fashion Store through the BIGFASHION TechStack, Logistics platform, Finance platform, advertising platform, and Customer Support"
+              className="w-full h-auto object-contain"
             />
           </div>
         </div>
