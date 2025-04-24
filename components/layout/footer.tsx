@@ -4,87 +4,112 @@ import type React from "react"
 
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { Facebook, Twitter, Instagram, Linkedin } from "lucide-react"
+import { Facebook, Twitter, Instagram, Linkedin, MapPin, ArrowRight } from "lucide-react"
 import TheBigFashionLogo from "@/components/the-big-fashion-logo"
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="border-t bg-muted/40">
-      <div className="container py-12">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          <div className="space-y-4">
-            <Link href="/" className="flex items-center gap-2">
-              <TheBigFashionLogo size="md" variant="default" />
-            </Link>
-            <p className="text-sm text-muted-foreground">
-              Revolutionizing India's clothing wholesale industry since 2018. Empowering retailers with diverse
-              inventory, rapid restocking, and local logistics support.
-            </p>
-            <div className="flex space-x-4">
-              <SocialIcon icon={<Facebook className="h-4 w-4" />} href="https://facebook.com" label="Facebook" />
-              <SocialIcon icon={<Twitter className="h-4 w-4" />} href="https://twitter.com" label="Twitter" />
-              <SocialIcon icon={<Instagram className="h-4 w-4" />} href="https://instagram.com" label="Instagram" />
-              <SocialIcon icon={<Linkedin className="h-4 w-4" />} href="https://linkedin.com" label="LinkedIn" />
-            </div>
-          </div>
+    <footer className="bg-white pt-20 pb-10">
+      <div className="container mx-auto px-4">
+        {/* Top section with logo and mission */}
+        <div className="max-w-3xl mb-14">
+          <Link href="/" className="inline-block mb-8">
+            <TheBigFashionLogo size="lg" variant="default" />
+          </Link>
+          <p className="text-gray-700 text-lg leading-relaxed font-medium">
+            We are sparking a revolution, changing how fashion is bought and sold to improve lives. By using technology,
+            we connect people and make quality fashion available everywhere, making them easier to access.
+          </p>
+        </div>
+
+        {/* Subtle divider */}
+        <div className="h-px bg-gray-100 w-full my-12"></div>
+
+        {/* Navigation columns */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
+          {/* Column 1 - Company */}
           <div>
-            <h3 className="font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              <FooterLink href="/" label="Home" />
+            <h3 className="text-xl font-bold mb-6 text-gray-900">Company</h3>
+            <ul className="space-y-4">
               <FooterLink href="/about" label="About Us" />
-              <FooterLink href="/catalog" label="Catalog" />
+              <FooterLink href="/careers" label="Careers" />
               <FooterLink href="/partners" label="For Retailers" />
-              <FooterLink href="/contact" label="Contact" />
             </ul>
           </div>
+
+          {/* Column 2 - Products */}
           <div>
-            <h3 className="font-semibold mb-4">Legal</h3>
-            <ul className="space-y-2">
-              <FooterLink href="/terms" label="Terms of Service" />
+            <h3 className="text-xl font-bold mb-6 text-gray-900">Products</h3>
+            <ul className="space-y-4">
+              <FooterLink href="/catalog" label="B2B eCommerce" />
+              <FooterLink href="/logistics" label="Managed Logistics" />
+              <FooterLink href="/software" label="Software as a Service" />
+              <FooterLink href="/solutions" label="Solutions" />
+            </ul>
+          </div>
+
+          {/* Column 3 - Legal */}
+          <div>
+            <h3 className="text-xl font-bold mb-6 text-gray-900">Legal</h3>
+            <ul className="space-y-4">
               <FooterLink href="/privacy" label="Privacy Policy" />
-              <FooterLink href="/shipping" label="Shipping Policy" />
-              <FooterLink href="/refunds" label="Refund Policy" />
               <FooterLink href="/faq" label="FAQ" />
             </ul>
           </div>
-          <div>
-            <h3 className="font-semibold mb-4">Contact</h3>
-            <ul className="space-y-2">
-              <li className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-                BIG FASHION Headquarters
-              </li>
-              <li className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-                B-12, Sector 63, Andheri East,
-              </li>
-              <li className="text-sm text-muted-foreground transition-colors hover:text-foreground">
-                Mumbai, Maharashtra 401208
-              </li>
-              <li className="text-sm text-muted-foreground transition-colors hover:text-foreground hover:underline">
-                <a href="mailto:bigfashion@gmail.com">bigfashion@gmail.com</a>
-              </li>
-              <li className="text-sm text-muted-foreground transition-colors hover:text-foreground hover:underline">
-                <a href="tel:+917033383119">+91 7033383119</a>
-              </li>
-            </ul>
-          </div>
         </div>
-        <div className="mt-12 pt-8 border-t border-border">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <p className="text-sm text-muted-foreground">© {currentYear} BIG FASHION Pvt Ltd. All rights reserved.</p>
-            <div className="flex gap-6">
-              <Link href="/terms" className="text-xs text-muted-foreground hover:text-foreground hover:underline">
-                Terms of Service
-              </Link>
-              <Link href="/privacy" className="text-xs text-muted-foreground hover:text-foreground hover:underline">
-                Privacy Policy
-              </Link>
-              <Link href="/cookies" className="text-xs text-muted-foreground hover:text-foreground hover:underline">
-                Cookie Policy
-              </Link>
+
+        {/* Office location and contact */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16 bg-gray-50 p-8 rounded-lg">
+          <div className="flex items-start">
+            <MapPin className="h-6 w-6 text-primary mr-3 mt-1 flex-shrink-0" />
+            <div>
+              <h4 className="font-bold text-lg mb-3 text-gray-900">Mumbai (Headquarters)</h4>
+              <p className="text-gray-700 font-medium">
+                B-12, Sector 63, Andheri East,
+                <br />
+                Mumbai, Maharashtra 401208
+              </p>
             </div>
           </div>
+          <div>
+            <h4 className="font-bold text-lg mb-3 text-gray-900">Contact Us</h4>
+            <p className="text-gray-700 font-medium mb-2">
+              <a href="mailto:bigfashion@gmail.com" className="hover:text-primary transition-colors flex items-center">
+                bigfashion@gmail.com
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
+            </p>
+            <p className="text-gray-700 font-medium">
+              <a href="tel:+917033383119" className="hover:text-primary transition-colors flex items-center">
+                +91 7033383119
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </a>
+            </p>
+          </div>
+        </div>
+
+        {/* CTA section */}
+        <div className="flex flex-col md:flex-row md:items-center justify-between mb-16 bg-gray-50 p-8 rounded-lg">
+          <h3 className="text-2xl font-bold mb-4 md:mb-0 text-gray-900">
+            How can we help?{" "}
+            <Link href="/contact" className="text-primary hover:underline inline-flex items-center">
+              Contact us <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </h3>
+
+          <div className="flex space-x-5">
+            <SocialIcon icon={<Twitter className="h-5 w-5" />} href="https://twitter.com" label="Twitter" />
+            <SocialIcon icon={<Facebook className="h-5 w-5" />} href="https://facebook.com" label="Facebook" />
+            <SocialIcon icon={<Instagram className="h-5 w-5" />} href="https://instagram.com" label="Instagram" />
+            <SocialIcon icon={<Linkedin className="h-5 w-5" />} href="https://linkedin.com" label="LinkedIn" />
+          </div>
+        </div>
+
+        {/* Copyright */}
+        <div className="text-center font-bold text-gray-700">
+          <p>© {currentYear} BIG FASHION Pvt Ltd. All rights reserved.</p>
         </div>
       </div>
     </footer>
@@ -101,9 +126,17 @@ function FooterLink({ href, label }: FooterLinkProps) {
     <li>
       <Link
         href={href}
-        className="text-sm text-muted-foreground transition-colors hover:text-foreground hover:underline"
+        className="text-gray-700 hover:text-primary transition-colors font-medium text-base flex items-center group"
       >
-        {label}
+        <span>{label}</span>
+        <motion.span
+          initial={{ opacity: 0, x: -5 }}
+          animate={{ opacity: 0, x: -5 }}
+          whileHover={{ opacity: 1, x: 0 }}
+          className="ml-2"
+        >
+          <ArrowRight className="h-4 w-4" />
+        </motion.span>
       </Link>
     </li>
   )
@@ -122,7 +155,7 @@ function SocialIcon({ icon, href, label }: SocialIconProps) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className="flex h-8 w-8 items-center justify-center rounded-full bg-muted text-muted-foreground transition-colors hover:bg-primary hover:text-primary-foreground"
+      className="flex h-12 w-12 items-center justify-center rounded-full bg-white text-primary transition-all hover:bg-gray-50"
       whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
     >

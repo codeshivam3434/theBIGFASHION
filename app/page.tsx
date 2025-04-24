@@ -3,21 +3,7 @@
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { motion, useScroll, AnimatePresence, useInView } from "framer-motion"
-import {
-  ArrowRight,
-  ShieldCheck,
-  TrendingUp,
-  BarChart3,
-  Truck,
-  Zap,
-  Users,
-  CheckCircle,
-  ChevronRight,
-  Star,
-  Clock,
-  Award,
-  ArrowUpRight,
-} from "lucide-react"
+import { ShieldCheck, TrendingUp, BarChart3, Truck, Zap, Users, ChevronRight, Star, ArrowUpRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { EnhancedImage } from "@/components/ui/enhanced-image"
 import { HomePageJsonLd, ProductJsonLd, FAQJsonLd } from "./structured-data"
@@ -76,13 +62,11 @@ export default function Home() {
   const featuresRef = useRef(null)
   const solutionRef = useRef(null)
   const testimonialsRef = useRef(null)
-  const ctaRef = useRef(null)
 
   const [statsInView, setStatsInView] = useState(false)
   const [featuresInView, setFeaturesInView] = useState(false)
   const [solutionInView, setSolutionInView] = useState(false)
   const [testimonialsInView, setTestimonialsInView] = useState(false)
-  const [ctaInView, setCtaInView] = useState(false)
 
   useEffect(() => {
     const observerOptions = {
@@ -127,27 +111,16 @@ export default function Home() {
       })
     }, observerOptions)
 
-    const ctaObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setCtaInView(true)
-          ctaObserver.unobserve(entry.target)
-        }
-      })
-    }, observerOptions)
-
     if (statsRef.current) statsObserver.observe(statsRef.current)
     if (featuresRef.current) featuresObserver.observe(featuresRef.current)
     if (solutionRef.current) solutionObserver.observe(solutionRef.current)
     if (testimonialsRef.current) testimonialsObserver.observe(testimonialsRef.current)
-    if (ctaRef.current) ctaObserver.observe(ctaRef.current)
 
     return () => {
       statsObserver.disconnect()
       featuresObserver.disconnect()
       solutionObserver.disconnect()
       testimonialsObserver.disconnect()
-      ctaObserver.disconnect()
     }
   }, [])
 
@@ -810,119 +783,6 @@ export default function Home() {
               Read more success stories <ChevronRight className="ml-1 h-5 w-5" />
             </Link>
           </div>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section ref={ctaRef} className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <EnhancedImage
-            src="/tech-chic-boutique.png"
-            alt="Modern fashion retail store with digital displays and inventory management system showing the BIG FASHION platform in action"
-            fill
-            quality="high"
-            objectFit="cover"
-            className="brightness-[0.2]"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 to-black/40 z-10"></div>
-        </div>
-
-        <div className="container px-4 relative z-20">
-          <motion.div
-            className="max-w-4xl mx-auto text-center text-white bg-black/30 p-10 rounded-2xl backdrop-blur-sm border border-white/10"
-            initial={{ opacity: 0, y: 30 }}
-            animate={ctaInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-          >
-            <motion.h2
-              className="text-3xl md:text-5xl font-bold mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              animate={ctaInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.1 }}
-            >
-              Ready to Transform Your Retail Business?
-            </motion.h2>
-
-            <motion.p
-              className="text-xl md:text-2xl mb-10 text-white/90"
-              initial={{ opacity: 0, y: 20 }}
-              animate={ctaInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              Join hundreds of successful retailers who have revolutionized their businesses with our platform.
-            </motion.p>
-
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-              initial={{ opacity: 0, y: 20 }}
-              animate={ctaInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              <Button
-                size="lg"
-                className="text-base px-8 py-6 bg-white text-primary hover:bg-gray-100"
-                onClick={handleDemoClick}
-              >
-                {isLoading.demo ? (
-                  <span className="flex items-center">
-                    <svg
-                      className="animate-spin -ml-1 mr-2 h-4 w-4 text-primary"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                    >
-                      <circle
-                        className="opacity-25"
-                        cx="12"
-                        cy="12"
-                        r="10"
-                        stroke="currentColor"
-                        strokeWidth="4"
-                      ></circle>
-                      <path
-                        className="opacity-75"
-                        fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                      ></path>
-                    </svg>
-                    Scheduling demo...
-                  </span>
-                ) : (
-                  <span className="flex items-center">
-                    Get Started Free <ArrowRight className="ml-2 h-5 w-5" />
-                  </span>
-                )}
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                asChild
-                className="text-base text-white border-white hover:bg-white/20 py-6"
-              >
-                <Link href="/solutions">Learn More</Link>
-              </Button>
-            </motion.div>
-
-            <motion.div
-              className="mt-10 flex flex-wrap justify-center gap-6"
-              initial={{ opacity: 0 }}
-              animate={ctaInView ? { opacity: 1 } : {}}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <div className="flex items-center">
-                <Clock className="h-5 w-5 text-primary mr-2" />
-                <span className="text-white/80 text-sm">Setup in 24 hours</span>
-              </div>
-              <div className="flex items-center">
-                <Award className="h-5 w-5 text-primary mr-2" />
-                <span className="text-white/80 text-sm">30-day satisfaction guarantee</span>
-              </div>
-              <div className="flex items-center">
-                <CheckCircle className="h-5 w-5 text-primary mr-2" />
-                <span className="text-white/80 text-sm">Free onboarding support</span>
-              </div>
-            </motion.div>
-          </motion.div>
         </div>
       </section>
 
