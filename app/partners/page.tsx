@@ -10,7 +10,6 @@ import { motion } from "framer-motion"
 
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import FadeInSection from "@/components/fade-in-section"
@@ -159,156 +158,6 @@ export default function PartnersPage() {
                 </Card>
               </FadeInSection>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Partnership Program */}
-      <section className="bg-gray-50 py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeInSection>
-            <div className="mx-auto max-w-3xl text-center">
-              <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-                Tailored Partnership Solutions
-              </h2>
-              <p className="mt-4 text-xl text-gray-600">
-                Select the partnership tier that aligns with your business objectives and growth strategy.
-              </p>
-            </div>
-          </FadeInSection>
-
-          <div className="mt-16">
-            <Tabs defaultValue="premium" className="w-full">
-              <TabsList className="mx-auto grid w-full max-w-md grid-cols-3">
-                <TabsTrigger value="standard">Standard</TabsTrigger>
-                <TabsTrigger value="premium">Premium</TabsTrigger>
-                <TabsTrigger value="enterprise">Enterprise</TabsTrigger>
-              </TabsList>
-              <div className="mt-8">
-                <TabsContent value="standard" className="mt-0">
-                  <Card className="border-0 shadow-lg">
-                    <CardContent className="p-6 sm:p-8">
-                      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-                        <div>
-                          <h3 className="text-2xl font-bold text-gray-900">Standard Partnership</h3>
-                          <p className="mt-2 text-gray-600">
-                            Ideal for independent retailers and small businesses looking to optimize their operations.
-                          </p>
-                          <div className="mt-6">
-                            <p className="text-4xl font-bold text-gray-900">₹25,000</p>
-                            <p className="text-gray-600">Annual subscription</p>
-                          </div>
-                          <Button className="mt-6 w-full" size="lg">
-                            Get Started
-                          </Button>
-                        </div>
-                        <div>
-                          <h4 className="text-lg font-semibold text-gray-900">Includes:</h4>
-                          <ul className="mt-4 space-y-3">
-                            {[
-                              "Access to wholesale catalog with 2,000+ products",
-                              "Basic inventory management tools",
-                              "Standard order processing (48-hour fulfillment)",
-                              "Monthly performance reports",
-                              "Email support (24-hour response time)",
-                            ].map((feature, index) => (
-                              <li key={index} className="flex items-start">
-                                <CheckCircle className="mr-2 h-5 w-5 flex-shrink-0 text-primary" />
-                                <span className="text-gray-600">{feature}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-                <TabsContent value="premium" className="mt-0">
-                  <Card className="border-0 shadow-lg">
-                    <CardContent className="p-6 sm:p-8">
-                      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-                        <div>
-                          <div className="mb-4 inline-flex rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary">
-                            Most Popular
-                          </div>
-                          <h3 className="text-2xl font-bold text-gray-900">Premium Partnership</h3>
-                          <p className="mt-2 text-gray-600">
-                            For established retailers seeking advanced tools and priority support.
-                          </p>
-                          <div className="mt-6">
-                            <p className="text-4xl font-bold text-gray-900">₹60,000</p>
-                            <p className="text-gray-600">Annual subscription</p>
-                          </div>
-                          <Button className="mt-6 w-full" size="lg">
-                            Get Started
-                          </Button>
-                        </div>
-                        <div>
-                          <h4 className="text-lg font-semibold text-gray-900">Includes:</h4>
-                          <ul className="mt-4 space-y-3">
-                            {[
-                              "Everything in Standard, plus:",
-                              "Access to 5,000+ products with priority allocation",
-                              "Advanced analytics and business intelligence tools",
-                              "Priority order processing (24-hour fulfillment)",
-                              "Dedicated account manager",
-                              "Phone and email support (4-hour response time)",
-                              "Quarterly business review and strategy sessions",
-                            ].map((feature, index) => (
-                              <li key={index} className="flex items-start">
-                                <CheckCircle className="mr-2 h-5 w-5 flex-shrink-0 text-primary" />
-                                <span className="text-gray-600">{feature}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-                <TabsContent value="enterprise" className="mt-0">
-                  <Card className="border-0 shadow-lg">
-                    <CardContent className="p-6 sm:p-8">
-                      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-                        <div>
-                          <h3 className="text-2xl font-bold text-gray-900">Enterprise Partnership</h3>
-                          <p className="mt-2 text-gray-600">
-                            Comprehensive solution for large retailers and multi-location businesses.
-                          </p>
-                          <div className="mt-6">
-                            <p className="text-4xl font-bold text-gray-900">Custom</p>
-                            <p className="text-gray-600">Tailored pricing</p>
-                          </div>
-                          <Button className="mt-6 w-full" size="lg">
-                            Contact Sales
-                          </Button>
-                        </div>
-                        <div>
-                          <h4 className="text-lg font-semibold text-gray-900">Includes:</h4>
-                          <ul className="mt-4 space-y-3">
-                            {[
-                              "Everything in Premium, plus:",
-                              "Full access to entire product catalog with custom allocations",
-                              "Enterprise-grade analytics with predictive modeling",
-                              "Custom integration with existing systems",
-                              "White-labeled solutions available",
-                              "Expedited order processing with dedicated logistics",
-                              "Executive-level strategic partnership",
-                              "24/7 priority support with dedicated team",
-                            ].map((feature, index) => (
-                              <li key={index} className="flex items-start">
-                                <CheckCircle className="mr-2 h-5 w-5 flex-shrink-0 text-primary" />
-                                <span className="text-gray-600">{feature}</span>
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-              </div>
-            </Tabs>
           </div>
         </div>
       </section>
@@ -584,36 +433,79 @@ export default function PartnersPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="bg-primary py-16 text-white">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center justify-between gap-8 text-center lg:flex-row lg:text-left">
-            <div className="max-w-2xl">
-              <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Ready to elevate your retail business?</h2>
-              <p className="mt-4 text-lg text-white/90">
-                Join thousands of successful retailers who have transformed their operations with THE BIG FASHION.
-              </p>
-            </div>
-            <div className="flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-              <Button
-                size="lg"
-                className="bg-white text-primary hover:bg-white/90"
-                onClick={() => {
-                  document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" })
-                }}
-              >
-                Become a Partner
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                className="border-white text-white hover:bg-white/10"
-                onClick={() => {
-                  window.location.href = "/solutions"
-                }}
-              >
-                Explore Solutions
-              </Button>
+      {/* CTA Section - Enhanced */}
+      <section className="relative overflow-hidden bg-gradient-to-r from-primary to-primary-dark py-24 text-white">
+        {/* Background pattern */}
+        <div className="absolute inset-0 z-0 opacity-10">
+          <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <defs>
+              <pattern id="grid-pattern" width="10" height="10" patternUnits="userSpaceOnUse">
+                <path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" strokeWidth="0.5" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid-pattern)" />
+          </svg>
+        </div>
+
+        {/* Animated circles */}
+        <div className="absolute left-0 top-0 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white opacity-10 mix-blend-overlay"></div>
+        <div className="absolute bottom-0 right-0 h-96 w-96 translate-x-1/3 translate-y-1/3 rounded-full bg-white opacity-10 mix-blend-overlay"></div>
+
+        <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-5xl">
+            <div className="rounded-2xl bg-white/10 p-8 backdrop-blur-sm sm:p-12">
+              <div className="flex flex-col items-center gap-12 text-center lg:flex-row lg:text-left">
+                <div className="flex-1">
+                  <span className="inline-block rounded-full border border-white/30 bg-white/10 px-4 py-1 text-sm font-medium backdrop-blur-sm">
+                    Limited Time Offer
+                  </span>
+                  <h2 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
+                    Transform Your Retail Business Today
+                  </h2>
+                  <p className="mt-6 text-xl text-white/90">
+                    Join over 30 successful retailers across 3 cities who have increased their profits by an average of
+                    32% with THE BIG FASHION.
+                  </p>
+
+                  <div className="mt-8 flex flex-wrap items-center gap-3">
+                    <div className="flex -space-x-2">
+                      {[1, 2, 3, 4].map((i) => (
+                        <div
+                          key={i}
+                          className="inline-block h-10 w-10 rounded-full border-2 border-primary bg-white/90"
+                        ></div>
+                      ))}
+                    </div>
+                    <p className="text-sm font-medium">+20 retailers joined this month</p>
+                  </div>
+                </div>
+
+                <div className="flex w-full flex-col space-y-4 lg:w-auto">
+                  <Button
+                    size="lg"
+                    className="group relative overflow-hidden bg-white px-8 py-6 text-lg font-bold text-primary transition-all hover:bg-white/90 hover:shadow-lg"
+                    onClick={() => {
+                      document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" })
+                    }}
+                  >
+                    <span className="relative z-10">Become a Partner Now</span>
+                    <span className="absolute bottom-0 left-0 h-1 w-full bg-primary transition-all duration-300 group-hover:h-2"></span>
+                  </Button>
+
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="border-2 border-white px-8 py-6 text-lg font-bold text-white transition-all hover:bg-white/20"
+                    onClick={() => {
+                      window.location.href = "/solutions"
+                    }}
+                  >
+                    Explore Our Solutions
+                  </Button>
+
+                  <p className="text-center text-sm text-white/80">No commitment required. Free consultation.</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

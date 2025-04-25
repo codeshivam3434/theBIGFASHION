@@ -1,23 +1,10 @@
 "use client"
 
-import {
-  CheckCircle,
-  TrendingUp,
-  Users,
-  Award,
-  Truck,
-  Target,
-  Heart,
-  Shield,
-  BarChart3,
-  Package,
-  Clock,
-} from "lucide-react"
+import { TrendingUp, Users, Award, Truck, Target, Heart, Shield, BarChart3, Package, Clock } from "lucide-react"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import FadeInSection from "@/components/fade-in-section"
 import { Button } from "@/components/ui/button"
-import ParallaxImage from "@/components/parallax-image"
 import TeamSection from "@/components/team-section"
 import { VideoBackground } from "@/components/ui/video-background"
 import { ProcessFlow } from "@/components/process-flow"
@@ -103,74 +90,84 @@ export default function AboutPage() {
         <VideoBackground
           src="https://v0.blob.com/fashion-production-video.mp4"
           fallbackImage="/garment-warehouse-operations.png"
-          overlayOpacity={0.7}
+          overlayOpacity={0.6}
           priority={true}
         />
-        <div className="container relative z-10 flex flex-col items-center justify-center py-24 md:py-32 text-center text-white">
-          <motion.span
-            className="inline-flex items-center rounded-full bg-primary/20 px-4 py-1 text-sm font-medium text-white ring-1 ring-inset ring-primary/30 mb-6"
+        <div className="container relative z-10 flex flex-col items-center justify-center py-24 md:py-36 text-center text-white">
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
+            className="inline-flex items-center rounded-full bg-white/10 backdrop-blur-sm px-4 py-1.5 text-sm font-medium text-white ring-1 ring-inset ring-white/20 mb-6"
           >
             Our Story
-          </motion.span>
+          </motion.div>
           <motion.h1
-            className="max-w-4xl text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl"
+            className="max-w-3xl text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            Revolutionizing Fashion Wholesale in India
+            Revolutionizing Fashion Retail
           </motion.h1>
           <motion.div
-            className="mt-6 max-w-2xl text-lg md:text-xl text-gray-200"
+            className="mt-6 max-w-2xl text-lg md:text-xl text-white/90"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            <span className="inline-block px-6 py-3 bg-black/30 backdrop-blur-sm rounded-lg">
-              Empowering retailers with technology, logistics, and market insights since 2018
+            <span className="inline-block px-6 py-3 bg-black/30 backdrop-blur-sm rounded-lg border border-white/10">
+              Empowering 30 retailers across 3 cities with technology and insights
             </span>
           </motion.div>
         </div>
       </section>
 
-      {/* Key Differentiators - FEATURED PROMINENTLY */}
-      <section className="py-20 bg-gradient-to-b from-background to-muted/30">
+      {/* Key Differentiators */}
+      <section className="py-24 bg-gradient-to-b from-background to-muted/20">
         <div className="container">
           <FadeInSection>
             <div className="text-center mb-16">
-              <span className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20 mb-4">
-                Our Difference
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">What Sets Us Apart</h2>
-              <div className="w-24 h-1 bg-primary rounded-full mx-auto mb-6"></div>
-              <p className="max-w-2xl mx-auto text-muted-foreground">
-                Our platform delivers two key advantages that transform how fashion retailers operate
-              </p>
+              <motion.div
+                className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20 mb-4"
+                whileHover={{ y: -2 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                Our Approach
+              </motion.div>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">What Sets Us Apart</h2>
+              <div className="w-16 h-1 bg-primary/80 rounded-full mx-auto mb-6"></div>
             </div>
           </FadeInSection>
 
           {keyDifferentiators.map((differentiator, index) => (
             <FadeInSection key={index} delay={index * 0.2}>
-              <div className="mb-16 last:mb-0">
-                <div className="flex flex-col md:flex-row items-start gap-8">
+              <div className="mb-20 last:mb-0">
+                <div className="flex flex-col md:flex-row items-start gap-12">
                   <div className="md:w-1/3">
-                    <div className="flex items-center gap-4 mb-4">
+                    <motion.div
+                      className="flex items-center gap-4 mb-6"
+                      whileHover={{ x: 5 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                    >
                       <div className="rounded-full bg-primary/10 p-4 flex items-center justify-center">
                         {differentiator.icon}
                       </div>
                       <h3 className="text-2xl font-bold">{differentiator.title}</h3>
-                    </div>
+                    </motion.div>
                     <div className="hidden md:block">
-                      <EnhancedImage
-                        src={index === 0 ? "/retail-operations-dashboard.png" : "/supply-chain-logistics.png"}
-                        alt={differentiator.title}
-                        width={400}
-                        height={300}
-                        className="rounded-xl shadow-lg border border-border"
-                      />
+                      <motion.div
+                        whileHover={{ y: -5, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)" }}
+                        transition={{ type: "spring", stiffness: 300, damping: 15 }}
+                      >
+                        <EnhancedImage
+                          src={index === 0 ? "/retail-operations-dashboard.png" : "/supply-chain-logistics.png"}
+                          alt={differentiator.title}
+                          width={400}
+                          height={300}
+                          className="rounded-xl shadow-md border border-border/50"
+                        />
+                      </motion.div>
                     </div>
                   </div>
 
@@ -179,10 +176,11 @@ export default function AboutPage() {
                       {differentiator.features.map((feature, featureIndex) => (
                         <motion.div
                           key={featureIndex}
-                          className="bg-background rounded-xl p-6 shadow-md border border-border"
+                          className="bg-background/80 backdrop-blur-sm rounded-xl p-6 shadow-sm border border-border/50 relative overflow-hidden"
                           whileHover={{ y: -5, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1)" }}
-                          transition={{ duration: 0.2 }}
+                          transition={{ type: "spring", stiffness: 300, damping: 15 }}
                         >
+                          <div className="absolute top-0 left-0 w-full h-1 bg-primary/40"></div>
                           <div className="flex items-center gap-3 mb-3">
                             <div className="rounded-full bg-primary/10 p-2 flex-shrink-0">
                               {featureIndex === 0 ? (
@@ -210,34 +208,15 @@ export default function AboutPage() {
       </section>
 
       {/* Mission & Vision */}
-      <section className="py-20 bg-muted/30">
+      <section className="py-24 bg-muted/20">
         <div className="container">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <FadeInSection direction="left">
-              <div className="space-y-6">
-                <span className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20">
-                  Our Mission
-                </span>
-                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-                  Transforming India's Fashion Retail Ecosystem
-                </h2>
-                <p className="text-lg text-muted-foreground">
-                  At THE BIG FASHION, we're on a mission to revolutionize how clothing reaches India's vast network of
-                  retailers. We combine cutting-edge technology with deep industry expertise to create a seamless
-                  wholesale experience.
-                </p>
-                <div className="pt-4">
-                  <h3 className="text-xl font-semibold mb-3">Our Vision</h3>
-                  <p className="text-muted-foreground">
-                    To create a future where every fashion retailer in India, regardless of size, has access to the
-                    inventory, tools, and insights needed to build a thriving business.
-                  </p>
-                </div>
-              </div>
-            </FadeInSection>
-
-            <FadeInSection direction="right" delay={0.2}>
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+              <motion.div
+                className="relative rounded-2xl overflow-hidden shadow-xl"
+                whileHover={{ scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 300, damping: 15 }}
+              >
                 <EnhancedImage
                   src="/digital-fashion-hub.png"
                   alt="Our mission in action"
@@ -246,11 +225,45 @@ export default function AboutPage() {
                   className="w-full h-auto"
                   rounded="xl"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end">
-                  <div className="p-6 text-white">
-                    <span className="text-sm font-medium text-primary-foreground">Our Commitment</span>
-                    <h3 className="text-xl font-bold mt-1">Bridging the gap between manufacturers and retailers</h3>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex items-end">
+                  <div className="p-8 text-white">
+                    <span className="text-sm font-medium text-primary-foreground/90 bg-primary/20 px-3 py-1 rounded-full backdrop-blur-sm">
+                      Our Commitment
+                    </span>
+                    <h3 className="text-xl font-bold mt-2">Bridging the gap between manufacturers and retailers</h3>
                   </div>
+                </div>
+              </motion.div>
+            </FadeInSection>
+
+            <FadeInSection direction="right" delay={0.2}>
+              <div className="space-y-8">
+                <motion.div
+                  className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20"
+                  whileHover={{ y: -2 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                >
+                  Our Purpose
+                </motion.div>
+                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+                  Transforming India's Fashion Retail Ecosystem
+                </h2>
+                <p className="text-lg text-muted-foreground">
+                  At THE BIG FASHION, we're on a mission to revolutionize how clothing reaches India's vast network of
+                  retailers. We combine cutting-edge technology with deep industry expertise to create a seamless
+                  wholesale experience.
+                </p>
+                <div className="pt-4 p-6 bg-background/80 backdrop-blur-sm rounded-xl border border-border/50 shadow-sm">
+                  <h3 className="text-xl font-semibold mb-3 flex items-center">
+                    <span className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center mr-2">
+                      <Target className="h-4 w-4 text-primary" />
+                    </span>
+                    Our Vision
+                  </h3>
+                  <p className="text-muted-foreground">
+                    To create a future where every fashion retailer in India, regardless of size, has access to the
+                    inventory, tools, and insights needed to build a thriving business.
+                  </p>
                 </div>
               </div>
             </FadeInSection>
@@ -258,19 +271,20 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Core Values - WITH CONSISTENT STYLING */}
-      <section className="py-20 bg-background">
+      {/* Core Values */}
+      <section className="py-24 bg-background">
         <div className="container">
           <FadeInSection>
             <div className="text-center mb-16">
-              <span className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20 mb-4">
+              <motion.div
+                className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20 mb-4"
+                whileHover={{ y: -2 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
                 Our Foundation
-              </span>
+              </motion.div>
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Core Values That Drive Us</h2>
-              <div className="w-24 h-1 bg-primary rounded-full mx-auto mb-6"></div>
-              <p className="max-w-2xl mx-auto text-muted-foreground">
-                These principles guide every decision we make and shape how we serve our retail partners.
-              </p>
+              <div className="w-16 h-1 bg-primary/80 rounded-full mx-auto mb-6"></div>
             </div>
           </FadeInSection>
 
@@ -278,24 +292,25 @@ export default function AboutPage() {
             {coreValues.map((value, index) => (
               <FadeInSection key={index} delay={index * 0.15}>
                 <motion.div
-                  className="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-md border border-gray-100 dark:border-gray-700 h-full flex flex-col relative overflow-hidden"
-                  whileHover={{
-                    y: -10,
-                    boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-                  }}
-                  transition={{ duration: 0.3 }}
+                  className="bg-white dark:bg-gray-800/90 backdrop-blur-sm rounded-xl p-8 shadow-sm border border-gray-100 dark:border-gray-700/50 h-full flex flex-col relative overflow-hidden"
+                  whileHover={{ y: -8, boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)" }}
+                  transition={{ type: "spring", stiffness: 300, damping: 15 }}
                 >
-                  {/* Consistent styling element - top accent */}
-                  <div className="absolute top-0 left-0 right-0 h-2 bg-primary"></div>
+                  {/* Top accent */}
+                  <div className="absolute top-0 left-0 right-0 h-1 bg-primary"></div>
 
-                  <div className="rounded-full bg-primary/10 p-4 w-16 h-16 flex items-center justify-center mb-6 mt-4">
+                  <motion.div
+                    className="rounded-full bg-primary/10 p-4 w-16 h-16 flex items-center justify-center mb-6 mt-4"
+                    whileHover={{ rotate: 5, scale: 1.05 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 10 }}
+                  >
                     {value.icon}
-                  </div>
+                  </motion.div>
                   <h3 className="text-xl font-bold mb-3">{value.title}</h3>
                   <p className="text-muted-foreground flex-grow">{value.description}</p>
 
-                  {/* Consistent styling element - bottom decoration */}
-                  <div className="mt-6 pt-4 border-t border-gray-100 dark:border-gray-700">
+                  {/* Bottom decoration */}
+                  <div className="mt-6 pt-4 border-t border-gray-100 dark:border-gray-700/50">
                     <div className="flex items-center">
                       <div className="w-2 h-2 rounded-full bg-primary mr-2"></div>
                       <div className="w-3 h-2 rounded-full bg-primary/70 mr-2"></div>
@@ -309,95 +324,32 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Our Story */}
-      <section className="py-20 bg-muted/30">
-        <div className="container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <FadeInSection direction="left">
-              <ParallaxImage
-                src="/fashion-startup-warehouse.png"
-                alt="Our founders"
-                width={800}
-                height={800}
-                className="relative aspect-square overflow-hidden rounded-2xl shadow-xl"
-              />
-            </FadeInSection>
-
-            <FadeInSection direction="right" delay={0.2}>
-              <div>
-                <span className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20 mb-4">
-                  Our Journey
-                </span>
-                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-6">From Vision to Revolution</h2>
-
-                <div className="space-y-6">
-                  <div className="flex items-start gap-4">
-                    <div className="rounded-full bg-primary/10 p-3 mt-1">
-                      <CheckCircle className="h-5 w-5 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">The Beginning (2018)</h3>
-                      <p className="text-muted-foreground">
-                        Founded with a vision to transform how clothing reaches India's vast network of retailers,
-                        addressing the inefficiencies in the traditional wholesale model.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="rounded-full bg-primary/10 p-3 mt-1">
-                      <CheckCircle className="h-5 w-5 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">Growth & Expansion (2019-2021)</h3>
-                      <p className="text-muted-foreground">
-                        Grew from a small operation to India's fastest-growing wholesaler, expanding our network to
-                        cover major fashion hubs across the country.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="rounded-full bg-primary/10 p-3 mt-1">
-                      <CheckCircle className="h-5 w-5 text-primary" />
-                    </div>
-                    <div>
-                      <h3 className="font-semibold mb-1">Digital Transformation (2022-Present)</h3>
-                      <p className="text-muted-foreground">
-                        Built a modern supply chain platform bringing efficiency, transparency, and growth opportunities
-                        to thousands of fashion retailers across India.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </FadeInSection>
-          </div>
-        </div>
-      </section>
-
       {/* Trust Factors - ANIMATED STATS */}
-      <section className="bg-gradient-to-b from-background to-muted/30 py-20 relative overflow-hidden">
-        <div className="absolute inset-0 z-0 opacity-10">
+      <section className="bg-gradient-to-b from-background to-muted/20 py-24 relative overflow-hidden">
+        <div className="absolute inset-0 z-0 opacity-5">
           <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-transparent to-primary/10" />
         </div>
         <div className="container relative z-10">
           <FadeInSection>
             <div className="flex flex-col items-center text-center mb-12">
-              <span className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20 mb-4">
+              <motion.div
+                className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20 mb-4"
+                whileHover={{ y: -2 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
                 Our Impact
-              </span>
+              </motion.div>
               <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Why Retailers Trust Us</h2>
-              <div className="w-24 h-1 bg-primary rounded-full mt-4 mb-6"></div>
+              <div className="w-16 h-1 bg-primary/80 rounded-full mt-4 mb-6"></div>
             </div>
           </FadeInSection>
 
           <AnimatedStats
             stats={[
               {
-                value: 10000,
-                suffix: "+",
-                label: "Retailers Served Across India",
+                value: 30,
+                suffix: "",
+                label: "Retailers Served Across 3 Cities",
                 color: "primary",
               },
               {
@@ -426,7 +378,7 @@ export default function AboutPage() {
       {/* Our Process - Process Flow */}
       <ProcessFlow
         title="From Design to Delivery"
-        subtitle="Our approach to creating quality fashion products"
+        subtitle="Our streamlined approach to creating quality fashion products"
         steps={[
           {
             number: "1",
@@ -446,7 +398,7 @@ export default function AboutPage() {
             number: "3",
             title: "Distribution",
             description:
-              "Leveraging our efficient logistics network to ensure timely delivery across India, even to remote locations.",
+              "Leveraging our efficient logistics network to ensure timely delivery across Vasai, Nalasopara, and Virar.",
             icon: <Truck className="h-6 w-6 text-primary" />,
           },
           {
@@ -457,20 +409,20 @@ export default function AboutPage() {
             icon: <Users className="h-6 w-6 text-primary" />,
           },
         ]}
-        className="py-20 bg-muted/30"
+        className="py-24 bg-muted/20"
       />
 
       {/* Team Section */}
       <TeamSection />
 
       {/* CTA Section */}
-      <section className="relative overflow-hidden py-16">
+      <section className="relative overflow-hidden py-20">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-primary mix-blend-multiply" />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary" />
+          <div className="absolute inset-0 bg-primary/90" />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary opacity-80" />
         </div>
         <div className="container relative z-10">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-8 max-w-4xl mx-auto">
             <div className="max-w-2xl">
               <motion.h2
                 className="text-3xl font-bold tracking-tight sm:text-4xl text-white"
@@ -488,7 +440,7 @@ export default function AboutPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.2 }}
               >
-                Join thousands of successful retailers who have partnered with THE BIG FASHION.
+                Join successful retailers in Vasai, Nalasopara, and Virar who have partnered with THE BIG FASHION.
               </motion.p>
             </div>
             <motion.div
@@ -499,7 +451,7 @@ export default function AboutPage() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Button variant="secondary" size="lg" className="text-primary font-medium" asChild>
+              <Button variant="secondary" size="lg" className="text-primary font-medium shadow-lg" asChild>
                 <Link href="/partners">Become a Partner</Link>
               </Button>
             </motion.div>

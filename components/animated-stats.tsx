@@ -69,18 +69,29 @@ function AnimatedStat({ stat, index }: { stat: StatItem; index: number }) {
   return (
     <motion.div
       ref={ref}
-      className="text-center p-6 rounded-xl"
+      className="text-center p-6 rounded-xl bg-background/80 backdrop-blur-sm border border-border/50 shadow-sm"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
+      whileHover={{
+        y: -5,
+        boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1)",
+        borderColor: "hsl(var(--primary) / 0.2)",
+      }}
     >
-      <div className={`text-4xl md:text-5xl font-bold mb-2 ${stat.color ? `text-${stat.color}` : "text-primary"}`}>
+      <motion.div
+        className={`text-4xl md:text-5xl font-bold mb-3 ${stat.color ? `text-${stat.color}` : "text-primary"}`}
+        initial={{ scale: 0.8 }}
+        animate={isInView ? { scale: 1 } : { scale: 0.8 }}
+        transition={{ type: "spring", stiffness: 300, damping: 10, delay: index * 0.1 }}
+      >
         {stat.prefix && <span>{stat.prefix}</span>}
         <span>{isInView ? count : 0}</span>
         {stat.suffix && <span>{stat.suffix}</span>}
-      </div>
+      </motion.div>
       <p className="text-lg text-muted-foreground">{stat.label}</p>
+      <div className="mt-3 w-12 h-1 bg-primary/30 rounded-full mx-auto"></div>
     </motion.div>
   )
 }

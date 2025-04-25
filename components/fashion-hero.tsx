@@ -1,14 +1,21 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import type React from "react"
+
+import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ArrowRight, Sparkles, TrendingUp, ShoppingBag, Users } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { EnhancedImage } from "@/components/ui/enhanced-image"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 export default function FashionHero() {
   const [isLoading, setIsLoading] = useState(false)
   const [currentSlide, setCurrentSlide] = useState(0)
+  const isMobile = useIsMobile()
+  const slideContainerRef = useRef<HTMLDivElement>(null)
+  const [touchStartX, setTouchStartX] = useState(0)
+  const [isSwiping, setIsSwiping] = useState(false)
 
   const headlines = ["Reinvent Operation", "Simplify Supply Chain", "Enhance Retail Results"]
 
@@ -18,18 +25,53 @@ export default function FashionHero() {
     "Boost sell-through rates and enhance margins with data-driven insights",
   ]
 
+  // Auto-rotate slides
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % headlines.length)
+      if (!isSwiping) {
+        setCurrentSlide((prev) => (prev + 1) % headlines.length)
+      }
     }, 5000)
     return () => clearInterval(interval)
-  }, [headlines.length])
+  }, [headlines.length, isSwiping])
 
   const handleDemoClick = () => {
     setIsLoading(true)
     setTimeout(() => {
       window.location.href = "/contact?demo=true"
     }, 800)
+  }
+
+  // Handle touch events for mobile swipe
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStartX(e.touches[0].clientX)
+    setIsSwiping(true)
+  }
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    const touchEndX = e.changedTouches[0].clientX
+    const deltaX = touchEndX - touchStartX
+
+    // Determine swipe direction if the swipe was significant
+    if (Math.abs(deltaX) > 50) {
+      if (deltaX > 0) {
+        // Swipe right - go to previous slide
+        setCurrentSlide((prev) => (prev === 0 ? headlines.length - 1 : prev - 1))
+      } else {
+        // Swipe left - go to next slide
+        setCurrentSlide((prev) => (prev + 1) % headlines.length)
+      }
+    }
+
+    // Reset swiping state after a short delay
+    setTimeout(() => setIsSwiping(false), 300)
+  }
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    // Prevent default to avoid page scrolling during swipe
+    if (Math.abs(e.touches[0].clientX - touchStartX) > 10) {
+      e.preventDefault()
+    }
   }
 
   // Key benefits that appear as cards
@@ -41,13 +83,13 @@ export default function FashionHero() {
     },
     {
       icon: <ShoppingBag className="h-5 w-5" />,
-      title: "20K+ Products",
-      text: "Access to trending fashion inventory",
+      title: "30 Retailers",
+      text: "Trusted partners across 3 cities",
     },
     {
       icon: <Users className="h-5 w-5" />,
-      title: "500+ Brands",
-      text: "Connect with top fashion brands",
+      title: "500+ Products",
+      text: "Access to trending fashion inventory",
     },
   ]
 
@@ -57,12 +99,12 @@ export default function FashionHero() {
       <div className="absolute inset-0 bg-fashion-gradient">
         <div className="absolute inset-0 bg-fashion-pattern opacity-10"></div>
 
-        {/* Animated shapes */}
+        {/* Animated shapes - optimized for mobile */}
         <motion.div
-          className="absolute top-20 left-10 w-64 h-64 rounded-full bg-white/10 blur-3xl"
+          className="absolute top-10 left-5 md:left-10 w-32 md:w-64 h-32 md:h-64 rounded-full bg-white/10 blur-3xl"
           animate={{
-            x: [0, 30, 0],
-            y: [0, 15, 0],
+            x: [0, 15, 0],
+            y: [0, 10, 0],
           }}
           transition={{
             duration: 8,
@@ -72,10 +114,10 @@ export default function FashionHero() {
         />
 
         <motion.div
-          className="absolute bottom-20 right-10 w-80 h-80 rounded-full bg-white/10 blur-3xl"
+          className="absolute bottom-10 right-5 md:right-10 w-40 md:w-80 h-40 md:h-80 rounded-full bg-white/10 blur-3xl"
           animate={{
-            x: [0, -20, 0],
-            y: [0, -25, 0],
+            x: [0, -10, 0],
+            y: [0, -15, 0],
           }}
           transition={{
             duration: 10,
@@ -86,22 +128,29 @@ export default function FashionHero() {
       </div>
 
       {/* Hero content */}
-      <div className="container relative z-10 px-4 py-16 md:py-32 min-h-[90vh] flex flex-col justify-center">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div className="container relative z-10 px-4 py-12 md:py-16 lg:py-32 min-h-[90vh] flex flex-col justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <div className="text-center lg:text-left">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="inline-block mb-6"
+              className="inline-block mb-4 md:mb-6"
             >
-              <span className="inline-flex items-center rounded-full bg-white/90 px-4 py-1.5 text-sm font-medium text-fashion-primary">
-                <Sparkles className="h-3.5 w-3.5 mr-1.5" />
-                Fashion Industry's Leading B2B Platform
+              <span className="inline-flex items-center rounded-full bg-white/90 px-3 py-1.5 text-xs md:text-sm font-medium text-fashion-primary">
+                <Sparkles className="h-3 w-3 md:h-3.5 md:w-3.5 mr-1.5" />
+                <span className="whitespace-nowrap">Fashion Industry's Leading B2B Platform</span>
               </span>
             </motion.div>
 
-            <div className="h-[120px] md:h-[150px] mb-4 md:mb-6 flex items-center justify-center lg:justify-start">
+            {/* Headline container with touch events for mobile */}
+            <div
+              ref={slideContainerRef}
+              className="h-[100px] md:h-[120px] lg:h-[150px] mb-2 md:mb-4 lg:mb-6 flex items-center justify-center lg:justify-start overflow-hidden"
+              onTouchStart={handleTouchStart}
+              onTouchEnd={handleTouchEnd}
+              onTouchMove={handleTouchMove}
+            >
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentSlide}
@@ -109,16 +158,17 @@ export default function FashionHero() {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.5 }}
-                  className="absolute"
+                  className="absolute px-2 md:px-0"
                 >
-                  <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-tight">
                     {headlines[currentSlide]}
                   </h1>
                 </motion.div>
               </AnimatePresence>
             </div>
 
-            <div className="h-[100px] md:h-[100px] mb-6 md:mb-8">
+            {/* Subheadline container */}
+            <div className="h-[120px] sm:h-[100px] md:h-[100px] mb-4 md:mb-6 lg:mb-8 px-2 md:px-0">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={currentSlide}
@@ -128,22 +178,39 @@ export default function FashionHero() {
                   transition={{ duration: 0.5, delay: 0.1 }}
                   className="absolute max-w-xl mx-auto lg:mx-0"
                 >
-                  <p className="text-base md:text-xl text-white/90">{subheadlines[currentSlide]}</p>
+                  <p className="text-sm sm:text-base md:text-xl text-white/90">{subheadlines[currentSlide]}</p>
                 </motion.div>
               </AnimatePresence>
             </div>
 
+            {/* Mobile swipe hint - only visible on mobile */}
+            {isMobile && (
+              <motion.div
+                className="flex items-center justify-center mb-4 text-white/70 text-xs"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1, duration: 0.5 }}
+              >
+                <motion.div
+                  animate={{ x: [-5, 5, -5] }}
+                  transition={{ repeat: Number.POSITIVE_INFINITY, duration: 1.5 }}
+                >
+                  ← Swipe to explore →
+                </motion.div>
+              </motion.div>
+            )}
+
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-12"
+              className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start mb-8 md:mb-12"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.3 }}
             >
               <Button
-                size="lg"
+                size={isMobile ? "default" : "lg"}
                 onClick={handleDemoClick}
                 disabled={isLoading}
-                className="text-base px-8 py-6 font-semibold bg-white hover:bg-white/90 text-primary"
+                className="text-sm md:text-base px-6 md:px-8 py-5 md:py-6 font-semibold bg-white hover:bg-white/90 text-primary"
               >
                 {isLoading ? (
                   <span className="flex items-center">
@@ -171,28 +238,30 @@ export default function FashionHero() {
                   </span>
                 ) : (
                   <span className="flex items-center">
-                    Get Started <ArrowRight className="ml-2 h-5 w-5" />
+                    Get Started <ArrowRight className="ml-2 h-4 w-4 md:h-5 md:w-5" />
                   </span>
                 )}
               </Button>
               <Button
                 variant="outline"
-                size="lg"
-                className="text-base border-white text-white hover:bg-white/10 py-6"
+                size={isMobile ? "default" : "lg"}
+                className="text-sm md:text-base border-white text-white hover:bg-white/10 py-5 md:py-6"
                 onClick={() => (window.location.href = "/solutions")}
               >
                 Explore Solutions
               </Button>
             </motion.div>
 
-            {/* Slide indicators */}
-            <div className="flex justify-center lg:justify-start space-x-2 mb-6 md:mb-8">
+            {/* Slide indicators - enhanced for mobile */}
+            <div className="flex justify-center lg:justify-start space-x-3 mb-6 md:mb-8">
               {headlines.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentSlide(index)}
-                  className={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${
-                    currentSlide === index ? "bg-white scale-125" : "bg-white/40"
+                  className={`transition-all duration-300 flex items-center justify-center ${
+                    currentSlide === index
+                      ? "bg-white w-8 h-3 rounded-full"
+                      : "bg-white/40 w-3 h-3 rounded-full hover:bg-white/60"
                   }`}
                   aria-label={`Go to slide ${index + 1}`}
                 />
@@ -200,6 +269,7 @@ export default function FashionHero() {
             </div>
           </div>
 
+          {/* Desktop image - hidden on mobile */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -244,22 +314,58 @@ export default function FashionHero() {
           </motion.div>
         </div>
 
-        {/* Mobile benefit cards - only visible on mobile */}
-        <div className="mt-8 md:mt-12 grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-4 lg:hidden px-2">
+        {/* Mobile hero image - only visible on mobile */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.5 }}
+          className="mt-4 mb-8 lg:hidden"
+        >
+          <div className="relative mx-auto max-w-sm sm:max-w-md">
+            <EnhancedImage
+              src="/vibrant-fashion-b2b-dashboard.png"
+              alt="Fashion B2B platform dashboard"
+              width={500}
+              height={300}
+              className="w-full h-auto rounded-lg shadow-xl"
+              quality="high"
+              priority
+            />
+
+            {/* Single floating stat card for mobile - positioned over the image */}
+            <motion.div
+              className="absolute top-0 right-0 -mt-4 -mr-2 bg-white rounded-lg shadow-xl p-2.5 z-10"
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.8 }}
+            >
+              <div className="flex items-center">
+                <div className="bg-primary p-1.5 rounded-full text-white mr-2">
+                  <TrendingUp className="h-4 w-4" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-primary text-xs">40% Growth</h3>
+                  <p className="text-xs text-gray-600">Avg. business growth</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </motion.div>
+
+        {/* Mobile benefit cards - redesigned for better mobile experience */}
+        <div className="mt-2 grid grid-cols-3 gap-2 sm:gap-3 lg:hidden">
           {keyBenefits.map((benefit, index) => (
             <motion.div
               key={index}
-              className="bg-white rounded-lg shadow-xl p-3"
-              initial={{ opacity: 0, y: 20 }}
+              className="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg p-2.5 sm:p-3"
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 + index * 0.2 }}
+              transition={{ delay: 0.6 + index * 0.15 }}
             >
-              <div className="flex items-start">
-                <div className="bg-primary p-1.5 rounded-full text-white mr-2">{benefit.icon}</div>
-                <div>
-                  <h3 className="font-bold text-primary text-sm">{benefit.title}</h3>
-                  <p className="text-xs text-gray-600">{benefit.text}</p>
-                </div>
+              <div className="flex flex-col items-center text-center">
+                <div className="bg-primary p-1.5 rounded-full text-white mb-1.5">{benefit.icon}</div>
+                <h3 className="font-bold text-primary text-xs sm:text-sm">{benefit.title}</h3>
+                <p className="text-xs text-gray-600 mt-0.5 hidden sm:block">{benefit.text}</p>
               </div>
             </motion.div>
           ))}

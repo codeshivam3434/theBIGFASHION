@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { ArrowRight, CheckCircle, TrendingUp, ShieldCheck, Truck } from "lucide-react"
+import { ArrowRight, TrendingUp, ShieldCheck, Truck } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { EnhancedImage } from "@/components/ui/enhanced-image"
 
@@ -18,9 +18,9 @@ export default function HeroSection() {
 
   // Key benefits that appear below the CTA
   const keyBenefits = [
-    { icon: <TrendingUp className="h-4 w-4 text-primary" />, text: "40% average growth" },
-    { icon: <ShieldCheck className="h-4 w-4 text-primary" />, text: "Zero inventory risk" },
-    { icon: <Truck className="h-4 w-4 text-primary" />, text: "24-48 hour delivery" },
+    { icon: <TrendingUp className="h-4 w-4 text-white" />, text: "40% average growth" },
+    { icon: <ShieldCheck className="h-4 w-4 text-white" />, text: "Zero inventory risk" },
+    { icon: <Truck className="h-4 w-4 text-white" />, text: "Serving 3 cities" },
   ]
 
   return (
@@ -78,7 +78,7 @@ export default function HeroSection() {
               size="lg"
               onClick={handleDemoClick}
               disabled={isLoading}
-              className="text-base px-8 py-6 font-semibold bg-white hover:bg-white/90 text-primary"
+              className="text-base px-8 py-6 font-semibold bg-white hover:bg-white/90 text-fashion-primary"
             >
               {isLoading ? (
                 <span className="flex items-center">
@@ -121,15 +121,18 @@ export default function HeroSection() {
           </motion.div>
 
           <motion.div
-            className="flex flex-wrap gap-4 justify-center"
+            className="flex flex-wrap gap-6 justify-center"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.8 }}
           >
             {keyBenefits.map((benefit, i) => (
-              <div key={i} className="flex items-center bg-white/10 backdrop-blur-sm px-3 py-1.5 rounded-full">
-                <CheckCircle className="h-4 w-4 text-white mr-2 flex-shrink-0" />
-                <span className="text-white text-sm whitespace-nowrap">{benefit.text}</span>
+              <div
+                key={i}
+                className="flex items-center bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg border border-white/10"
+              >
+                {benefit.icon}
+                <span className="text-white text-sm ml-2 whitespace-nowrap font-medium">{benefit.text}</span>
               </div>
             ))}
           </motion.div>
@@ -143,10 +146,10 @@ export default function HeroSection() {
           transition={{ duration: 0.8, delay: 1 }}
         >
           <p className="text-white/80 text-sm uppercase tracking-wider mb-6">
-            Trusted by leading retailers across Rural India
+            Trusted by 30 leading retailers across 3 cities
           </p>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16">
-            {[1, 2, 3, 4, 5].map((i) => (
+            {[1, 2, 3].map((i) => (
               <div key={i} className="opacity-70 hover:opacity-100 transition-all duration-300">
                 <EnhancedImage
                   src={`/placeholder.svg?height=40&width=120&query=indian%20rural%20fashion%20retail%20logo%20${i}%20white`}

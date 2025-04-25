@@ -8,8 +8,6 @@ import { Button } from "@/components/ui/button"
 import { ButtonWithFeedback } from "@/components/ui/button-with-feedback"
 import FadeInSection from "@/components/fade-in-section"
 import { VideoBackground } from "@/components/ui/video-background"
-import { FeatureComparison } from "@/components/feature-comparison"
-import { SolutionShowcase } from "@/components/solution-showcase"
 import { LineChart, TrendingUp, Users } from "lucide-react"
 import { InteractiveFeatureCards } from "@/components/interactive-feature-cards"
 
@@ -120,89 +118,325 @@ export default function SolutionsPage() {
             </div>
           </FadeInSection>
 
-          <FeatureComparison
-            title="How We're Different"
-            subtitle="Our approach eliminates traditional retail challenges"
-            traditionalTitle="Traditional Wholesale"
-            ourTitle="Our Platform"
-            features={[
-              {
-                name: "Inventory Risk",
-                description: "Financial exposure from unsold stock",
-                traditional: true,
-                our: false,
-              },
-              {
-                name: "Minimum Order Quantities",
-                description: "Large upfront purchases required",
-                traditional: true,
-                our: false,
-              },
-              {
-                name: "Market Analytics",
-                description: "Data-driven decision making",
-                traditional: false,
-                our: true,
-              },
-              {
-                name: "Supply Chain Visibility",
-                description: "End-to-end tracking and management",
-                traditional: false,
-                our: true,
-              },
-              {
-                name: "Growth Support",
-                description: "Tools and resources for scaling",
-                traditional: false,
-                our: true,
-              },
-            ]}
-          />
+          <div className="mb-16">
+            <div className="text-center mb-8">
+              <h3 className="text-2xl md:text-3xl font-bold">How We're Different</h3>
+              <p className="text-gray-600 mt-2">Our approach eliminates traditional retail challenges</p>
+            </div>
 
-          <div className="mt-16">
-            <SolutionShowcase
-              solutions={[
-                {
-                  title: "Risk-Free Logistics",
-                  description:
-                    "Eliminate inventory risk with our revolutionary model that ensures you only pay for what sells.",
-                  image: "/automated-warehouse-efficiency.png",
-                  features: [
-                    "No upfront inventory investment",
-                    "Flexible payment terms",
-                    "Managed warehousing and distribution",
-                    "Rapid restocking of bestsellers",
-                  ],
-                  color: "primary",
-                },
-                {
-                  title: "Supply Chain Management",
-                  description:
-                    "Streamline your entire supply chain from sourcing to delivery with our integrated platform.",
-                  image: "/digital-supply-chain-overview.png",
-                  features: [
-                    "End-to-end visibility",
-                    "Automated ordering",
-                    "Quality control processes",
-                    "Optimized delivery routes",
-                  ],
-                  color: "blue-500",
-                },
-                {
-                  title: "Business Intelligence",
-                  description:
-                    "Make data-driven decisions with comprehensive analytics that reveal insights and opportunities.",
-                  image: "/fashion-retail-insights.png",
-                  features: [
-                    "Sales performance tracking",
-                    "Customer behavior analysis",
-                    "Market trend identification",
-                    "Predictive inventory forecasting",
-                  ],
-                  color: "purple-500",
-                },
-              ]}
-            />
+            <div className="overflow-hidden rounded-lg shadow-md">
+              <table className="w-full border-collapse">
+                <thead>
+                  <tr className="bg-gray-100">
+                    <th className="p-4 text-left font-medium text-gray-600">Feature</th>
+                    <th className="p-4 text-center font-medium text-gray-600">Traditional Wholesale</th>
+                    <th className="p-4 text-center font-medium text-primary">Our Platform</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-t border-gray-200">
+                    <td className="p-4">
+                      <div className="font-medium">Inventory Risk</div>
+                      <div className="text-sm text-gray-500">Financial exposure from unsold stock</div>
+                    </td>
+                    <td className="p-4 text-center">
+                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-red-600">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </span>
+                    </td>
+                    <td className="p-4 text-center">
+                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-100 text-green-600">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="border-t border-gray-200">
+                    <td className="p-4">
+                      <div className="font-medium">Minimum Order Quantities</div>
+                      <div className="text-sm text-gray-500">Large upfront purchases required</div>
+                    </td>
+                    <td className="p-4 text-center">
+                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-red-600">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </span>
+                    </td>
+                    <td className="p-4 text-center">
+                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-100 text-green-600">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="border-t border-gray-200">
+                    <td className="p-4">
+                      <div className="font-medium">Market Analytics</div>
+                      <div className="text-sm text-gray-500">Data-driven decision making</div>
+                    </td>
+                    <td className="p-4 text-center">
+                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-red-600">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </span>
+                    </td>
+                    <td className="p-4 text-center">
+                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-100 text-green-600">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="border-t border-gray-200">
+                    <td className="p-4">
+                      <div className="font-medium">Supply Chain Visibility</div>
+                      <div className="text-sm text-gray-500">End-to-end tracking and management</div>
+                    </td>
+                    <td className="p-4 text-center">
+                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-red-600">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </span>
+                    </td>
+                    <td className="p-4 text-center">
+                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-100 text-green-600">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </span>
+                    </td>
+                  </tr>
+                  <tr className="border-t border-gray-200">
+                    <td className="p-4">
+                      <div className="font-medium">Growth Support</div>
+                      <div className="text-sm text-gray-500">Tools and resources for scaling</div>
+                    </td>
+                    <td className="p-4 text-center">
+                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-red-100 text-red-600">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </span>
+                    </td>
+                    <td className="p-4 text-center">
+                      <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-green-100 text-green-600">
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-5 w-5"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                      </span>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
+              <div className="h-48 overflow-hidden">
+                <Image
+                  src="/automated-warehouse-efficiency.png"
+                  alt="Automated warehouse with efficient logistics systems for fashion retail"
+                  width={600}
+                  height={400}
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold mb-2 text-primary">Risk-Free Logistics</h3>
+                <p className="text-gray-600 mb-4">
+                  Eliminate inventory risk with our revolutionary model that ensures you only pay for what sells.
+                </p>
+                <ul className="space-y-2">
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2">✓</span>
+                    <span>No upfront inventory investment</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2">✓</span>
+                    <span>Flexible payment terms</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2">✓</span>
+                    <span>Managed warehousing and distribution</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2">✓</span>
+                    <span>Rapid restocking of bestsellers</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
+              <div className="h-48 overflow-hidden">
+                <Image
+                  src="/digital-supply-chain-overview.png"
+                  alt="Digital supply chain management system for fashion retail"
+                  width={600}
+                  height={400}
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold mb-2 text-blue-500">Supply Chain Management</h3>
+                <p className="text-gray-600 mb-4">
+                  Streamline your entire supply chain from sourcing to delivery with our integrated platform.
+                </p>
+                <ul className="space-y-2">
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2">✓</span>
+                    <span>End-to-end visibility</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2">✓</span>
+                    <span>Automated ordering</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2">✓</span>
+                    <span>Quality control processes</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2">✓</span>
+                    <span>Optimized delivery routes</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-lg shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
+              <div className="h-48 overflow-hidden">
+                <Image
+                  src="/fashion-retail-insights.png"
+                  alt="Business intelligence dashboard for fashion retail analytics"
+                  width={600}
+                  height={400}
+                  className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-bold mb-2 text-purple-500">Business Intelligence</h3>
+                <p className="text-gray-600 mb-4">
+                  Make data-driven decisions with comprehensive analytics that reveal insights and opportunities.
+                </p>
+                <ul className="space-y-2">
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2">✓</span>
+                    <span>Sales performance tracking</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2">✓</span>
+                    <span>Customer behavior analysis</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2">✓</span>
+                    <span>Market trend identification</span>
+                  </li>
+                  <li className="flex items-start">
+                    <span className="text-green-500 mr-2">✓</span>
+                    <span>Predictive inventory forecasting</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -248,56 +482,76 @@ export default function SolutionsPage() {
         className="py-20"
       />
 
-      {/* CTA Section with Video Background */}
-      <section className="py-20 relative overflow-hidden">
-        <VideoBackground src="/videos/fashion-retail.mp4" overlayOpacity={0.8} overlayColor="#000" />
-        <div className="container px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center text-white">
-            <motion.h2
-              className="text-3xl md:text-5xl font-bold mb-6"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              Ready to Transform Your Retail Business?
-            </motion.h2>
+      {/* CTA Section - Enhanced */}
+      <section className="relative overflow-hidden bg-gradient-to-r from-primary to-primary-dark py-24 text-white">
+        {/* Background pattern */}
+        <div className="absolute inset-0 z-0 opacity-10">
+          <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <defs>
+              <pattern id="grid-pattern" width="10" height="10" patternUnits="userSpaceOnUse">
+                <path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" strokeWidth="0.5" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid-pattern)" />
+          </svg>
+        </div>
 
-            <motion.p
-              className="text-xl md:text-2xl mb-10 text-white/90"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              Join hundreds of successful retailers who have revolutionized their businesses with our platform.
-            </motion.p>
+        {/* Animated circles */}
+        <div className="absolute left-0 top-0 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white opacity-10 mix-blend-overlay"></div>
+        <div className="absolute bottom-0 right-0 h-96 w-96 translate-x-1/3 translate-y-1/3 rounded-full bg-white opacity-10 mix-blend-overlay"></div>
 
-            <motion.div
-              className="flex flex-col sm:flex-row gap-4 justify-center"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              <Button
-                size="lg"
-                variant="secondary"
-                className="text-primary font-bold text-base px-8 py-6"
-                onClick={handleDemoClick}
-              >
-                Schedule a Demo
-              </Button>
+        <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-5xl">
+            <div className="rounded-2xl bg-white/10 p-8 backdrop-blur-sm sm:p-12">
+              <div className="flex flex-col items-center gap-12 text-center lg:flex-row lg:text-left">
+                <div className="flex-1">
+                  <span className="inline-block rounded-full border border-white/30 bg-white/10 px-4 py-1 text-sm font-medium backdrop-blur-sm">
+                    Limited Time Offer
+                  </span>
+                  <h2 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
+                    Transform Your Retail Business Today
+                  </h2>
+                  <p className="mt-6 text-xl text-white/90">
+                    Join over 30 successful retailers across 3 cities who have increased their profits by an average of
+                    32% with our solutions.
+                  </p>
 
-              <Button
-                size="lg"
-                variant="outline"
-                className="text-white border-white hover:bg-white/10 text-base px-8 py-6"
-                onClick={handleContactClick}
-              >
-                Contact Sales
-              </Button>
-            </motion.div>
+                  <div className="mt-8 flex flex-wrap items-center gap-3">
+                    <div className="flex -space-x-2">
+                      {[1, 2, 3, 4].map((i) => (
+                        <div
+                          key={i}
+                          className="inline-block h-10 w-10 rounded-full border-2 border-primary bg-white/90"
+                        ></div>
+                      ))}
+                    </div>
+                    <p className="text-sm font-medium">+20 retailers joined this month</p>
+                  </div>
+                </div>
+
+                <div className="flex w-full flex-col space-y-4 lg:w-auto">
+                  <Button
+                    size="lg"
+                    className="group relative overflow-hidden bg-white px-8 py-6 text-lg font-bold text-primary transition-all hover:bg-white/90 hover:shadow-lg"
+                    onClick={handleDemoClick}
+                  >
+                    <span className="relative z-10">Schedule a Demo Now</span>
+                    <span className="absolute bottom-0 left-0 h-1 w-full bg-primary transition-all duration-300 group-hover:h-2"></span>
+                  </Button>
+
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="border-2 border-white px-8 py-6 text-lg font-bold text-white transition-all hover:bg-white/20"
+                    onClick={handleContactClick}
+                  >
+                    Contact Our Sales Team
+                  </Button>
+
+                  <p className="text-center text-sm text-white/80">No commitment required. Free consultation.</p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

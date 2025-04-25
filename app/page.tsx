@@ -3,13 +3,11 @@
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { motion, useScroll, AnimatePresence, useInView } from "framer-motion"
-import { ShieldCheck, TrendingUp, BarChart3, Truck, Zap, Users, ChevronRight, Star, ArrowUpRight } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { ShieldCheck, TrendingUp, Truck, Users, ChevronRight, Star } from "lucide-react"
 import { EnhancedImage } from "@/components/ui/enhanced-image"
 import { HomePageJsonLd, ProductJsonLd, FAQJsonLd } from "./structured-data"
 import ScrollToTop from "@/components/scroll-to-top"
 import FashionHero from "@/components/fashion-hero"
-import MobileOptimizedDiagram from "@/components/mobile-optimized-diagram"
 import { AnimatedProcessFlow } from "@/components/animated-process-flow"
 
 // Animated counter component
@@ -60,12 +58,10 @@ export default function Home() {
   // Intersection observer hooks for animations
   const statsRef = useRef(null)
   const featuresRef = useRef(null)
-  const solutionRef = useRef(null)
   const testimonialsRef = useRef(null)
 
   const [statsInView, setStatsInView] = useState(false)
   const [featuresInView, setFeaturesInView] = useState(false)
-  const [solutionInView, setSolutionInView] = useState(false)
   const [testimonialsInView, setTestimonialsInView] = useState(false)
 
   useEffect(() => {
@@ -93,15 +89,6 @@ export default function Home() {
       })
     }, observerOptions)
 
-    const solutionObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setSolutionInView(true)
-          solutionObserver.unobserve(entry.target)
-        }
-      })
-    }, observerOptions)
-
     const testimonialsObserver = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
@@ -113,13 +100,11 @@ export default function Home() {
 
     if (statsRef.current) statsObserver.observe(statsRef.current)
     if (featuresRef.current) featuresObserver.observe(featuresRef.current)
-    if (solutionRef.current) solutionObserver.observe(solutionRef.current)
     if (testimonialsRef.current) testimonialsObserver.observe(testimonialsRef.current)
 
     return () => {
       statsObserver.disconnect()
       featuresObserver.disconnect()
-      solutionObserver.disconnect()
       testimonialsObserver.disconnect()
     }
   }, [])
@@ -155,7 +140,7 @@ export default function Home() {
       quote:
         "This platform completely transformed our retail operations. We've seen a 40% increase in sales and 60% reduction in stockouts.",
       name: "Rajesh Kumar",
-      position: "Owner, Fashion Hub Lucknow",
+      position: "Owner, Fashion Hub Vasai",
       image: "/confident-indian-businessman.png",
       rating: 5,
       metrics: "40% sales increase",
@@ -164,7 +149,7 @@ export default function Home() {
       quote:
         "The risk-free logistics model allowed us to expand our product range without increasing our inventory costs. Game changer!",
       name: "Priya Sharma",
-      position: "Director, Style Studio Kanpur",
+      position: "Director, Style Studio Nalasopara",
       image: "/confident-indian-professional.png",
       rating: 5,
       metrics: "2x product range",
@@ -173,7 +158,7 @@ export default function Home() {
       quote:
         "Their analytics tools helped us identify trends we never would have seen. Our business has grown 35% in just six months.",
       name: "Amit Singh",
-      position: "Founder, Trendsetter Varanasi",
+      position: "Founder, Trendsetter Virar",
       image: "/vibrant-startup-huddle.png",
       rating: 5,
       metrics: "35% growth in 6 months",
@@ -183,9 +168,9 @@ export default function Home() {
   // Key metrics with numeric values for animation
   const metrics = [
     {
-      value: "500+",
-      numericValue: 500,
-      suffix: "+",
+      value: "30",
+      numericValue: 30,
+      suffix: "",
       label: "Retail Partners",
       icon: <Users className="h-5 w-5 text-primary" />,
     },
@@ -197,9 +182,9 @@ export default function Home() {
       icon: <TrendingUp className="h-5 w-5 text-primary" />,
     },
     {
-      value: "20+",
-      numericValue: 20,
-      suffix: "+",
+      value: "3",
+      numericValue: 3,
+      suffix: "",
       label: "Cities Served",
       icon: <Truck className="h-5 w-5 text-primary" />,
     },
@@ -359,53 +344,117 @@ export default function Home() {
       {/* Hero Section */}
 
       {/* Rural Platform Diagram Section */}
-      <section className="py-12 md:py-20 bg-gray-50 w-full overflow-hidden">
-        <div className="container mx-auto px-4 md:px-6 text-center mb-8 md:mb-12">
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-3 md:mb-4">
+      <section className="py-20 bg-gray-50 w-full overflow-hidden">
+        <div className="container mx-auto px-4 md:px-6 text-center mb-12">
+          <motion.span
+            className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20 mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            Our Platform
+          </motion.span>
+          <motion.h2
+            className="text-3xl md:text-5xl font-bold tracking-tight mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+          >
             India's only rural B2B
             <br className="hidden sm:block" />
             fashion platform
-          </h2>
-          <p className="text-lg md:text-2xl text-gray-600 max-w-3xl mx-auto">
+          </motion.h2>
+          <motion.p
+            className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+          >
             BIGFASHION unlocks direct reach of fashion to
             <br className="hidden sm:block" />
             rural consumers through 10M+ stores
-          </p>
+          </motion.p>
         </div>
 
         <div className="w-full max-w-6xl mx-auto px-2 md:px-4">
           {/* Desktop version - hidden on small screens */}
-          <div className="relative hidden md:block">
+          <motion.div
+            className="relative hidden md:block"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
             <img
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Blank%20diagram%20%285%29-KAZk449aqwuDO31JxCbQp5vX1XQo5s.png"
-              alt="BIGFASHION ecosystem diagram showing the B2B fashion eCommerce platform connecting Dashboard, Clothes, Door2Door, Finance, and Fashion Store through the BIGFASHION TechStack, Logistics platform, Finance platform, advertising platform, and Customer Support"
-              className="w-full h-auto object-contain"
+              alt="BIGFASHION ecosystem diagram showing the B2B fashion eCommerce platform"
+              className="w-full h-auto object-contain rounded-xl shadow-lg"
             />
-          </div>
+          </motion.div>
 
           {/* Mobile version - only shown on small screens */}
-          <div className="md:hidden">
-            <MobileOptimizedDiagram
-              imageSrc="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Blank%20diagram%20%285%29-KAZk449aqwuDO31JxCbQp5vX1XQo5s.png"
-              imageAlt="BIGFASHION ecosystem diagram showing the B2B fashion eCommerce platform connecting Dashboard, Clothes, Door2Door, Finance, and Fashion Store through the BIGFASHION TechStack, Logistics platform, Finance platform, advertising platform, and Customer Support"
-            />
-          </div>
+          <motion.div
+            className="md:hidden"
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+          >
+            <div className="relative overflow-hidden rounded-lg border border-gray-200 bg-white">
+              <img
+                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Blank%20diagram%20%285%29-KAZk449aqwuDO31JxCbQp5vX1XQo5s.png"
+                alt="BIGFASHION ecosystem diagram showing the B2B fashion eCommerce platform"
+                className="w-full h-auto object-contain"
+              />
+            </div>
+            <p className="text-xs text-gray-500 text-center mt-2">Tap image to view details</p>
+          </motion.div>
         </div>
       </section>
 
       {/* Key Metrics Section with Animated Counters */}
-      <section ref={statsRef} className="py-16 bg-white">
+      <section ref={statsRef} className="py-20 bg-white">
         <div className="container px-4">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8">
+          <div className="text-center mb-12">
+            <motion.span
+              className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20 mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={statsInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5 }}
+            >
+              Our Impact
+            </motion.span>
+            <motion.h2
+              className="text-3xl md:text-4xl font-bold mb-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={statsInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              Key Performance Metrics
+            </motion.h2>
+            <motion.p
+              className="text-xl text-gray-600 max-w-3xl mx-auto"
+              initial={{ opacity: 0, y: 20 }}
+              animate={statsInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              Delivering measurable results for fashion retailers
+            </motion.p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 max-w-5xl mx-auto">
             {metrics.map((metric, index) => (
               <motion.div
                 key={index}
-                className="bg-white rounded-xl p-6 text-center shadow-sm border border-gray-100 hover:shadow-md transition-shadow"
+                className="bg-white rounded-xl p-8 text-center shadow-sm border border-gray-100 hover:shadow-md transition-all duration-300 hover:translate-y-[-5px]"
                 initial={{ opacity: 0, y: 20 }}
                 animate={statsInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
-                <div className="flex justify-center mb-3">
+                <div className="flex justify-center mb-4">
                   <div className="rounded-full bg-primary/10 p-3">{metric.icon}</div>
                 </div>
                 <AnimatedCounter
@@ -413,7 +462,7 @@ export default function Home() {
                   suffix={metric.suffix}
                   prefix={metric.prefix}
                   duration={2000}
-                  className="text-3xl md:text-4xl font-bold text-gray-900 mb-1"
+                  className="text-3xl md:text-4xl font-bold text-gray-900 mb-2"
                 />
                 <p className="text-sm text-gray-600">{metric.label}</p>
               </motion.div>
@@ -423,7 +472,7 @@ export default function Home() {
       </section>
 
       {/* Product Offerings Section */}
-      <section ref={featuresRef} className="py-20 bg-gradient-to-b from-white to-gray-50">
+      <section ref={featuresRef} className="py-24 bg-gradient-to-b from-white to-gray-50">
         <div className="container px-4">
           <div className="text-center mb-16">
             <motion.span
@@ -432,7 +481,7 @@ export default function Home() {
               animate={featuresInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5 }}
             >
-              Why Choose BIG FASHION
+              Our Solutions
             </motion.span>
             <motion.h2
               className="text-3xl md:text-4xl font-bold mb-4"
@@ -448,7 +497,7 @@ export default function Home() {
               animate={featuresInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              We offer transformative solutions for your fashion business
+              Transformative solutions for your fashion business
             </motion.p>
           </div>
 
@@ -463,50 +512,35 @@ export default function Home() {
                 whileHover={{
                   y: -5,
                   boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-                  scale: 1.02,
                 }}
               >
-                {/* Add a background gradient effect that appears on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-
-                {/* Add a border highlight effect */}
+                {/* Clean border highlight effect */}
                 <div className="absolute inset-0 border-2 border-primary/0 rounded-xl group-hover:border-primary/20 transition-all duration-300"></div>
 
-                {/* Update the icon container with hover effects */}
-                <div className="flex justify-center mb-6 relative z-10">
-                  <motion.div
-                    className="relative w-40 h-40"
-                    whileHover={{ rotate: [0, -5, 5, -5, 0], scale: 1.05 }}
-                    transition={{ duration: 0.5 }}
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-primary/5 rounded-full group-hover:from-primary/20 group-hover:to-primary/10 transition-all duration-300"></div>
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
-                        {offering.icon}
-                      </motion.div>
-                    </div>
-                  </motion.div>
+                {/* Simplified icon container */}
+                <div className="flex justify-center mb-8 relative z-10">
+                  <div className="relative w-20 h-20 flex items-center justify-center">
+                    <div className="absolute inset-0 bg-primary/10 rounded-full group-hover:bg-primary/20 transition-all duration-300"></div>
+                    <div className="relative">{offering.icon}</div>
+                  </div>
                 </div>
 
-                {/* Update the title with hover effect */}
-                <h3 className="text-xl font-bold mb-3 text-center group-hover:text-primary transition-colors duration-300">
+                {/* Clean title with subtle hover effect */}
+                <h3 className="text-xl font-bold mb-4 text-center group-hover:text-primary transition-colors duration-300">
                   {offering.title}
                 </h3>
 
-                {/* Keep the description and learn more link */}
+                {/* Simplified description */}
                 <p className="text-gray-600 text-center mb-6 relative z-10">{offering.description}</p>
+
+                {/* Minimal learn more link */}
                 <div className="mt-auto pt-4 border-t border-gray-100 text-center relative z-10">
-                  <Link
-                    href="/solutions"
-                    className="inline-flex items-center text-primary font-medium hover:underline group-hover:text-primary/80 transition-colors duration-300"
-                  >
+                  <Link href="/solutions" className="inline-flex items-center text-primary font-medium group">
                     <span className="relative">
                       Learn more
                       <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
                     </span>
-                    <motion.span className="inline-flex ml-1" whileHover={{ x: 3 }} transition={{ duration: 0.2 }}>
-                      <ChevronRight className="h-4 w-4" />
-                    </motion.span>
+                    <ChevronRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform duration-300" />
                   </Link>
                 </div>
               </motion.div>
@@ -518,159 +552,6 @@ export default function Home() {
       {/* How It Works Section - Replaced with Animated Process Flow */}
       <AnimatedProcessFlow />
 
-      {/* Solution Showcase Section */}
-      <section ref={solutionRef} className="py-24 relative overflow-hidden bg-gray-900">
-        <div className="absolute inset-0 z-0">
-          <EnhancedImage
-            src="/fashion-retail-insights.png"
-            alt="Comprehensive retail analytics dashboard showing sales performance, inventory metrics, and customer insights for fashion retailers"
-            fill
-            quality="high"
-            objectFit="cover"
-            className="opacity-20"
-          />
-          <div className="absolute inset-0 bg-gradient-to-b from-gray-900/90 to-gray-900/70 z-10"></div>
-        </div>
-
-        <div className="container px-4 relative z-20">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={solutionInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6 }}
-            >
-              <motion.span
-                className="inline-flex items-center rounded-full bg-primary/20 px-4 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/30 mb-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={solutionInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.1 }}
-              >
-                Our Solution
-              </motion.span>
-              <motion.h2
-                className="text-3xl md:text-4xl font-bold mb-6 text-white"
-                initial={{ opacity: 0, y: 20 }}
-                animate={solutionInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                The Ultimate Retail Tech Platform
-              </motion.h2>
-              <motion.p
-                className="text-xl text-gray-300 mb-8"
-                initial={{ opacity: 0, y: 20 }}
-                animate={solutionInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.3 }}
-              >
-                We've built a comprehensive platform that addresses every challenge facing fashion retailers in Tier 2 &
-                3 cities.
-              </motion.p>
-
-              <div className="space-y-6">
-                {[
-                  {
-                    icon: <ShieldCheck className="h-6 w-6 text-primary" />,
-                    title: "Risk-Free Logistics",
-                    description:
-                      "Our revolutionary model eliminates inventory risk, ensuring you only pay for what sells.",
-                  },
-                  {
-                    icon: <BarChart3 className="h-6 w-6 text-primary" />,
-                    title: "Advanced Analytics",
-                    description:
-                      "Make data-driven decisions with real-time insights into customer preferences and market trends.",
-                  },
-                  {
-                    icon: <Zap className="h-6 w-6 text-primary" />,
-                    title: "Streamlined Operations",
-                    description: "Automate inventory management, order processing, and supply chain logistics.",
-                  },
-                ].map((feature, index) => (
-                  <motion.div
-                    key={index}
-                    className="flex gap-4"
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={solutionInView ? { opacity: 1, x: 0 } : {}}
-                    transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                  >
-                    <div className="rounded-full bg-primary/20 p-3 h-12 w-12 flex items-center justify-center flex-shrink-0">
-                      {feature.icon}
-                    </div>
-                    <div>
-                      <h4 className="text-xl font-semibold mb-2 text-white">{feature.title}</h4>
-                      <p className="text-gray-300">{feature.description}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-
-              <motion.div
-                className="mt-10"
-                initial={{ opacity: 0, y: 20 }}
-                animate={solutionInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.7 }}
-              >
-                <Button size="lg" className="bg-white text-primary hover:bg-gray-100">
-                  <Link href="/solutions">
-                    <span className="flex items-center">
-                      Explore All Features <ArrowUpRight className="ml-2 h-5 w-5" />
-                    </span>
-                  </Link>
-                </Button>
-              </motion.div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={solutionInView ? { opacity: 1, x: 0 } : {}}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="relative hidden lg:block"
-            >
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary to-purple-600 rounded-lg blur opacity-30"></div>
-              <div className="relative bg-gray-800 rounded-lg overflow-hidden shadow-2xl border border-gray-700">
-                <EnhancedImage
-                  src="/fashion-retail-dashboard.png"
-                  alt="Detailed view of the BIG FASHION retail analytics dashboard showing comprehensive sales data, inventory management tools, and predictive trend analysis"
-                  width={600}
-                  height={400}
-                  className="w-full h-auto"
-                  quality="high"
-                  rounded="lg"
-                />
-
-                {/* Interactive elements overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-gray-900/80 to-transparent flex items-end">
-                  <div className="p-6 w-full">
-                    <div className="flex justify-between items-center mb-4">
-                      <div>
-                        <h4 className="text-white font-semibold">Real-time Dashboard</h4>
-                        <p className="text-gray-300 text-sm">Updated every 15 minutes</p>
-                      </div>
-                      <Button size="sm" variant="outline" className="border-gray-600 text-white hover:bg-gray-800">
-                        Live Demo
-                      </Button>
-                    </div>
-
-                    <div className="grid grid-cols-3 gap-3">
-                      {[
-                        { label: "Sales", value: "₹42,580", trend: "+18%" },
-                        { label: "Inventory", value: "324 items", trend: "Optimal" },
-                        { label: "Customers", value: "1,240", trend: "+22%" },
-                      ].map((stat, i) => (
-                        <div key={i} className="bg-gray-800/80 backdrop-blur-sm rounded-lg p-3 border border-gray-700">
-                          <p className="text-gray-400 text-xs">{stat.label}</p>
-                          <p className="text-white font-medium">{stat.value}</p>
-                          <p className="text-green-400 text-xs">{stat.trend}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
       {/* Testimonials Section */}
       <section ref={testimonialsRef} className="py-24 bg-gray-50 overflow-hidden">
         <div className="container px-4">
@@ -681,7 +562,7 @@ export default function Home() {
               animate={testimonialsInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5 }}
             >
-              Success Stories
+              Client Experiences
             </motion.span>
             <motion.h2
               className="text-3xl md:text-4xl font-bold mb-4"
@@ -697,7 +578,7 @@ export default function Home() {
               animate={testimonialsInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              Join hundreds of successful retailers who have revolutionized their businesses
+              Join our growing community of retailers who are transforming their businesses
             </motion.p>
           </div>
 
@@ -735,7 +616,7 @@ export default function Home() {
                           "{testimonial.quote}"
                         </p>
 
-                        <div className="flex items-center gap-4">
+                        <div className="flex flex-col sm:flex-row items-center gap-4">
                           <div className="rounded-full overflow-hidden border-2 border-primary/20 h-16 w-16 flex-shrink-0">
                             <EnhancedImage
                               src={testimonial.image}
@@ -745,11 +626,11 @@ export default function Home() {
                               className="h-full w-full object-cover"
                             />
                           </div>
-                          <div>
+                          <div className="text-center sm:text-left">
                             <h4 className="font-bold text-gray-900">{testimonial.name}</h4>
                             <p className="text-gray-600">{testimonial.position}</p>
                           </div>
-                          <div className="ml-4 pl-4 border-l border-gray-200">
+                          <div className="mt-2 sm:mt-0 sm:ml-4 sm:pl-4 sm:border-l border-gray-200">
                             <div className="bg-primary/10 text-primary font-medium px-3 py-1 rounded-full text-sm">
                               {testimonial.metrics}
                             </div>
@@ -765,8 +646,8 @@ export default function Home() {
                   <button
                     key={index}
                     onClick={() => setActiveTestimonial(index)}
-                    className={`h-3 w-3 rounded-full mx-1 transition-all duration-300 ${
-                      activeTestimonial === index ? "bg-primary w-6" : "bg-gray-300 hover:bg-gray-400"
+                    className={`h-2 rounded-full mx-1 transition-all duration-300 ${
+                      activeTestimonial === index ? "bg-primary w-8" : "bg-gray-200 w-4 hover:bg-gray-300"
                     }`}
                     aria-label={`View testimonial ${index + 1}`}
                   />
@@ -776,11 +657,12 @@ export default function Home() {
           </div>
 
           <div className="mt-16 text-center">
-            <Link
-              href="/partners"
-              className="inline-flex items-center text-primary font-medium hover:underline text-lg"
-            >
-              Read more success stories <ChevronRight className="ml-1 h-5 w-5" />
+            <Link href="/partners" className="inline-flex items-center text-primary font-medium group">
+              <span className="relative">
+                Read more success stories
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
+              </span>
+              <ChevronRight className="ml-1 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
           </div>
         </div>
