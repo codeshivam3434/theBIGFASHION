@@ -9,6 +9,7 @@ import { HomePageJsonLd, ProductJsonLd, FAQJsonLd } from "./structured-data"
 import ScrollToTop from "@/components/scroll-to-top"
 import FashionHero from "@/components/fashion-hero"
 import { AnimatedProcessFlow } from "@/components/animated-process-flow"
+import { Button } from "@/components/ui/button"
 
 // Animated counter component
 function AnimatedCounter({ value, duration = 2000, className = "", prefix = "", suffix = "" }) {
@@ -664,6 +665,143 @@ export default function Home() {
               </span>
               <ChevronRight className="ml-1 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section - Similar to Solutions Page */}
+      <section className="relative overflow-hidden bg-gradient-to-r from-primary to-primary-dark py-24 text-white">
+        {/* Background pattern */}
+        <div className="absolute inset-0 z-0 opacity-10">
+          <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <defs>
+              <pattern id="grid-pattern" width="10" height="10" patternUnits="userSpaceOnUse">
+                <path d="M 10 0 L 0 0 0 10" fill="none" stroke="white" strokeWidth="0.5" />
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#grid-pattern)" />
+          </svg>
+        </div>
+
+        {/* Animated circles */}
+        <motion.div
+          className="absolute left-0 top-0 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-white opacity-10 mix-blend-overlay"
+          animate={{
+            scale: [1, 1.2, 1],
+            opacity: [0.1, 0.15, 0.1],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Number.POSITIVE_INFINITY,
+            repeatType: "reverse",
+          }}
+        ></motion.div>
+        <motion.div
+          className="absolute bottom-0 right-0 h-96 w-96 translate-x-1/3 translate-y-1/3 rounded-full bg-white opacity-10 mix-blend-overlay"
+          animate={{
+            scale: [1, 1.1, 1],
+            opacity: [0.1, 0.2, 0.1],
+          }}
+          transition={{
+            duration: 10,
+            repeat: Number.POSITIVE_INFINITY,
+            repeatType: "reverse",
+          }}
+        ></motion.div>
+
+        <div className="container relative z-10 mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-5xl">
+            <motion.div
+              className="rounded-2xl bg-white/10 p-8 backdrop-blur-sm sm:p-12"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+            >
+              <div className="flex flex-col items-center gap-12 text-center lg:flex-row lg:text-left">
+                <div className="flex-1">
+                  <motion.span
+                    className="inline-block rounded-full border border-white/30 bg-white/10 px-4 py-1 text-sm font-medium backdrop-blur-sm"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.2 }}
+                  >
+                    Ready to Transform Your Business?
+                  </motion.span>
+                  <motion.h2
+                    className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                  >
+                    Join India's Leading Fashion Retail Platform
+                  </motion.h2>
+                  <motion.p
+                    className="mt-6 text-xl text-white/90"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.4 }}
+                  >
+                    Experience zero inventory risk, powerful analytics, and direct access to 10M+ rural consumers
+                    through our revolutionary B2B platform.
+                  </motion.p>
+
+                  <motion.div
+                    className="mt-8 flex flex-wrap items-center gap-3"
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.5 }}
+                  >
+                    <div className="flex -space-x-2">
+                      {[1, 2, 3, 4].map((i) => (
+                        <div
+                          key={i}
+                          className="inline-block h-10 w-10 rounded-full border-2 border-primary bg-white/90"
+                          style={{
+                            backgroundImage: `url(/confident-indian-${i % 2 === 0 ? "businessman" : "professional"}.png)`,
+                            backgroundSize: "cover",
+                            backgroundPosition: "center",
+                          }}
+                        ></div>
+                      ))}
+                    </div>
+                    <p className="text-sm font-medium">Trusted by 30+ retailers across 3 cities</p>
+                  </motion.div>
+                </div>
+
+                <motion.div
+                  className="flex w-full flex-col space-y-4 lg:w-auto"
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: 0.6 }}
+                >
+                  <Button
+                    size="lg"
+                    className="group relative overflow-hidden bg-white px-8 py-6 text-lg font-bold text-primary transition-all hover:bg-white/90 hover:shadow-lg"
+                    onClick={handleDemoClick}
+                  >
+                    <span className="relative z-10">Schedule a Demo Now</span>
+                    <span className="absolute bottom-0 left-0 h-1 w-full bg-primary transition-all duration-300 group-hover:h-2"></span>
+                  </Button>
+
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="border-2 border-white/60 bg-transparent px-8 py-6 text-lg font-bold text-white transition-all hover:bg-white/10 hover:border-white/80"
+                    onClick={handleContactClick}
+                  >
+                    Contact Our Sales Team
+                  </Button>
+
+                  <p className="text-center text-sm text-white/80">No commitment required. Free consultation.</p>
+                </motion.div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>

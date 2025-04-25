@@ -1,6 +1,19 @@
 "use client"
 
-import { TrendingUp, Users, Award, Truck, Target, Heart, Shield, BarChart3, Package, Clock } from "lucide-react"
+import {
+  TrendingUp,
+  Users,
+  Award,
+  Truck,
+  Target,
+  Heart,
+  Shield,
+  BarChart3,
+  Package,
+  Clock,
+  MapPin,
+  ArrowRight,
+} from "lucide-react"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import FadeInSection from "@/components/fade-in-section"
@@ -415,46 +428,188 @@ export default function AboutPage() {
       {/* Team Section */}
       <TeamSection />
 
-      {/* CTA Section */}
-      <section className="relative overflow-hidden py-20">
+      {/* Enhanced CTA Section */}
+      <section className="relative overflow-hidden py-24 sm:py-32">
+        {/* Background elements */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-primary/90" />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary opacity-80" />
+          <div className="absolute inset-0 bg-gradient-to-br from-primary/95 via-primary to-primary/80" />
+          <div className="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_30%_20%,rgba(255,255,255,0.2)_0%,rgba(255,255,255,0)_60%)]" />
+
+          {/* Decorative elements */}
+          <motion.div
+            className="absolute top-0 right-0 w-64 h-64 rounded-full bg-white/10 blur-3xl"
+            initial={{ opacity: 0, x: 100 }}
+            whileInView={{ opacity: 0.5, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+          />
+          <motion.div
+            className="absolute bottom-0 left-0 w-96 h-96 rounded-full bg-white/5 blur-3xl"
+            initial={{ opacity: 0, y: 100 }}
+            whileInView={{ opacity: 0.3, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 1.5, ease: "easeOut", delay: 0.2 }}
+          />
+
+          {/* Animated pattern */}
+          <div className="absolute inset-0 overflow-hidden opacity-10">
+            {Array.from({ length: 6 }).map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute h-px bg-white/50"
+                style={{
+                  top: `${15 + i * 15}%`,
+                  left: 0,
+                  right: 0,
+                }}
+                initial={{ x: "-100%" }}
+                whileInView={{ x: "100%" }}
+                viewport={{ once: false }}
+                transition={{
+                  duration: 8,
+                  repeat: Number.POSITIVE_INFINITY,
+                  repeatType: "loop",
+                  ease: "linear",
+                  delay: i * 0.5,
+                }}
+              />
+            ))}
+          </div>
         </div>
+
         <div className="container relative z-10">
-          <div className="flex flex-col lg:flex-row items-center justify-between gap-8 max-w-4xl mx-auto">
-            <div className="max-w-2xl">
-              <motion.h2
-                className="text-3xl font-bold tracking-tight sm:text-4xl text-white"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
+          <div className="mx-auto max-w-5xl">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12 items-center">
+              {/* Left content - Main CTA */}
+              <div className="lg:col-span-3 space-y-6">
+                <motion.div
+                  className="inline-flex items-center rounded-full bg-white/20 backdrop-blur-sm px-4 py-1.5 text-sm font-medium text-white ring-1 ring-inset ring-white/30 mb-2"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6 }}
+                >
+                  Join Our Network
+                </motion.div>
+
+                <motion.h2
+                  className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.1 }}
+                >
+                  Ready to transform your retail business?
+                </motion.h2>
+
+                <motion.p
+                  className="text-lg text-white/80 max-w-2xl"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.2 }}
+                >
+                  Join successful retailers in Vasai, Nalasopara, and Virar who have partnered with THE BIG FASHION to
+                  increase sales, reduce costs, and grow their business.
+                </motion.p>
+
+                <motion.div
+                  className="flex flex-wrap gap-4 pt-2"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                >
+                  <Button
+                    variant="secondary"
+                    size="lg"
+                    className="text-primary font-semibold shadow-lg hover:shadow-xl transition-all duration-300"
+                    asChild
+                  >
+                    <Link href="/partners">Become a Partner</Link>
+                  </Button>
+
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="bg-transparent border-white text-white hover:bg-white/10 hover:text-white transition-all duration-300"
+                    asChild
+                  >
+                    <Link href="/contact">Contact Sales</Link>
+                  </Button>
+                </motion.div>
+
+                {/* Social proof */}
+                <motion.div
+                  className="pt-6 border-t border-white/20 mt-8"
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                >
+                  <p className="text-white/70 text-sm mb-3">Trusted by retailers across:</p>
+                  <div className="flex flex-wrap gap-3">
+                    {["Vasai", "Nalasopara", "Virar"].map((location, index) => (
+                      <span
+                        key={location}
+                        className="inline-flex items-center rounded-full bg-white/10 backdrop-blur-sm px-3 py-1 text-xs font-medium text-white"
+                      >
+                        <MapPin className="h-3 w-3 mr-1" />
+                        {location}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Right content - Stats card */}
+              <motion.div
+                className="lg:col-span-2 bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20 shadow-xl relative overflow-hidden"
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                whileHover={{ y: -5, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.3)" }}
               >
-                Ready to join the retail revolution?
-              </motion.h2>
-              <motion.p
-                className="mt-4 text-primary-foreground/90"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                Join successful retailers in Vasai, Nalasopara, and Virar who have partnered with THE BIG FASHION.
-              </motion.p>
+                <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-3xl -mr-16 -mt-16" />
+
+                <h3 className="text-xl font-bold text-white mb-4">Partner Success</h3>
+
+                <div className="space-y-4">
+                  {[
+                    { label: "Average Revenue Growth", value: "42%", icon: <TrendingUp className="h-5 w-5" /> },
+                    { label: "Reduction in Dead Stock", value: "28%", icon: <Package className="h-5 w-5" /> },
+                    { label: "Operational Efficiency", value: "35%", icon: <BarChart3 className="h-5 w-5" /> },
+                  ].map((stat, index) => (
+                    <motion.div
+                      key={stat.label}
+                      className="flex items-center gap-4 p-3 rounded-xl bg-white/10 hover:bg-white/20 transition-colors"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: 0.3 + index * 0.1 }}
+                      whileHover={{ x: 5 }}
+                    >
+                      <div className="rounded-full bg-white/20 p-2 flex-shrink-0">{stat.icon}</div>
+                      <div>
+                        <p className="text-white/70 text-sm">{stat.label}</p>
+                        <p className="text-white text-xl font-bold">{stat.value}</p>
+                      </div>
+                    </motion.div>
+                  ))}
+                </div>
+
+                <div className="mt-6 pt-4 border-t border-white/20">
+                  <Link
+                    href="/case-studies"
+                    className="text-white flex items-center hover:underline text-sm font-medium"
+                  >
+                    <span>View success stories</span>
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </div>
+              </motion.div>
             </div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Button variant="secondary" size="lg" className="text-primary font-medium shadow-lg" asChild>
-                <Link href="/partners">Become a Partner</Link>
-              </Button>
-            </motion.div>
           </div>
         </div>
       </section>
