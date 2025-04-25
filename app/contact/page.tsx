@@ -355,39 +355,166 @@ export default function ContactPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden py-20">
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-primary mix-blend-multiply" />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/80 to-primary" />
-        </div>
-        <div className="container relative z-10 py-16">
+          {/* Background gradient */}
+          <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-primary-dark opacity-95" />
+
+          {/* Background pattern */}
+          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmZmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSI+PHBhdGggZD0iTTM2IDM0djZoNnYtNmgtNnptMCAwdi02aC02djZoNnptNiAwaDZ2LTZoLTZ2NnptLTEyIDBoLTZ2LTZoNnY2em0tNiAwdi02aC02djZoNnptLTYgMGgtNnY2aDZ2LTZ6Ii8+PC9nPjwvZz48L3N2Zz4=')] opacity-30" />
+
+          {/* Animated circles */}
+          <div className="absolute -left-20 -top-20 h-80 w-80 rounded-full bg-white/5 blur-3xl" />
+          <div className="absolute -bottom-20 -right-20 h-80 w-80 rounded-full bg-white/5 blur-3xl" />
           <motion.div
-            className="flex flex-col items-center text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
-          >
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl mb-6 text-white">
-              Ready to join India's retail revolution?
-            </h2>
-            <p className="max-w-2xl text-primary-foreground/90 mb-8">
-              Join thousands of successful retailers who have partnered with Fashion Fusion to access premium products,
-              diverse inventory, and local logistics support.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <ButtonWithFeedback variant="secondary" size="lg">
-                  Become a Partner
-                </ButtonWithFeedback>
-              </motion.div>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <ButtonWithFeedback variant="transparent" size="lg">
-                  Explore Catalog
-                </ButtonWithFeedback>
-              </motion.div>
+            className="absolute left-1/4 top-1/4 h-40 w-40 rounded-full bg-white/5 blur-xl"
+            animate={{
+              x: [0, 30, 0],
+              y: [0, -30, 0],
+            }}
+            transition={{
+              repeat: Number.POSITIVE_INFINITY,
+              duration: 15,
+              ease: "easeInOut",
+            }}
+          />
+          <motion.div
+            className="absolute bottom-1/4 right-1/3 h-60 w-60 rounded-full bg-white/5 blur-xl"
+            animate={{
+              x: [0, -40, 0],
+              y: [0, 20, 0],
+            }}
+            transition={{
+              repeat: Number.POSITIVE_INFINITY,
+              duration: 20,
+              ease: "easeInOut",
+            }}
+          />
+        </div>
+
+        <div className="container relative z-10">
+          <div className="mx-auto max-w-4xl">
+            <div className="relative overflow-hidden rounded-2xl bg-white/10 backdrop-blur-sm">
+              <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
+              <div className="absolute -bottom-10 -left-10 h-40 w-40 rounded-full bg-white/10 blur-2xl" />
+
+              <div className="relative p-8 md:p-12">
+                <div className="flex flex-col items-center text-center">
+                  <div className="mb-4 inline-flex items-center justify-center rounded-full bg-white/20 px-3 py-1 text-sm font-medium text-white backdrop-blur-sm">
+                    <span className="mr-1.5 flex h-2 w-2 rounded-full bg-green-400"></span>
+                    Join 30+ Fashion Retailers
+                  </div>
+
+                  <motion.h2
+                    className="mb-6 text-3xl font-bold tracking-tight text-white sm:text-4xl"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                  >
+                    Ready to revolutionize your fashion business?
+                  </motion.h2>
+
+                  <motion.p
+                    className="mb-8 max-w-2xl text-lg text-white/90"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
+                  >
+                    Join thousands of successful retailers who have partnered with Fashion Fusion to access premium
+                    products, diverse inventory, and local logistics support.
+                  </motion.p>
+
+                  <div className="mb-8 flex w-full max-w-md flex-col space-y-3 sm:flex-row sm:space-x-4 sm:space-y-0">
+                    <div className="flex-1">
+                      <motion.div
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.98 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                      >
+                        <ButtonWithFeedback
+                          variant="secondary"
+                          size="lg"
+                          className="w-full bg-white text-primary hover:bg-white/90"
+                        >
+                          Become a Partner
+                        </ButtonWithFeedback>
+                      </motion.div>
+                    </div>
+
+                    <div className="flex-1">
+                      <motion.div
+                        whileHover={{ scale: 1.03 }}
+                        whileTap={{ scale: 0.98 }}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.3 }}
+                      >
+                        <ButtonWithFeedback
+                          variant="outline"
+                          size="lg"
+                          className="w-full border-white/60 bg-transparent text-white hover:bg-white/10 hover:border-white/80"
+                        >
+                          Explore Catalog
+                        </ButtonWithFeedback>
+                      </motion.div>
+                    </div>
+                  </div>
+
+                  <div className="flex flex-col items-center space-y-4">
+                    <div className="flex -space-x-2">
+                      {[...Array(5)].map((_, i) => (
+                        <div
+                          key={i}
+                          className="h-10 w-10 overflow-hidden rounded-full border-2 border-primary bg-white/90"
+                        >
+                          <img
+                            src={`/thoughtful-artist.png?height=40&width=40&query=person ${i + 1}`}
+                            alt={`Partner ${i + 1}`}
+                            className="h-full w-full object-cover"
+                          />
+                        </div>
+                      ))}
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-primary bg-white text-xs font-bold text-primary">
+                        30+
+                      </div>
+                    </div>
+
+                    <motion.p
+                      className="text-sm text-white/80"
+                      initial={{ opacity: 0 }}
+                      whileInView={{ opacity: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: 0.4 }}
+                    >
+                      <span className="font-medium text-white">No commitment required.</span> Free consultation with our
+                      retail experts.
+                    </motion.p>
+
+                    <div className="flex flex-wrap items-center justify-center gap-3 text-xs text-white/70">
+                      <div className="flex items-center">
+                        <MapPin className="mr-1 h-3 w-3" />
+                        <span>Vasai</span>
+                      </div>
+                      <div className="flex items-center">
+                        <MapPin className="mr-1 h-3 w-3" />
+                        <span>Nalasopara</span>
+                      </div>
+                      <div className="flex items-center">
+                        <MapPin className="mr-1 h-3 w-3" />
+                        <span>Virar</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
     </div>

@@ -540,9 +540,9 @@ export default function SolutionsPage() {
                   </Button>
 
                   <Button
-                    variant="outline"
+                    variant="ghost"
                     size="lg"
-                    className="border-2 border-white px-8 py-6 text-lg font-bold text-white transition-all hover:bg-white/20"
+                    className="border-2 border-white/30 bg-transparent px-8 py-6 text-lg font-bold text-white transition-all hover:bg-white/10"
                     onClick={handleContactClick}
                   >
                     Contact Our Sales Team
