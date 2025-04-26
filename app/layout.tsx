@@ -1,13 +1,4 @@
 import type React from "react"
-import "./globals.css"
-import type { Metadata } from "next"
-
-export const metadata: Metadata = {
-  title: "BigApparels - Fashion Retail Solutions",
-  description: "Revolutionizing fashion retail with technology",
-    generator: 'v0.dev'
-}
-
 export default function RootLayout({
   children,
 }: {
@@ -15,7 +6,18 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <title>BigApparels - Fashion Retail Solutions</title>
+        <meta name="description" content="Revolutionizing fashion retail with technology" />
+      </head>
       <body>{children}</body>
     </html>
   )
 }
+
+
+import './globals.css'
+
+export const metadata = {
+      generator: 'v0.dev'
+    };

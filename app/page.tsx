@@ -1,24 +1,65 @@
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <h1 className="text-4xl font-bold mb-8">BigApparels</h1>
-      <p className="text-xl mb-8">Revolutionizing fashion retail with technology</p>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl">
-        {[
-          "Inventory Management",
-          "Sales Analytics",
-          "Customer Insights",
-          "Growth Tools",
-          "Supply Chain",
-          "Financial Solutions",
-        ].map((feature) => (
-          <div key={feature} className="p-6 border rounded-lg shadow-sm hover:shadow-md transition-shadow">
-            <h2 className="text-xl font-semibold mb-2">{feature}</h2>
-            <p>Advanced solutions for modern fashion retailers.</p>
+    <div
+      style={{
+        fontFamily: "system-ui, sans-serif",
+        maxWidth: "1200px",
+        margin: "0 auto",
+        padding: "2rem",
+      }}
+    >
+      <header style={{ marginBottom: "2rem", textAlign: "center" }}>
+        <h1 style={{ fontSize: "2.5rem", marginBottom: "1rem" }}>BigApparels</h1>
+        <p style={{ fontSize: "1.25rem", color: "#666" }}>Revolutionizing fashion retail with technology</p>
+      </header>
+
+      <main>
+        <section style={{ marginBottom: "3rem" }}>
+          <h2 style={{ fontSize: "1.75rem", marginBottom: "1.5rem" }}>Our Solutions</h2>
+          <div
+            style={{
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+              gap: "1.5rem",
+            }}
+          >
+            {[
+              "Inventory Management",
+              "Sales Analytics",
+              "Customer Insights",
+              "Growth Tools",
+              "Supply Chain",
+              "Financial Solutions",
+            ].map((feature) => (
+              <div
+                key={feature}
+                style={{
+                  padding: "1.5rem",
+                  border: "1px solid #eaeaea",
+                  borderRadius: "0.5rem",
+                  boxShadow: "0 2px 4px rgba(0,0,0,0.05)",
+                }}
+              >
+                <h3 style={{ fontSize: "1.25rem", marginBottom: "0.75rem" }}>{feature}</h3>
+                <p style={{ color: "#666" }}>Advanced solutions for modern fashion retailers.</p>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
-      <footer className="mt-16 text-sm text-gray-500">© {new Date().getFullYear()} BigApparels • Version 1.0.0</footer>
-    </main>
+        </section>
+      </main>
+
+      <footer
+        style={{
+          marginTop: "3rem",
+          padding: "1.5rem 0",
+          borderTop: "1px solid #eaeaea",
+          textAlign: "center",
+          color: "#666",
+          fontSize: "0.875rem",
+        }}
+      >
+        © {new Date().getFullYear()} BigApparels • Version 1.0.0
+      </footer>
+    </div>
   )
 }

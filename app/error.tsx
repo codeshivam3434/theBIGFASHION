@@ -1,7 +1,5 @@
 "use client"
 
-import { useEffect } from "react"
-
 export default function Error({
   error,
   reset,
@@ -9,14 +7,27 @@ export default function Error({
   error: Error & { digest?: string }
   reset: () => void
 }) {
-  useEffect(() => {
-    console.error("Application error:", error)
-  }, [error])
-
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center p-24">
-      <h2 className="text-2xl font-bold mb-4">Something went wrong!</h2>
-      <button onClick={reset} className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+    <div
+      style={{
+        padding: "2rem",
+        maxWidth: "800px",
+        margin: "0 auto",
+        textAlign: "center",
+      }}
+    >
+      <h1 style={{ color: "red", marginBottom: "1rem" }}>Something went wrong</h1>
+      <button
+        onClick={reset}
+        style={{
+          padding: "0.5rem 1rem",
+          backgroundColor: "#0070f3",
+          color: "white",
+          border: "none",
+          borderRadius: "0.25rem",
+          cursor: "pointer",
+        }}
+      >
         Try again
       </button>
     </div>

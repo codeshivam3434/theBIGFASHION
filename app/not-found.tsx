@@ -1,13 +1,30 @@
-import Link from "next/link"
-
 export default function NotFound() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center p-24">
-      <h2 className="text-2xl font-bold mb-4">Page Not Found</h2>
-      <p className="mb-8">Could not find the requested resource</p>
-      <Link href="/" className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-        Return Home
-      </Link>
+    <div
+      style={{
+        padding: "2rem",
+        maxWidth: "800px",
+        margin: "0 auto",
+        textAlign: "center",
+      }}
+    >
+      <h1 style={{ marginBottom: "1rem" }}>Page Not Found</h1>
+      <p>The page you are looking for does not exist.</p>
+      <a
+        href="/"
+        style={{
+          display: "inline-block",
+          marginTop: "1rem",
+          padding: "0.5rem 1rem",
+          backgroundColor: "#0070f3",
+          color: "white",
+          border: "none",
+          borderRadius: "0.25rem",
+          textDecoration: "none",
+        }}
+      >
+        Go Home
+      </a>
     </div>
   )
 }
