@@ -65,9 +65,7 @@
     "react-intersection-observer": "latest",
     "@supabase/supabase-js": "latest",
     "bcryptjs": "latest",
-    "next-auth": "latest",
-    "fs": "latest",
-    "path": "latest"
+    "next-auth": "latest"
   },
   "devDependencies": {
     "@types/node": "^22",

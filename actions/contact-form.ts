@@ -1,20 +1,19 @@
 "use server"
 
-import { createClient } from "@supabase/supabase-js"
-import { sendEmail, getContactFormEmailTemplate } from "@/lib/email"
-import { sendMockEmail } from "@/lib/mock-email"
-import { logError } from "@/lib/error-logger"
+import { z } from "zod"
+import { supabaseAdmin } from "@/lib/db"
+import { sendEmail } from "@/lib/email"
 import { revalidatePath } from "next/cache"
 
-// Define the form data type
-type ContactFormData = {
-  firstName: string
-  lastName: string
-  email: string
-  phone: string
-  subject: string
-  message: string
-}
+// Form validation schema
+const ContactFormSchema = z.object({
+  firstName: z.string().min(2, "First name must be at least 2 characters"),
+  lastName: z.string().min(2, "Last name must be at least 2 characters"),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().min(10, "Phone number must be at least 10 digits"),
+  subject: z.string().min(3, "Subject is required"),
+  message: z.string().min(10, "Message must be at least 10 characters"),
+})
 
 export type ContactFormState = {
   errors?: {
@@ -28,149 +27,98 @@ export type ContactFormState = {
   }
   success?: boolean
   message?: string
-  id?: string
 }
 
 export async function submitContactForm(prevState: ContactFormState, formData: FormData): Promise<ContactFormState> {
+  // Validate form data
+  const validatedFields = ContactFormSchema.safeParse({
+    firstName: formData.get("firstName"),
+    lastName: formData.get("lastName"),
+    email: formData.get("email"),
+    phone: formData.get("phone"),
+    subject: formData.get("subject"),
+    message: formData.get("message"),
+  })
+
+  // If validation fails, return errors
+  if (!validatedFields.success) {
+    return {
+      errors: validatedFields.error.flatten().fieldErrors,
+      success: false,
+      message: "Please correct the errors in the form.",
+    }
+  }
+
+  const { firstName, lastName, email, phone, subject, message } = validatedFields.data
+
   try {
-    // Extract form data
-    const firstName = formData.get("firstName") as string
-    const lastName = formData.get("lastName") as string
-    const email = formData.get("email") as string
-    const phone = formData.get("phone") as string
-    const subject = formData.get("subject") as string
-    const message = formData.get("message") as string
+    // 1. Store contact request in database
+    const { error: dbError } = await supabaseAdmin.from("contact_requests").insert([
+      {
+        first_name: firstName,
+        last_name: lastName,
+        email,
+        phone,
+        subject,
+        message,
+        status: "new",
+      },
+    ])
 
-    // Validate form data
-    if (!firstName || !lastName || !email || !phone || !subject || !message) {
-      return { success: false, message: "All fields are required" }
-    }
+    if (dbError) throw new Error(dbError.message)
 
-    if (!email.includes("@")) {
-      return { success: false, message: "Please enter a valid email address" }
-    }
+    // 2. Send notification email to admin
+    const adminEmailResult = await sendEmail({
+      to: "support@bigapparels.com", // Replace with your admin email
+      subject: `New Contact Form: ${subject}`,
+      html: `
+      <h1>New Contact Form Submission</h1>
+      <p><strong>Name:</strong> ${firstName} ${lastName}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Phone:</strong> ${phone}</p>
+      <p><strong>Subject:</strong> ${subject}</p>
+      <p><strong>Message:</strong> ${message}</p>
+      `,
+    })
 
-    // Create Supabase client
-    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!
-    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY!
-    const supabase = createClient(supabaseUrl, supabaseKey)
+    if (!adminEmailResult.success) throw new Error("Failed to send admin notification")
 
-    // Save to database
-    const { data, error } = await supabase
-      .from("contact_requests")
-      .insert([
-        {
-          first_name: firstName,
-          last_name: lastName,
-          email,
-          phone,
-          subject,
-          message,
-          status: "new",
-        },
-      ])
-      .select()
+    // In preview environment, we don't actually check for email success
+    // since we're just logging the emails
 
-    if (error) {
-      logError({
-        message: "Failed to save contact form to database",
-        error,
-        context: { firstName, lastName, email },
-      })
-      return { success: false, message: "Failed to submit form. Please try again later." }
-    }
-
-    // Prepare email content
-    const contactData: ContactFormData = {
-      firstName,
-      lastName,
-      email,
-      phone,
-      subject,
-      message,
-    }
-
-    const emailHtml = getContactFormEmailTemplate(contactData)
-
-    // Determine if we're in development/preview mode
-    const isDevOrPreview = process.env.NODE_ENV === "development" || process.env.VERCEL_ENV === "preview"
-
-    // Send email notification (or mock it in dev/preview)
-    let emailResult
-    if (isDevOrPreview) {
-      emailResult = await sendMockEmail({
-        to: "support@bigapparels.com",
-        subject: `New Contact Form: ${subject}`,
-        html: emailHtml,
-      })
-    } else {
-      emailResult = await sendEmail({
-        to: process.env.EMAIL_USER!,
-        subject: `New Contact Form: ${subject}`,
-        html: emailHtml,
-      })
-    }
-
-    if (!emailResult.success && !isDevOrPreview) {
-      // Log the error but don't fail the submission
-      logError({
-        message: "Failed to send contact form email notification",
-        error: emailResult.error,
-        context: { email },
-      })
-      // We'll still return success since the data was saved to the database
-    }
-
-    // Send confirmation email to the user
-    const confirmationHtml = `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-        <h2>Thank you for contacting us!</h2>
-        <p>Dear ${firstName},</p>
-        <p>We have received your message and will get back to you as soon as possible.</p>
-        <p>Here's a summary of your inquiry:</p>
-        <p><strong>Subject:</strong> ${subject}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message}</p>
-        <p>Best regards,</p>
-        <p>The BIGApparels Team</p>
-      </div>
-    `
-
-    // Send or mock the confirmation email
-    if (isDevOrPreview) {
-      await sendMockEmail({
-        to: email,
-        subject: "We've received your message - BIGApparels",
-        html: confirmationHtml,
-      })
-    } else {
-      await sendEmail({
-        to: email,
-        subject: "We've received your message - BIGApparels",
-        html: confirmationHtml,
-      }).catch((error) => {
-        // Log but don't fail if confirmation email fails
-        logError({
-          message: "Failed to send confirmation email to user",
-          error,
-          context: { email },
-        })
-      })
-    }
+    // 3. Send confirmation email to user
+    await sendEmail({
+      to: email,
+      subject: "Thank you for contacting BIGApparels",
+      html: `
+      <h1>Thank You for Contacting Us</h1>
+      <p>Dear ${firstName},</p>
+      <p>We have received your message and will get back to you as soon as possible, typically within 24 hours.</p>
+      <p>Here's a summary of your inquiry:</p>
+      <p><strong>Subject:</strong> ${subject}</p>
+      <p><strong>Message:</strong> ${message}</p>
+      <br>
+      <p>Best regards,</p>
+      <p>The BIGApparels Team</p>
+      `,
+    })
 
     // Revalidate the admin contacts page
     revalidatePath("/admin/contacts")
 
+    // Return success response
     return {
       success: true,
-      message: "Your message has been sent successfully! We'll get back to you soon.",
-      id: data?.[0]?.id,
+      message: "Your message has been sent successfully. We will contact you soon!",
     }
   } catch (error) {
-    logError({
-      message: "Unexpected error in contact form submission",
-      error,
-    })
-    return { success: false, message: "An unexpected error occurred. Please try again later." }
+    console.error("Error submitting contact form:", error)
+    return {
+      errors: {
+        _form: ["An error occurred while submitting the form. Please try again."],
+      },
+      success: false,
+      message: "Failed to submit form. Please try again.",
+    }
   }
 }

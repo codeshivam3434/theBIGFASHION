@@ -111,7 +111,6 @@ export default function Footer() {
         <div className="text-center font-bold text-gray-700">
           <p>© {currentYear} BigApparels Pvt Ltd. All rights reserved.</p>
         </div>
-        <div className="mt-8 text-xs text-gray-500 text-center">v1.0.0</div>
       </div>
     </footer>
   )
