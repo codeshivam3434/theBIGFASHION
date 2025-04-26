@@ -29,7 +29,8 @@ const nextConfig = {
   async headers() {
     return [
       {
-        source: '/(.*).(?:jpg|jpeg|gif|png|svg|ico|webp|avif)',
+        // Fix: Use valid pattern for image files
+        source: '/:path(.+)\\.(jpg|jpeg|gif|png|svg|ico|webp|avif)',
         headers: [
           {
             key: 'Cache-Control',
@@ -38,7 +39,8 @@ const nextConfig = {
         ],
       },
       {
-        source: '/(.*).(?:js|css)',
+        // Fix: Use valid pattern for JS and CSS files
+        source: '/:path(.+)\\.(js|css)',
         headers: [
           {
             key: 'Cache-Control',
@@ -47,7 +49,8 @@ const nextConfig = {
         ],
       },
       {
-        source: '/(.*).(?:woff|woff2|eot|ttf|otf)',
+        // Fix: Use valid pattern for font files
+        source: '/:path(.+)\\.(woff|woff2|eot|ttf|otf)',
         headers: [
           {
             key: 'Cache-Control',

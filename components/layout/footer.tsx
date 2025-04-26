@@ -6,7 +6,6 @@ import Link from "next/link"
 import { motion } from "framer-motion"
 import { Facebook, Twitter, Instagram, Linkedin, MapPin, ArrowRight } from "lucide-react"
 import BigApparelsLogo from "@/components/big-apparels-logo"
-import { getVersionString } from "@/lib/version"
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -112,7 +111,7 @@ export default function Footer() {
         <div className="text-center font-bold text-gray-700">
           <p>© {currentYear} BigApparels Pvt Ltd. All rights reserved.</p>
         </div>
-        <div className="mt-8 text-xs text-gray-500 text-center">{getVersionString()}</div>
+        <div className="mt-8 text-xs text-gray-500 text-center">v1.0.0</div>
       </div>
     </footer>
   )

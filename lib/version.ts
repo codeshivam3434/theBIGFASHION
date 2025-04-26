@@ -1,11 +1,12 @@
 /**
  * Application version information
+ * Using hardcoded values to avoid environment variable dependencies
  */
 
-// Get the app version from environment variable or use default
-export const APP_VERSION = process.env.NEXT_PUBLIC_APP_VERSION || "1.0.0"
+// Hardcoded app version - no environment variable needed
+export const APP_VERSION = "1.0.0"
 
-// Get the build date (current date if not in production)
+// Get the build date (current date)
 export const BUILD_DATE = new Date().toISOString()
 
 // Format the version for display

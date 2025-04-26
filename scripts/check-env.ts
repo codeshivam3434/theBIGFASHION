@@ -35,12 +35,6 @@ const requiredEnvVars = [
 
 const optionalEnvVars = ["NEXT_PUBLIC_GA_MEASUREMENT_ID"]
 
-// Set default app version if not provided
-if (!process.env.NEXT_PUBLIC_APP_VERSION) {
-  process.env.NEXT_PUBLIC_APP_VERSION = "1.0.0"
-  console.log("Setting default NEXT_PUBLIC_APP_VERSION to 1.0.0")
-}
-
 function checkEnvVars() {
   console.log("Checking environment variables...\n")
 
@@ -67,8 +61,6 @@ function checkEnvVars() {
       console.log(`⚠️ ${envVar} is not set (optional)`)
     }
   }
-
-  console.log(`✅ NEXT_PUBLIC_APP_VERSION: ${process.env.NEXT_PUBLIC_APP_VERSION}`)
 
   console.log("\nSummary:")
   console.log(`Total required variables: ${requiredEnvVars.length}`)
