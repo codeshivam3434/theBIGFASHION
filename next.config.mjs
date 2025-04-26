@@ -19,47 +19,13 @@ const nextConfig = {
     minimumCacheTTL: 60,
   },
   experimental: {
+    // Remove optimizeCss which requires critters
     serverActions: true,
-    optimizeCss: true,
     scrollRestoration: true,
   },
   // Enable compression
   compress: true,
-  // Add headers for caching static assets
-  async headers() {
-    return [
-      {
-        // Fix: Use valid pattern for image files
-        source: '/:path(.+)\\.(jpg|jpeg|gif|png|svg|ico|webp|avif)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          }
-        ],
-      },
-      {
-        // Fix: Use valid pattern for JS and CSS files
-        source: '/:path(.+)\\.(js|css)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          }
-        ],
-      },
-      {
-        // Fix: Use valid pattern for font files
-        source: '/:path(.+)\\.(woff|woff2|eot|ttf|otf)',
-        headers: [
-          {
-            key: 'Cache-Control',
-            value: 'public, max-age=31536000, immutable',
-          }
-        ],
-      },
-    ];
-  },
+  
   // Optimize output
   poweredByHeader: false,
   reactStrictMode: true,
