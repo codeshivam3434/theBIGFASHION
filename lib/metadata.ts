@@ -2,14 +2,14 @@ import type { Metadata } from "next"
 
 // Base metadata configuration
 export const siteConfig = {
-  name: "BIG FASHION",
+  name: "BigApparels",
   description:
     "Premium wholesale clothing connecting manufacturers to retailers with flexible ordering and private labeling options.",
-  url: "https://bigfashion.com",
-  ogImage: "https://bigfashion.com/og-image.jpg",
+  url: "https://bigapparels.com",
+  ogImage: "https://bigapparels.com/og-image.jpg",
   links: {
-    twitter: "https://twitter.com/bigfashion",
-    github: "https://github.com/bigfashion",
+    twitter: "https://twitter.com/bigapparels",
+    github: "https://github.com/bigapparels",
   },
 }
 
@@ -46,9 +46,9 @@ export function generateMetadata({
       "fashion business",
       "retail solution",
     ],
-    authors: [{ name: "BIG FASHION Team" }],
-    creator: "BIG FASHION",
-    publisher: "BIG FASHION",
+    authors: [{ name: "BigApparels Team" }],
+    creator: "BigApparels",
+    publisher: "BigApparels",
     metadataBase: new URL(siteConfig.url),
     alternates: {
       canonical: url,
@@ -74,7 +74,7 @@ export function generateMetadata({
       title: metaTitle,
       description: metaDescription,
       images: [ogImageUrl],
-      creator: "@bigfashion",
+      creator: "@bigapparels",
     },
     robots: {
       index: true,

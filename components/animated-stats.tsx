@@ -19,27 +19,6 @@ interface AnimatedStatsProps {
   className?: string
 }
 
-export function AnimatedStats({ title, subtitle, stats, className }: AnimatedStatsProps) {
-  return (
-    <div className={cn("py-12", className)}>
-      <div className="container px-4">
-        {(title || subtitle) && (
-          <div className="text-center mb-12">
-            {title && <h2 className="text-3xl md:text-4xl font-bold mb-4">{title}</h2>}
-            {subtitle && <p className="text-xl text-muted-foreground max-w-2xl mx-auto">{subtitle}</p>}
-          </div>
-        )}
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {stats.map((stat, index) => (
-            <AnimatedStat key={index} stat={stat} index={index} />
-          ))}
-        </div>
-      </div>
-    </div>
-  )
-}
-
 function AnimatedStat({ stat, index }: { stat: StatItem; index: number }) {
   const [count, setCount] = useState(0)
   const ref = useRef(null)
@@ -95,3 +74,29 @@ function AnimatedStat({ stat, index }: { stat: StatItem; index: number }) {
     </motion.div>
   )
 }
+
+// Named export
+export function AnimatedStats({ title, subtitle, stats, className }: AnimatedStatsProps) {
+  return (
+    <div className={cn("py-12", className)}>
+      <div className="container px-4">
+        {(title || subtitle) && (
+          <div className="text-center mb-12">
+            {title && <h2 className="text-3xl md:text-4xl font-bold mb-4">{title}</h2>}
+            {subtitle && <p className="text-xl text-muted-foreground max-w-2xl mx-auto">{subtitle}</p>}
+          </div>
+        )}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {stats.map((stat, index) => (
+            <AnimatedStat key={index} stat={stat} index={index} />
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// Default export
+const AnimatedStatsDefault = AnimatedStats
+export default AnimatedStatsDefault

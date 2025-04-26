@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X, ChevronDown, Home, Info, Lightbulb, Store, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import TheBigFashionLogo from "@/components/the-big-fashion-logo"
+import BigApparelsLogo from "@/components/big-apparels-logo"
 import { useMobile } from "@/hooks/use-mobile"
 
 export default function NavBar() {
@@ -50,7 +50,7 @@ export default function NavBar() {
     >
       <div className="container flex items-center justify-between max-w-screen-2xl mx-auto px-4">
         <Link href="/" className="flex items-center flex-shrink-0 mr-10 min-w-[120px]">
-          <TheBigFashionLogo
+          <BigApparelsLogo
             size={isScrolled ? "sm" : "md"}
             className={`transition-all duration-300 ${isScrolled ? "scale-90" : "scale-100"}`}
           />

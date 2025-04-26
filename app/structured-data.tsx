@@ -9,9 +9,9 @@ export function HomePageJsonLd() {
     logo: `${siteConfig.url}/logo.png`,
     sameAs: [
       siteConfig.links.twitter,
-      "https://www.facebook.com/thebigfashion",
-      "https://www.instagram.com/thebigfashion",
-      "https://www.linkedin.com/company/thebigfashion",
+      "https://www.facebook.com/bigapparels",
+      "https://www.instagram.com/bigapparels",
+      "https://www.linkedin.com/company/bigapparels",
     ],
     contactPoint: {
       "@type": "ContactPoint",

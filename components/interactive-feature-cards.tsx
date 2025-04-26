@@ -23,6 +23,7 @@ interface InteractiveFeatureCardsProps {
   className?: string
 }
 
+// Named export
 export function InteractiveFeatureCards({ title, subtitle, features, className }: InteractiveFeatureCardsProps) {
   const [activeFeature, setActiveFeature] = useState(0)
 
@@ -114,3 +115,7 @@ export function InteractiveFeatureCards({ title, subtitle, features, className }
     </div>
   )
 }
+
+// Default export
+const InteractiveFeatureCardsDefault = InteractiveFeatureCards
+export default InteractiveFeatureCardsDefault

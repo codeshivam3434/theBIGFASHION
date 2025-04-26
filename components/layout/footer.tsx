@@ -5,7 +5,8 @@ import type React from "react"
 import Link from "next/link"
 import { motion } from "framer-motion"
 import { Facebook, Twitter, Instagram, Linkedin, MapPin, ArrowRight } from "lucide-react"
-import TheBigFashionLogo from "@/components/the-big-fashion-logo"
+import BigApparelsLogo from "@/components/big-apparels-logo"
+import { getVersionString } from "@/lib/version"
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
@@ -16,7 +17,7 @@ export default function Footer() {
         {/* Top section with logo and mission */}
         <div className="max-w-3xl mb-14">
           <Link href="/" className="inline-block mb-8">
-            <TheBigFashionLogo size="lg" variant="default" />
+            <BigApparelsLogo size="lg" variant="default" />
           </Link>
           <p className="text-gray-700 text-lg leading-relaxed font-medium">
             We are sparking a revolution, changing how fashion is bought and sold to improve lives. By using technology,
@@ -76,8 +77,8 @@ export default function Footer() {
           <div>
             <h4 className="font-bold text-lg mb-3 text-gray-900">Contact Us</h4>
             <p className="text-gray-700 font-medium mb-2">
-              <a href="mailto:bigfashion@gmail.com" className="hover:text-primary transition-colors flex items-center">
-                bigfashion@gmail.com
+              <a href="mailto:bigapparels@gmail.com" className="hover:text-primary transition-colors flex items-center">
+                bigapparels@gmail.com
                 <ArrowRight className="ml-2 h-4 w-4" />
               </a>
             </p>
@@ -109,8 +110,9 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="text-center font-bold text-gray-700">
-          <p>© {currentYear} BIG FASHION Pvt Ltd. All rights reserved.</p>
+          <p>© {currentYear} BigApparels Pvt Ltd. All rights reserved.</p>
         </div>
+        <div className="mt-8 text-xs text-gray-500 text-center">{getVersionString()}</div>
       </div>
     </footer>
   )

@@ -1,7 +1,5 @@
 "use client"
-
-import type React from "react"
-
+import { useActionState } from "react"
 import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
@@ -14,49 +12,23 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import FadeInSection from "@/components/fade-in-section"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+import { submitPartnershipForm, type PartnershipFormState } from "@/actions/partnership-form"
+
+const initialState: PartnershipFormState = {}
 
 export default function PartnersPage() {
-  const [formState, setFormState] = useState({
-    name: "",
-    businessName: "",
-    email: "",
-    phone: "",
-    message: "",
-  })
-
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [formState, formAction, isPending] = useActionState(submitPartnershipForm, initialState)
   const [formSubmitted, setFormSubmitted] = useState(false)
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormState({
-      ...formState,
-      [e.target.id]: e.target.value,
-    })
-  }
+  // Handle form submission success
+  if (formState.success && !formSubmitted) {
+    setFormSubmitted(true)
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-
-    // Simulate API call
+    // Reset form submission state after 5 seconds
     setTimeout(() => {
-      setIsSubmitting(false)
-      setFormSubmitted(true)
-
-      // Reset form after submission
-      setFormState({
-        name: "",
-        businessName: "",
-        email: "",
-        phone: "",
-        message: "",
-      })
-
-      // Reset success message after 5 seconds
-      setTimeout(() => {
-        setFormSubmitted(false)
-      }, 5000)
-    }, 1500)
+      setFormSubmitted(false)
+    }, 5000)
   }
 
   return (
@@ -288,8 +260,8 @@ export default function PartnersPage() {
                   Ready to Transform Your Retail Business?
                 </h2>
                 <p className="mt-4 text-lg text-gray-600">
-                  Complete the form to speak with our partnership team about how THE BIG FASHION can help you achieve
-                  your business objectives.
+                  Complete the form to speak with our partnership team about how BIGApparels can help you achieve your
+                  business objectives.
                 </p>
                 <div className="mt-8 space-y-6">
                   <div className="flex items-start">
@@ -348,18 +320,40 @@ export default function PartnersPage() {
                       </p>
                     </motion.div>
                   ) : (
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                    <form action={formAction} className="space-y-6">
+                      {/* Form error message */}
+                      {formState.errors?._form && (
+                        <Alert variant="destructive" className="mb-6">
+                          <AlertTitle>Error</AlertTitle>
+                          <AlertDescription>{formState.errors._form}</AlertDescription>
+                        </Alert>
+                      )}
+
+                      {/* Form success message */}
+                      {formState.success && (
+                        <Alert variant="success" className="mb-6">
+                          <AlertTitle>Success</AlertTitle>
+                          <AlertDescription>{formState.message}</AlertDescription>
+                        </Alert>
+                      )}
+
                       <div>
                         <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                           Full Name
                         </label>
                         <Input
                           id="name"
+                          name="name"
                           value={formState.name}
-                          onChange={handleInputChange}
                           className="mt-1"
                           required
+                          aria-describedby={formState.errors?.name ? "name-error" : undefined}
                         />
+                        {formState.errors?.name && (
+                          <p id="name-error" className="text-sm text-red-500">
+                            {formState.errors.name}
+                          </p>
+                        )}
                       </div>
                       <div>
                         <label htmlFor="businessName" className="block text-sm font-medium text-gray-700">
@@ -367,11 +361,16 @@ export default function PartnersPage() {
                         </label>
                         <Input
                           id="businessName"
-                          value={formState.businessName}
-                          onChange={handleInputChange}
+                          name="businessName"
                           className="mt-1"
                           required
+                          aria-describedby={formState.errors?.businessName ? "businessName-error" : undefined}
                         />
+                        {formState.errors?.businessName && (
+                          <p id="businessName-error" className="text-sm text-red-500">
+                            {formState.errors.businessName}
+                          </p>
+                        )}
                       </div>
                       <div>
                         <label htmlFor="email" className="block text-sm font-medium text-gray-700">
@@ -379,12 +378,17 @@ export default function PartnersPage() {
                         </label>
                         <Input
                           id="email"
+                          name="email"
                           type="email"
-                          value={formState.email}
-                          onChange={handleInputChange}
                           className="mt-1"
                           required
+                          aria-describedby={formState.errors?.email ? "email-error" : undefined}
                         />
+                        {formState.errors?.email && (
+                          <p id="email-error" className="text-sm text-red-500">
+                            {formState.errors.email}
+                          </p>
+                        )}
                       </div>
                       <div>
                         <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
@@ -392,11 +396,16 @@ export default function PartnersPage() {
                         </label>
                         <Input
                           id="phone"
-                          value={formState.phone}
-                          onChange={handleInputChange}
+                          name="phone"
                           className="mt-1"
                           required
+                          aria-describedby={formState.errors?.phone ? "phone-error" : undefined}
                         />
+                        {formState.errors?.phone && (
+                          <p id="phone-error" className="text-sm text-red-500">
+                            {formState.errors.phone}
+                          </p>
+                        )}
                       </div>
                       <div>
                         <label htmlFor="message" className="block text-sm font-medium text-gray-700">
@@ -404,14 +413,20 @@ export default function PartnersPage() {
                         </label>
                         <Textarea
                           id="message"
+                          name="message"
                           rows={4}
-                          value={formState.message}
-                          onChange={handleInputChange}
                           className="mt-1"
+                          required
+                          aria-describedby={formState.errors?.message ? "message-error" : undefined}
                         />
+                        {formState.errors?.message && (
+                          <p id="message-error" className="text-sm text-red-500">
+                            {formState.errors.message}
+                          </p>
+                        )}
                       </div>
-                      <Button type="submit" className="w-full" size="lg" disabled={isSubmitting}>
-                        {isSubmitting ? "Submitting..." : "Request Partnership Information"}
+                      <Button type="submit" className="w-full" size="lg" disabled={isPending}>
+                        {isPending ? "Submitting..." : "Request Partnership Information"}
                       </Button>
                       <p className="text-center text-xs text-gray-500">
                         By submitting this form, you agree to our{" "}
@@ -464,7 +479,7 @@ export default function PartnersPage() {
                   </h2>
                   <p className="mt-6 text-xl text-white/90">
                     Join over 30 successful retailers across 3 cities who have increased their profits by an average of
-                    32% with THE BIG FASHION.
+                    32% with BIGApparels.
                   </p>
 
                   <div className="mt-8 flex flex-wrap items-center gap-3">

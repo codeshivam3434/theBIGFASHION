@@ -1,6 +1,6 @@
 "use client"
 
-import type React from "react"
+import { useActionState } from "react"
 
 import { Button } from "@/components/ui/button"
 import { ButtonWithFeedback } from "@/components/ui/button-with-feedback"
@@ -12,51 +12,23 @@ import FadeInSection from "@/components/fade-in-section"
 import HoverCardEffect from "@/components/hover-card-effect"
 import { useState } from "react"
 import { ButtonHierarchy } from "@/components/ui/button-hierarchy"
+import { submitContactForm, type ContactFormState } from "@/actions/contact-form"
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
+
+const initialState: ContactFormState = {}
 
 export default function ContactPage() {
-  const [formState, setFormState] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    phone: "",
-    subject: "",
-    message: "",
-  })
-
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [formState, formAction, isPending] = useActionState(submitContactForm, initialState)
   const [formSubmitted, setFormSubmitted] = useState(false)
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    setFormState({
-      ...formState,
-      [e.target.id]: e.target.value,
-    })
-  }
+  // Handle form submission success
+  if (formState.success && !formSubmitted) {
+    setFormSubmitted(true)
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-
-    // Simulate API call
+    // Reset form submission state after 5 seconds
     setTimeout(() => {
-      setIsSubmitting(false)
-      setFormSubmitted(true)
-
-      // Reset form after submission
-      setFormState({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        subject: "",
-        message: "",
-      })
-
-      // Reset success message after 5 seconds
-      setTimeout(() => {
-        setFormSubmitted(false)
-      }, 5000)
-    }, 1500)
+      setFormSubmitted(false)
+    }, 5000)
   }
 
   return (
@@ -168,7 +140,24 @@ export default function ContactPage() {
                 ) : (
                   <>
                     <h2 className="text-2xl font-bold mb-6">Send Us a Message</h2>
-                    <form className="space-y-6" onSubmit={handleSubmit}>
+
+                    {/* Form error message */}
+                    {formState.errors?._form && (
+                      <Alert variant="destructive" className="mb-6">
+                        <AlertTitle>Error</AlertTitle>
+                        <AlertDescription>{formState.errors._form}</AlertDescription>
+                      </Alert>
+                    )}
+
+                    {/* Form success message */}
+                    {formState.success && (
+                      <Alert variant="success" className="mb-6">
+                        <AlertTitle>Success</AlertTitle>
+                        <AlertDescription>{formState.message}</AlertDescription>
+                      </Alert>
+                    )}
+
+                    <form action={formAction} className="space-y-6">
                       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                         <div className="space-y-2">
                           <label htmlFor="firstName" className="text-sm font-medium">
@@ -176,11 +165,17 @@ export default function ContactPage() {
                           </label>
                           <Input
                             id="firstName"
+                            name="firstName"
                             placeholder="Enter your first name"
-                            value={formState.firstName}
-                            onChange={handleInputChange}
                             required
+                            aria-describedby={formState.errors?.firstName ? "firstName-error" : undefined}
+                            className={formState.errors?.firstName ? "border-red-500" : ""}
                           />
+                          {formState.errors?.firstName && (
+                            <p id="firstName-error" className="text-sm text-red-500">
+                              {formState.errors.firstName}
+                            </p>
+                          )}
                         </div>
                         <div className="space-y-2">
                           <label htmlFor="lastName" className="text-sm font-medium">
@@ -188,11 +183,17 @@ export default function ContactPage() {
                           </label>
                           <Input
                             id="lastName"
+                            name="lastName"
                             placeholder="Enter your last name"
-                            value={formState.lastName}
-                            onChange={handleInputChange}
                             required
+                            aria-describedby={formState.errors?.lastName ? "lastName-error" : undefined}
+                            className={formState.errors?.lastName ? "border-red-500" : ""}
                           />
+                          {formState.errors?.lastName && (
+                            <p id="lastName-error" className="text-sm text-red-500">
+                              {formState.errors.lastName}
+                            </p>
+                          )}
                         </div>
                       </div>
                       <div className="space-y-2">
@@ -201,12 +202,18 @@ export default function ContactPage() {
                         </label>
                         <Input
                           id="email"
+                          name="email"
                           type="email"
                           placeholder="Enter your email"
-                          value={formState.email}
-                          onChange={handleInputChange}
                           required
+                          aria-describedby={formState.errors?.email ? "email-error" : undefined}
+                          className={formState.errors?.email ? "border-red-500" : ""}
                         />
+                        {formState.errors?.email && (
+                          <p id="email-error" className="text-sm text-red-500">
+                            {formState.errors.email}
+                          </p>
+                        )}
                       </div>
                       <div className="space-y-2">
                         <label htmlFor="phone" className="text-sm font-medium">
@@ -214,11 +221,17 @@ export default function ContactPage() {
                         </label>
                         <Input
                           id="phone"
+                          name="phone"
                           placeholder="Enter your phone number"
-                          value={formState.phone}
-                          onChange={handleInputChange}
                           required
+                          aria-describedby={formState.errors?.phone ? "phone-error" : undefined}
+                          className={formState.errors?.phone ? "border-red-500" : ""}
                         />
+                        {formState.errors?.phone && (
+                          <p id="phone-error" className="text-sm text-red-500">
+                            {formState.errors.phone}
+                          </p>
+                        )}
                       </div>
                       <div className="space-y-2">
                         <label htmlFor="subject" className="text-sm font-medium">
@@ -226,10 +239,10 @@ export default function ContactPage() {
                         </label>
                         <select
                           id="subject"
+                          name="subject"
                           className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-                          value={formState.subject}
-                          onChange={handleInputChange}
                           required
+                          aria-describedby={formState.errors?.subject ? "subject-error" : undefined}
                         >
                           <option value="">Select a subject</option>
                           <option value="partnership">Partnership Inquiry</option>
@@ -238,6 +251,11 @@ export default function ContactPage() {
                           <option value="support">Customer Support</option>
                           <option value="other">Other</option>
                         </select>
+                        {formState.errors?.subject && (
+                          <p id="subject-error" className="text-sm text-red-500">
+                            {formState.errors.subject}
+                          </p>
+                        )}
                       </div>
                       <div className="space-y-2">
                         <label htmlFor="message" className="text-sm font-medium">
@@ -245,12 +263,18 @@ export default function ContactPage() {
                         </label>
                         <Textarea
                           id="message"
+                          name="message"
                           placeholder="Enter your message"
                           rows={5}
-                          value={formState.message}
-                          onChange={handleInputChange}
                           required
+                          aria-describedby={formState.errors?.message ? "message-error" : undefined}
+                          className={formState.errors?.message ? "border-red-500" : ""}
                         />
+                        {formState.errors?.message && (
+                          <p id="message-error" className="text-sm text-red-500">
+                            {formState.errors.message}
+                          </p>
+                        )}
                       </div>
                       <ButtonHierarchy
                         type="submit"
@@ -258,10 +282,9 @@ export default function ContactPage() {
                         size="lg"
                         fullWidth
                         className="mt-6"
-                        isLoading={isSubmitting}
-                        loadingText="Sending message..."
+                        disabled={isPending}
                       >
-                        Send Message
+                        {isPending ? "Sending..." : "Send Message"}
                       </ButtonHierarchy>
                     </form>
                   </>
