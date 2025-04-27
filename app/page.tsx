@@ -2,14 +2,15 @@
 
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
-import { motion, useScroll, AnimatePresence, useInView } from "framer-motion"
-import { ShieldCheck, TrendingUp, Truck, Users, ChevronRight, Star } from "lucide-react"
-import { EnhancedImage } from "@/components/ui/enhanced-image"
+import { motion, useScroll, useInView } from "framer-motion"
+import { ShieldCheck, TrendingUp, Truck, Users, ChevronRight } from "lucide-react"
 import { HomePageJsonLd, ProductJsonLd, FAQJsonLd } from "./structured-data"
 import ScrollToTop from "@/components/scroll-to-top"
 import FashionHero from "@/components/fashion-hero"
 import { AnimatedProcessFlow } from "@/components/animated-process-flow"
 import { Button } from "@/components/ui/button"
+import { TestimonialShowcase } from "@/components/testimonial-showcase"
+import { RetailerAvatarGroup } from "@/components/retailer-avatar-group"
 
 // Animated counter component
 function AnimatedCounter({ value, duration = 2000, className = "", prefix = "", suffix = "" }) {
@@ -51,7 +52,6 @@ export default function Home() {
     demo: false,
     contact: false,
   })
-  const [activeTestimonial, setActiveTestimonial] = useState(0)
   const { scrollYProgress } = useScroll({
     offset: ["start start", "end start"],
   })
@@ -59,11 +59,9 @@ export default function Home() {
   // Intersection observer hooks for animations
   const statsRef = useRef(null)
   const featuresRef = useRef(null)
-  const testimonialsRef = useRef(null)
 
   const [statsInView, setStatsInView] = useState(false)
   const [featuresInView, setFeaturesInView] = useState(false)
-  const [testimonialsInView, setTestimonialsInView] = useState(false)
 
   useEffect(() => {
     const observerOptions = {
@@ -90,36 +88,14 @@ export default function Home() {
       })
     }, observerOptions)
 
-    const testimonialsObserver = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setTestimonialsInView(true)
-          testimonialsObserver.unobserve(entry.target)
-        }
-      })
-    }, observerOptions)
-
     if (statsRef.current) statsObserver.observe(statsRef.current)
     if (featuresRef.current) featuresObserver.observe(featuresRef.current)
-    if (testimonialsRef.current) testimonialsObserver.observe(testimonialsRef.current)
 
     return () => {
       statsObserver.disconnect()
       featuresObserver.disconnect()
-      testimonialsObserver.disconnect()
     }
   }, [])
-
-  // Auto-rotate testimonials
-  useEffect(() => {
-    if (!testimonialsInView) return
-
-    const interval = setInterval(() => {
-      setActiveTestimonial((prev) => (prev + 1) % testimonials.length)
-    }, 5000)
-
-    return () => clearInterval(interval)
-  }, [testimonialsInView])
 
   const handleDemoClick = () => {
     setIsLoading((prev) => ({ ...prev, demo: true }))
@@ -134,37 +110,6 @@ export default function Home() {
       window.location.href = "/contact"
     }, 800)
   }
-
-  // Testimonials with consistent image sizing
-  const testimonials = [
-    {
-      quote:
-        "This platform completely transformed our retail operations. We've seen a 40% increase in sales and 60% reduction in stockouts.",
-      name: "Rajesh Kumar",
-      position: "Owner, Fashion Hub Vasai",
-      image: "/confident-indian-businessman.png",
-      rating: 5,
-      metrics: "40% sales increase",
-    },
-    {
-      quote:
-        "The risk-free logistics model allowed us to expand our product range without increasing our inventory costs. Game changer!",
-      name: "Priya Sharma",
-      position: "Director, Style Studio Nalasopara",
-      image: "/confident-indian-professional.png",
-      rating: 5,
-      metrics: "2x product range",
-    },
-    {
-      quote:
-        "Their analytics tools helped us identify trends we never would have seen. Our business has grown 35% in just six months.",
-      name: "Amit Singh",
-      position: "Founder, Trendsetter Virar",
-      image: "/vibrant-startup-huddle.png",
-      rating: 5,
-      metrics: "35% growth in 6 months",
-    },
-  ]
 
   // Key metrics with numeric values for animation
   const metrics = [
@@ -554,120 +499,7 @@ export default function Home() {
       <AnimatedProcessFlow />
 
       {/* Testimonials Section */}
-      <section ref={testimonialsRef} className="py-24 bg-gray-50 overflow-hidden">
-        <div className="container px-4">
-          <div className="text-center mb-16">
-            <motion.span
-              className="inline-flex items-center rounded-full bg-primary/10 px-4 py-1 text-sm font-medium text-primary ring-1 ring-inset ring-primary/20 mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={testimonialsInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5 }}
-            >
-              Client Experiences
-            </motion.span>
-            <motion.h2
-              className="text-3xl md:text-4xl font-bold mb-4"
-              initial={{ opacity: 0, y: 20 }}
-              animate={testimonialsInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.1 }}
-            >
-              What Our Retail Partners Say
-            </motion.h2>
-            <motion.p
-              className="text-xl text-gray-600 max-w-3xl mx-auto"
-              initial={{ opacity: 0, y: 20 }}
-              animate={testimonialsInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              Join our growing community of retailers who are transforming their businesses
-            </motion.p>
-          </div>
-
-          <div className="max-w-4xl mx-auto relative">
-            <div className="absolute top-10 -left-4 md:-left-10 text-9xl text-primary opacity-10 pointer-events-none">
-              "
-            </div>
-            <div className="absolute bottom-10 -right-4 md:-right-10 text-9xl text-primary opacity-10 pointer-events-none rotate-180">
-              "
-            </div>
-
-            <div className="relative bg-white rounded-2xl shadow-xl p-8 md:p-12 border border-gray-100">
-              <AnimatePresence mode="wait">
-                {testimonials.map(
-                  (testimonial, index) =>
-                    activeTestimonial === index && (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        exit={{ opacity: 0, x: -20 }}
-                        transition={{ duration: 0.5 }}
-                        className="flex flex-col items-center"
-                      >
-                        <div className="flex mb-6">
-                          {[...Array(5)].map((_, i) => (
-                            <Star
-                              key={i}
-                              className={`h-5 w-5 ${i < testimonial.rating ? "text-yellow-400 fill-yellow-400" : "text-gray-300"}`}
-                            />
-                          ))}
-                        </div>
-
-                        <p className="text-xl md:text-2xl text-gray-700 text-center mb-8 italic">
-                          "{testimonial.quote}"
-                        </p>
-
-                        <div className="flex flex-col sm:flex-row items-center gap-4">
-                          <div className="rounded-full overflow-hidden border-2 border-primary/20 h-16 w-16 flex-shrink-0">
-                            <EnhancedImage
-                              src={testimonial.image}
-                              alt={testimonial.name}
-                              width={64}
-                              height={64}
-                              className="h-full w-full object-cover"
-                            />
-                          </div>
-                          <div className="text-center sm:text-left">
-                            <h4 className="font-bold text-gray-900">{testimonial.name}</h4>
-                            <p className="text-gray-600">{testimonial.position}</p>
-                          </div>
-                          <div className="mt-2 sm:mt-0 sm:ml-4 sm:pl-4 sm:border-l border-gray-200">
-                            <div className="bg-primary/10 text-primary font-medium px-3 py-1 rounded-full text-sm">
-                              {testimonial.metrics}
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
-                    ),
-                )}
-              </AnimatePresence>
-
-              <div className="flex justify-center mt-10">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setActiveTestimonial(index)}
-                    className={`h-2 rounded-full mx-1 transition-all duration-300 ${
-                      activeTestimonial === index ? "bg-primary w-8" : "bg-gray-200 w-4 hover:bg-gray-300"
-                    }`}
-                    aria-label={`View testimonial ${index + 1}`}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="mt-16 text-center">
-            <Link href="/partners" className="inline-flex items-center text-primary font-medium group">
-              <span className="relative">
-                Read more success stories
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary group-hover:w-full transition-all duration-300"></span>
-              </span>
-              <ChevronRight className="ml-1 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
-            </Link>
-          </div>
-        </div>
-      </section>
+      <TestimonialShowcase />
 
       {/* CTA Section - Similar to Solutions Page */}
       <section className="relative overflow-hidden bg-gradient-to-r from-primary to-primary-dark py-24 text-white">
@@ -745,8 +577,8 @@ export default function Home() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.4 }}
                   >
-                    Experience zero inventory risk, powerful analytics, and direct access to 10M+ rural consumers
-                    through our revolutionary B2B platform.
+                    Experience a retail revolution that eliminates inventory risk, unlocks a world of fashion, and
+                    delivers it all to your doorstep. Join the future of retail today.
                   </motion.p>
 
                   <motion.div
@@ -756,19 +588,7 @@ export default function Home() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, delay: 0.5 }}
                   >
-                    <div className="flex -space-x-2">
-                      {[1, 2, 3, 4].map((i) => (
-                        <div
-                          key={i}
-                          className="inline-block h-10 w-10 rounded-full border-2 border-primary bg-white/90"
-                          style={{
-                            backgroundImage: `url(/confident-indian-${i % 2 === 0 ? "businessman" : "professional"}.png)`,
-                            backgroundSize: "cover",
-                            backgroundPosition: "center",
-                          }}
-                        ></div>
-                      ))}
-                    </div>
+                    <RetailerAvatarGroup />
                     <p className="text-sm font-medium">Trusted by 30+ retailers across 3 cities</p>
                   </motion.div>
                 </div>

@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation"
 
 export default function AuthRedirect() {
-  redirect("/contact")
+  redirect("/")
 }

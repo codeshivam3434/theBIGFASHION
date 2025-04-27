@@ -30,8 +30,8 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         >
           <div className="flex items-center justify-between h-16 px-4 border-b">
             <Link href="/" className="flex items-center gap-2 text-xl font-bold" onClick={onClose}>
-              <span>FASHION</span>
-              <span className="text-primary">FUSION</span>
+              <span>BIG</span>
+              <span className="text-primary">APPARELS</span>
             </Link>
             <Button variant="ghost" size="icon" onClick={onClose}>
               <X className="h-6 w-6" />
@@ -42,7 +42,7 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             {[
               { href: "/", label: "Home" },
               { href: "/about", label: "About Us" },
-              { href: "/solutions", label: "Solution" },
+              { href: "/solutions", label: "Solutions" },
               { href: "/partners", label: "For Retailers" },
               { href: "/contact", label: "Contact" },
             ].map((item) => (

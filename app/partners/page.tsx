@@ -14,6 +14,8 @@ import FadeInSection from "@/components/fade-in-section"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { submitPartnershipForm, type PartnershipFormState } from "@/actions/partnership-form"
+import { RealRetailerTestimonials } from "@/components/real-retailer-testimonials"
+import { RetailerAvatarGroup } from "@/components/retailer-avatar-group"
 
 const initialState: PartnershipFormState = {}
 
@@ -39,46 +41,32 @@ export default function PartnersPage() {
           <Image src="/retail-strategy-session.png" alt="Retail Partnership" fill className="object-cover" priority />
         </div>
         <div className="container relative z-10 mx-auto px-4 py-24 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-8">
-            <div className="flex flex-col justify-center">
-              <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">
-                Strategic Retail Partnerships
-              </h1>
-              <p className="mt-6 max-w-xl text-lg text-gray-300">
-                Join India's premier wholesale network and transform your retail business with enhanced inventory
-                management, data-driven insights, and streamlined operations.
-              </p>
-              <div className="mt-8 flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0">
-                <Button
-                  size="lg"
-                  className="bg-white text-gray-900 hover:bg-gray-100"
-                  onClick={() => {
-                    document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" })
-                  }}
-                >
-                  Become a Partner
-                </Button>
-                <Button
-                  variant="outline"
-                  size="lg"
-                  className="border-white text-white hover:bg-white/10"
-                  onClick={() => {
-                    document.getElementById("benefits")?.scrollIntoView({ behavior: "smooth" })
-                  }}
-                >
-                  Learn More
-                </Button>
-              </div>
-            </div>
-            <div className="hidden lg:flex lg:items-center lg:justify-end">
-              <div className="relative h-[400px] w-full overflow-hidden rounded-lg shadow-2xl">
-                <Image
-                  src="/digital-retail-experience.png"
-                  alt="Modern Retail Experience"
-                  fill
-                  className="object-cover"
-                />
-              </div>
+          <div className="max-w-3xl mx-auto text-center">
+            <h1 className="text-4xl font-bold tracking-tight sm:text-5xl md:text-6xl">Strategic Retail Partnerships</h1>
+            <p className="mt-6 max-w-xl mx-auto text-lg text-gray-300">
+              Join India's premier wholesale network and transform your retail business with enhanced inventory
+              management, data-driven insights, and streamlined operations.
+            </p>
+            <div className="mt-8 flex flex-col space-y-4 sm:flex-row sm:space-x-4 sm:space-y-0 justify-center">
+              <Button
+                size="lg"
+                className="bg-white text-gray-900 hover:bg-gray-100"
+                onClick={() => {
+                  document.getElementById("contact-form")?.scrollIntoView({ behavior: "smooth" })
+                }}
+              >
+                Become a Partner
+              </Button>
+              <Button
+                variant="outline"
+                size="lg"
+                className="border-white/30 bg-transparent text-white hover:bg-white/10 backdrop-blur-sm"
+                onClick={() => {
+                  document.getElementById("benefits")?.scrollIntoView({ behavior: "smooth" })
+                }}
+              >
+                Learn More
+              </Button>
             </div>
           </div>
         </div>
@@ -448,6 +436,8 @@ export default function PartnersPage() {
         </div>
       </section>
 
+      <RealRetailerTestimonials />
+
       {/* CTA Section - Enhanced */}
       <section className="relative overflow-hidden bg-gradient-to-r from-primary to-primary-dark py-24 text-white">
         {/* Background pattern */}
@@ -483,14 +473,7 @@ export default function PartnersPage() {
                   </p>
 
                   <div className="mt-8 flex flex-wrap items-center gap-3">
-                    <div className="flex -space-x-2">
-                      {[1, 2, 3, 4].map((i) => (
-                        <div
-                          key={i}
-                          className="inline-block h-10 w-10 rounded-full border-2 border-primary bg-white/90"
-                        ></div>
-                      ))}
-                    </div>
+                    <RetailerAvatarGroup />
                     <p className="text-sm font-medium">+20 retailers joined this month</p>
                   </div>
                 </div>

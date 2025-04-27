@@ -3,11 +3,12 @@
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, ChevronDown, Home, Info, Lightbulb, Store, Phone } from "lucide-react"
+import { motion } from "framer-motion"
+import { Menu, X, Home, Info, Lightbulb, Store, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import BigApparelsLogo from "@/components/big-apparels-logo"
 import { useMobile } from "@/hooks/use-mobile"
+import { MobileMenu } from "@/components/mobile-menu"
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -106,48 +107,7 @@ export default function NavBar() {
       </div>
 
       {/* Mobile Navigation */}
-      <AnimatePresence>
-        {isOpen && isMobile && (
-          <motion.div
-            className="fixed inset-0 top-[60px] bg-background z-40 overflow-y-auto"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.2 }}
-          >
-            <div className="container py-6 space-y-6">
-              <nav className="flex flex-col space-y-4">
-                {navItems.map((item) => {
-                  const isActive = pathname === item.href
-                  return (
-                    <Link key={item.name} href={item.href}>
-                      <motion.div
-                        className={`flex items-center justify-between p-3 rounded-md ${
-                          isActive
-                            ? "bg-primary/10 text-primary"
-                            : "text-gray-800 hover:bg-primary/5 hover:text-primary"
-                        }`}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <div className="flex items-center">
-                          {item.icon}
-                          <span className="ml-2 font-medium">{item.name}</span>
-                        </div>
-                        <ChevronDown className="h-4 w-4" />
-                      </motion.div>
-                    </Link>
-                  )
-                })}
-              </nav>
-              <div className="pt-4 border-t">
-                <Button className="w-full" asChild>
-                  <Link href="/contact">Contact Us</Link>
-                </Button>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <MobileMenu isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </header>
   )
 }

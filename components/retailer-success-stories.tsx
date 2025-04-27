@@ -54,7 +54,7 @@ export function RetailerSuccessStories() {
                 <video
                   ref={videoRef}
                   className="w-full h-full object-cover"
-                  poster="/placeholder.svg?height=720&width=1280&query=happy fashion retailers using digital tools in modern store"
+                  poster="/connected-retail-joy.png"
                   muted
                   playsInline
                   onEnded={() => setIsPlaying(false)}
@@ -100,28 +100,31 @@ export function RetailerSuccessStories() {
                 {[
                   {
                     quote:
-                      "Since implementing this platform, our inventory turnover has increased by 35% and we've reduced stockouts by nearly 60%.",
-                    name: "Ananya Patel",
-                    position: "Owner, Elegance Boutique, Kanpur",
-                    image: "/placeholder.svg?height=100&width=100&query=indian female fashion retailer portrait",
+                      "Since implementing BIGFASHION, our inventory management has become much more efficient and we've seen a significant increase in sales turnover.",
+                    name: "Vishal Gupta",
+                    position: "Owner, Rangoli Readymade, Vijaypur",
+                    image: "/images/testimonials/vishal-gupta.jpeg",
                   },
                   {
                     quote:
-                      "The analytics tools helped us identify emerging trends months before our competitors, giving us a significant edge in the market.",
-                    name: "Vikram Singh",
-                    position: "Director, Fashion Forward, Lucknow",
-                    image: "/placeholder.svg?height=100&width=100&query=indian male fashion retailer portrait",
+                      "The platform has helped us expand our product range without increasing our inventory costs. It's been a game changer for our business.",
+                    name: "Mohit",
+                    position: "Manager, Pintu Vastralay, Hussepur",
+                    image: "/images/testimonials/mohit.jpeg",
                   },
                 ].map((testimonial, index) => (
-                  <div key={index} className="flex gap-4">
+                  <div key={index} className="flex gap-6">
                     <div className="flex-shrink-0">
-                      <EnhancedImage
-                        src={testimonial.image}
-                        alt={testimonial.name}
-                        width={64}
-                        height={64}
-                        className="rounded-full"
-                      />
+                      <div className="h-20 w-20 rounded-full overflow-hidden border-2 border-primary shadow-md">
+                        <EnhancedImage
+                          src={testimonial.image}
+                          alt={testimonial.name}
+                          width={80}
+                          height={80}
+                          className="w-full h-full object-cover object-center"
+                          style={{ objectPosition: "center top" }}
+                        />
+                      </div>
                     </div>
                     <div>
                       <p className="italic mb-3">{testimonial.quote}</p>

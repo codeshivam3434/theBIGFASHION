@@ -9,20 +9,9 @@ export default function TeamSection() {
   const teamMembers = [
     {
       name: "Priyanshu Gupta",
-      role: "Co-Founder & Chief Strategy Officer",
+      role: "Co-Founder & Chief Operating Officer",
       image: "/images/team/priyanshu.png",
-      bio: "Visionary strategist with expertise in fashion retail market trends and business development.",
-      socialLinks: [
-        { icon: <Linkedin className="h-4 w-4" />, url: "#" },
-        { icon: <Twitter className="h-4 w-4" />, url: "#" },
-        { icon: <Mail className="h-4 w-4" />, url: "#" },
-      ],
-    },
-    {
-      name: "Shivam Maurya",
-      role: "Co-Founder & Chief Executive Officer",
-      image: "/images/team/shivam.png",
-      bio: "Tech innovator driving our digital transformation and operational excellence initiatives.",
+      bio: "Operations expert optimizing our business processes and driving operational excellence.",
       socialLinks: [
         { icon: <Linkedin className="h-4 w-4" />, url: "#" },
         { icon: <Twitter className="h-4 w-4" />, url: "#" },
@@ -33,7 +22,29 @@ export default function TeamSection() {
       name: "Ankush Pal",
       role: "Co-Founder & Chief Technology Officer",
       image: "/images/team/ankush.png",
-      bio: "Supply chain expert with a passion for creating seamless logistics solutions for retailers.",
+      bio: "Tech innovator developing cutting-edge solutions for our digital retail platform.",
+      socialLinks: [
+        { icon: <Linkedin className="h-4 w-4" />, url: "#" },
+        { icon: <Twitter className="h-4 w-4" />, url: "#" },
+        { icon: <Mail className="h-4 w-4" />, url: "#" },
+      ],
+    },
+    {
+      name: "Pawan Singh",
+      role: "Co-Founder & Chief Marketing Officer",
+      image: "/images/team/new-cofounder.jpeg",
+      bio: "Marketing strategist building our brand presence and retailer acquisition strategies.",
+      socialLinks: [
+        { icon: <Linkedin className="h-4 w-4" />, url: "#" },
+        { icon: <Twitter className="h-4 w-4" />, url: "#" },
+        { icon: <Mail className="h-4 w-4" />, url: "#" },
+      ],
+    },
+    {
+      name: "Shivam Maurya",
+      role: "Co-Founder & Chief Executive Officer",
+      image: "/images/team/shivam.png",
+      bio: "Visionary leader driving our company's strategic direction and overall business growth.",
       socialLinks: [
         { icon: <Linkedin className="h-4 w-4" />, url: "#" },
         { icon: <Twitter className="h-4 w-4" />, url: "#" },
@@ -60,7 +71,7 @@ export default function TeamSection() {
           </div>
         </FadeInSection>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {teamMembers.map((member, index) => (
             <FadeInSection key={index} delay={index * 0.15} direction="up">
               <motion.div

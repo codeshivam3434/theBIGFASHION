@@ -69,7 +69,7 @@ export default function HeroSection() {
           </motion.p>
 
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center mb-8"
+            className="flex flex-col sm:flex-row justify-center mb-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
@@ -109,14 +109,6 @@ export default function HeroSection() {
                   Get Started <ArrowRight className="ml-2 h-5 w-5" />
                 </span>
               )}
-            </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="text-base border-white text-white hover:bg-white/10 py-6"
-              onClick={() => (window.location.href = "/solutions")}
-            >
-              Explore Solutions
             </Button>
           </motion.div>
 

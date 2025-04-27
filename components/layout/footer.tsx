@@ -34,8 +34,9 @@ export default function Footer() {
             <h3 className="text-xl font-bold mb-6 text-gray-900">Company</h3>
             <ul className="space-y-4">
               <FooterLink href="/about" label="About Us" />
-              <FooterLink href="/solutions" label="solutions" />
+              <FooterLink href="/solutions" label="Solutions" />
               <FooterLink href="/partners" label="For Retailers" />
+              <FooterLink href="/contact" label="Contact Us" />
             </ul>
           </div>
 
@@ -43,10 +44,10 @@ export default function Footer() {
           <div>
             <h3 className="text-xl font-bold mb-6 text-gray-900">Products</h3>
             <ul className="space-y-4">
-              <FooterLink href="/supplychain" label="Fashion Supply Chain" />
-              <FooterLink href="/Financial" label="Financial Solutions" />
-              <FooterLink href="/operations" label="Operation Handling" />
-              <FooterLink href="/solutions" label="Solutions" />
+              <FooterLink href="/solutions#supply-chain" label="Fashion Supply Chain" />
+              <FooterLink href="/solutions#financial" label="Financial Solutions" />
+              <FooterLink href="/solutions#operations" label="Operation Handling" />
+              <FooterLink href="/solutions" label="All Solutions" />
             </ul>
           </div>
 

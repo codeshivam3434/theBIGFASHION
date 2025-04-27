@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import Image from "next/image"
 import { motion } from "framer-motion"
 import { BarChart3 } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -10,6 +9,9 @@ import FadeInSection from "@/components/fade-in-section"
 import { VideoBackground } from "@/components/ui/video-background"
 import { LineChart, TrendingUp, Users } from "lucide-react"
 import { InteractiveFeatureCards } from "@/components/interactive-feature-cards"
+import { RealRetailerGrid } from "@/components/real-retailer-grid"
+import { RetailerAvatarGroup } from "@/components/retailer-avatar-group"
+import Image from "next/image"
 
 export default function SolutionsPage() {
   const [isLoading, setIsLoading] = useState({
@@ -37,69 +39,48 @@ export default function SolutionsPage() {
       <section className="relative py-20 md:py-28 overflow-hidden">
         <VideoBackground src="/videos/retail-analytics.mp4" overlayOpacity={0.9} overlayColor="#000" />
         <div className="container px-4 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <motion.h1
-                className="text-4xl md:text-5xl font-bold mb-6 text-white"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-              >
-                Comprehensive Solutions for Fashion Retailers
-              </motion.h1>
-              <motion.p
-                className="text-xl text-gray-300 mb-8"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.2 }}
-              >
-                Our integrated platform provides everything you need to streamline operations, reduce risk, and scale
-                your retail business.
-              </motion.p>
-              <motion.div
-                className="flex flex-col sm:flex-row gap-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: 0.4 }}
-              >
-                <ButtonWithFeedback
-                  size="lg"
-                  onClick={handleDemoClick}
-                  isLoading={isLoading.demo}
-                  loadingText="Scheduling demo..."
-                >
-                  Schedule a Demo
-                </ButtonWithFeedback>
-                <ButtonWithFeedback
-                  size="lg"
-                  variant="outline"
-                  onClick={handleContactClick}
-                  isLoading={isLoading.contact}
-                  loadingText="Connecting..."
-                  className="text-white border-white hover:bg-white/10"
-                >
-                  Contact Sales
-                </ButtonWithFeedback>
-              </motion.div>
-            </div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="relative"
+          <div className="max-w-3xl mx-auto text-center">
+            <motion.h1
+              className="text-4xl md:text-5xl font-bold mb-6 text-white"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
             >
-              <div className="relative">
-                <div className="absolute -inset-1 bg-gradient-to-r from-primary to-purple-600 rounded-lg blur opacity-25"></div>
-                <div className="relative bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-xl">
-                  <Image
-                    src="/images/solutions/analytics-dashboard.png"
-                    alt="Comprehensive fashion retail analytics dashboard showing sales metrics, inventory status, and business performance indicators - Solutions Hero section"
-                    width={800}
-                    height={600}
-                    className="w-full h-auto"
-                  />
-                </div>
-              </div>
+              Comprehensive Solutions for Fashion Retailers
+            </motion.h1>
+            <motion.p
+              className="text-xl text-gray-300 mb-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              Our integrated platform provides everything you need to streamline operations, reduce risk, and scale your
+              retail business.
+            </motion.p>
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4 justify-center"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+            >
+              <ButtonWithFeedback
+                size="lg"
+                onClick={handleDemoClick}
+                isLoading={isLoading.demo}
+                loadingText="Scheduling demo..."
+              >
+                Schedule a Demo
+              </ButtonWithFeedback>
+              <ButtonWithFeedback
+                size="lg"
+                variant="outline"
+                onClick={handleContactClick}
+                isLoading={isLoading.contact}
+                loadingText="Connecting..."
+                className="text-white border-white/30 bg-transparent hover:bg-white/10 backdrop-blur-sm"
+              >
+                Contact Sales
+              </ButtonWithFeedback>
             </motion.div>
           </div>
         </div>
@@ -517,14 +498,7 @@ export default function SolutionsPage() {
                   </p>
 
                   <div className="mt-8 flex flex-wrap items-center gap-3">
-                    <div className="flex -space-x-2">
-                      {[1, 2, 3, 4].map((i) => (
-                        <div
-                          key={i}
-                          className="inline-block h-10 w-10 rounded-full border-2 border-primary bg-white/90"
-                        ></div>
-                      ))}
-                    </div>
+                    <RetailerAvatarGroup />
                     <p className="text-sm font-medium">+20 retailers joined this month</p>
                   </div>
                 </div>
@@ -555,6 +529,7 @@ export default function SolutionsPage() {
           </div>
         </div>
       </section>
+      <RealRetailerGrid />
     </div>
   )
 }
