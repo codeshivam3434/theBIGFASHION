@@ -24,6 +24,28 @@ export function TestimonialShowcase() {
   // Testimonials with consistent image sizing
   const testimonials: Testimonial[] = [
     {
+      name: "Qadir",
+      position: "Owner",
+      location: "Chinchoti",
+      shopName: "AK Men's Wear",
+      image: "/images/testimonials/qadir.png",
+      quote:
+        "The platform's analytics have helped me understand which products sell best in my area. My profit margins have improved significantly.",
+      rating: 5,
+      metrics: "30% higher margins",
+    },
+    {
+      name: "Imran khan",
+      position: "Owner",
+      location: "Vasai West",
+      shopName: "Trendyz",
+      image: "/images/testimonials/nabi.png",
+      quote:
+        "The zero-risk inventory model has been a game-changer for my business. I can now offer premium brands without the financial burden.",
+      rating: 5,
+      metrics: "Added 15 new brands",
+    },
+    {
       name: "Vishal Gupta",
       position: "Owner",
       location: "Vijaypur",
@@ -57,37 +79,15 @@ export function TestimonialShowcase() {
       metrics: "50% more product variety",
     },
     {
-      name: "Qadir",
-      position: "Owner",
-      location: "Chinchoti",
-      shopName: "AK Men's Wear",
-      image: "/images/testimonials/qadir.png",
-      quote:
-        "The platform's analytics have helped me understand which products sell best in my area. My profit margins have improved significantly.",
-      rating: 5,
-      metrics: "30% higher margins",
-    },
-    {
-      name: "Imraan",
+      name: "Nabi",
       position: "Owner",
       location: "Vasai West",
-      shopName: "Trendyz",
+      shopName: "Groovy Collection",
       image: "/images/testimonials/imraan.png",
       quote:
         "Since partnering with BIGFASHION, I've been able to focus more on customer service while they handle the supply chain logistics.",
       rating: 5,
       metrics: "25% time saved on operations",
-    },
-    {
-      name: "Nabi",
-      position: "Owner",
-      location: "Vasai West",
-      shopName: "Groovy Collection",
-      image: "/images/testimonials/nabi.png",
-      quote:
-        "The zero-risk inventory model has been a game-changer for my business. I can now offer premium brands without the financial burden.",
-      rating: 5,
-      metrics: "Added 15 new brands",
     },
   ]
 

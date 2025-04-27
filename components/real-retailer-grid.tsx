@@ -4,34 +4,23 @@ import { RealRetailerCard } from "@/components/real-retailer-card"
 import FadeInSection from "@/components/fade-in-section"
 
 export function RealRetailerGrid() {
-  // Real retailer testimonials data - Only showing Qadir, Imraan, and Nabi for the solutions page
+  // Real retailer testimonials data - Only showing Qadir and Imran Khan for the solutions page
   const retailers = [
     {
+      id: "qadir",
       name: "Qadir",
-      position: "Owner",
-      location: "Chinchoti",
-      shopName: "AK Men's Wear",
+      role: "Fashion Retailer, Virar",
       image: "/images/testimonials/qadir.png",
-      quote:
-        "The platform's analytics have helped me understand which products sell best in my area. My profit margins have improved significantly.",
+      content:
+        "The Big Fashion has transformed how I manage my inventory. Their platform is intuitive and the analytics help me make better purchasing decisions. My store's profitability has increased by 35% since partnering with them.",
     },
     {
-      name: "Imraan",
-      position: "Owner",
-      location: "Vasai West",
-      shopName: "Trendyz",
-      image: "/images/testimonials/imraan.png",
-      quote:
-        "Since partnering with BIGFASHION, I've been able to focus more on customer service while they handle the supply chain logistics.",
-    },
-    {
-      name: "Nabi",
-      position: "Owner",
-      location: "Vasai West",
-      shopName: "Groovy Collection",
-      image: "/images/testimonials/nabi.png",
-      quote:
-        "The zero-risk inventory model has been a game-changer for my business. I can now offer premium brands without the financial burden.",
+      id: "imran-khan",
+      name: "Imran Khan",
+      role: "Clothing Store Owner, Nalasopara",
+      image: "/images/testimonials/nabi.png", // Using the same image as before
+      content:
+        "As a small retailer, I was struggling with inventory management and supplier relationships. The Big Fashion's platform simplified everything. Their team is responsive and the ordering system is seamless.",
     },
   ]
 
@@ -50,16 +39,16 @@ export function RealRetailerGrid() {
           </div>
         </FadeInSection>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {retailers.map((retailer, index) => (
             <RealRetailerCard
               key={index}
               name={retailer.name}
-              position={retailer.position}
+              position={retailer.role}
               location={retailer.location}
               shopName={retailer.shopName}
               image={retailer.image}
-              quote={retailer.quote}
+              quote={retailer.content}
             />
           ))}
         </div>

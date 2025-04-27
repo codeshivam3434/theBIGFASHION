@@ -377,7 +377,7 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* CTA Section */}
+      {/* CTA Section with Retailer Photos */}
       <section className="relative overflow-hidden py-20">
         <div className="absolute inset-0 z-0">
           {/* Background gradient */}
@@ -490,21 +490,45 @@ export default function ContactPage() {
                   </div>
 
                   <div className="flex flex-col items-center space-y-4">
-                    <div className="flex -space-x-2">
-                      {[...Array(5)].map((_, i) => (
-                        <div
-                          key={i}
-                          className="h-10 w-10 overflow-hidden rounded-full border-2 border-primary bg-white/90"
-                        >
-                          <img
-                            src={`/thoughtful-artist.png?height=40&width=40&query=person ${i + 1}`}
-                            alt={`Partner ${i + 1}`}
-                            className="h-full w-full object-cover"
-                          />
-                        </div>
-                      ))}
-                      <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-primary bg-white text-xs font-bold text-primary">
-                        30+
+                    <div className="flex -space-x-3">
+                      {/* Five retailer photos */}
+                      <div className="h-12 w-12 overflow-hidden rounded-full border-2 border-primary bg-white/90">
+                        <img
+                          src="/images/testimonials/qadir.png"
+                          alt="Retailer Qadir"
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                      <div className="h-12 w-12 overflow-hidden rounded-full border-2 border-primary bg-white/90">
+                        <img
+                          src="/images/testimonials/nabi.png"
+                          alt="Retailer Nabi"
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                      <div className="h-12 w-12 overflow-hidden rounded-full border-2 border-primary bg-white/90">
+                        <img
+                          src="/images/testimonials/imraan.png"
+                          alt="Retailer Imraan"
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                      <div className="h-12 w-12 overflow-hidden rounded-full border-2 border-primary bg-white/90">
+                        <img
+                          src="/images/testimonials/vishal-gupta.jpeg"
+                          alt="Retailer Vishal"
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                      <div className="h-12 w-12 overflow-hidden rounded-full border-2 border-primary bg-white/90">
+                        <img
+                          src="/images/testimonials/mohit.jpeg"
+                          alt="Retailer Mohit"
+                          className="h-full w-full object-cover"
+                        />
+                      </div>
+                      <div className="flex h-12 w-12 items-center justify-center rounded-full border-2 border-primary bg-white text-xs font-bold text-primary">
+                        25+
                       </div>
                     </div>
 

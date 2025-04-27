@@ -9,49 +9,49 @@ import FadeInSection from "@/components/fade-in-section"
 
 // Define the testimonial data structure
 interface Testimonial {
-  id: number
+  id: string
   name: string
-  position: string
-  location: string
-  shopName: string
+  role: string
   image: string
-  quote: string
+  content: string
 }
 
 export function RealRetailerTestimonials() {
   const [activeIndex, setActiveIndex] = useState(0)
 
-  // Real retailer testimonials with their images - Only showing Vishal Gupta, Mohit, and Suraj for the partners page
-  const testimonials: Testimonial[] = [
+  // Real retailer testimonials with their images - Removed Qadir and Nabi
+  const testimonials = [
     {
-      id: 1,
+      id: "vishal",
       name: "Vishal Gupta",
-      position: "Owner",
-      location: "Vijaypur",
-      shopName: "Rangoli Readymade",
+      role: "Fashion Entrepreneur, Mumbai",
       image: "/images/testimonials/vishal-gupta.jpeg",
-      quote:
-        "Since implementing BIGFASHION, our inventory management has become much more efficient and we've seen a significant increase in sales turnover.",
+      content:
+        "The ordering system is incredibly efficient. I can place orders quickly and track them in real-time. The Big Fashion has streamlined my entire supply chain process.",
     },
     {
-      id: 2,
+      id: "mohit",
       name: "Mohit",
-      position: "Manager",
-      location: "Hussepur",
-      shopName: "Pintu Vastralay",
+      role: "Retail Chain Manager, Thane",
       image: "/images/testimonials/mohit.jpeg",
-      quote:
-        "The platform has helped us expand our product range without increasing our inventory costs. It's been a game changer for our business.",
+      content:
+        "Managing multiple store locations was a logistical nightmare until we partnered with The Big Fashion. Their platform gives me a unified view of inventory across all locations and simplifies reordering.",
     },
     {
-      id: 3,
+      id: "suraj",
       name: "Suraj Rauniyar",
-      position: "Owner",
-      location: "Salempur",
-      shopName: "Suraj Fashion",
+      role: "Fashion Retailer, Borivali",
       image: "/images/testimonials/suraj-rauniyar.png",
-      quote:
-        "BIGFASHION has revolutionized how I manage my inventory. I can now offer a wider variety of products with minimal risk.",
+      content:
+        "The customer support team is exceptional. Whenever I have questions or issues, they respond quickly and effectively. The Big Fashion truly values their retail partners.",
+    },
+    {
+      id: "imraan",
+      name: "Imraan",
+      role: "Boutique Owner, Vasai",
+      image: "/images/testimonials/imraan.png",
+      content:
+        "The analytics dashboard has been a game-changer for my boutique. I can now track which styles are performing well and adjust my inventory accordingly. The Big Fashion team understands the unique challenges of fashion retail.",
     },
   ]
 
@@ -104,8 +104,8 @@ export function RealRetailerTestimonials() {
                     </div>
                   </div>
                   <div className="absolute -bottom-4 -right-4 bg-primary text-white px-4 py-2 rounded-lg shadow-lg">
-                    <p className="font-bold">{testimonials[activeIndex].shopName}</p>
-                    <p className="text-sm">{testimonials[activeIndex].location}</p>
+                    <p className="font-bold">{testimonials[activeIndex].name}</p>
+                    <p className="text-sm">{testimonials[activeIndex].role}</p>
                   </div>
                 </motion.div>
 
@@ -122,13 +122,11 @@ export function RealRetailerTestimonials() {
                         <Star key={i} className="h-5 w-5 text-yellow-400 fill-yellow-400" />
                       ))}
                     </div>
-                    <blockquote className="text-xl italic mb-8">"{testimonials[activeIndex].quote}"</blockquote>
+                    <blockquote className="text-xl italic mb-8">"{testimonials[activeIndex].content}"</blockquote>
                     <div className="flex items-center">
                       <div>
                         <h4 className="text-xl font-bold">{testimonials[activeIndex].name}</h4>
-                        <p className="text-gray-600">
-                          {testimonials[activeIndex].position}, {testimonials[activeIndex].shopName}
-                        </p>
+                        <p className="text-gray-600">{testimonials[activeIndex].role}</p>
                       </div>
                     </div>
                   </div>
