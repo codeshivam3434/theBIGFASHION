@@ -78,7 +78,7 @@ export default function HeroSection() {
               size="lg"
               onClick={handleDemoClick}
               disabled={isLoading}
-              className="text-base px-8 py-6 font-semibold bg-white hover:bg-white/90 text-fashion-primary"
+              className="text-base px-8 py-6 font-semibold bg-transparent hover:bg-white/20 text-white border border-white/50"
             >
               {isLoading ? (
                 <span className="flex items-center">
