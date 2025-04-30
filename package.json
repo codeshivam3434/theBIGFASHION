@@ -59,13 +59,9 @@
     "vaul": "^0.9.6",
     "zod": "latest",
     "@emotion/is-prop-valid": "latest",
-    "@auth/core": "latest",
-    "nodemailer": "latest",
     "framer-motion": "latest",
     "react-intersection-observer": "latest",
-    "@supabase/supabase-js": "latest",
-    "bcryptjs": "latest",
-    "next-auth": "latest"
+    "@supabase/supabase-js": "latest"
   },
   "devDependencies": {
     "@types/node": "^22",

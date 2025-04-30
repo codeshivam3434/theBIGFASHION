@@ -99,35 +99,6 @@ export interface Database {
           subscribed_at?: string
         }
       }
-      users: {
-        Row: {
-          id: string
-          email: string
-          password_hash: string
-          name: string
-          role: string
-          created_at: string
-          updated_at: string
-        }
-        Insert: {
-          id?: string
-          email: string
-          password_hash: string
-          name: string
-          role?: string
-          created_at?: string
-          updated_at?: string
-        }
-        Update: {
-          id?: string
-          email?: string
-          password_hash?: string
-          name?: string
-          role?: string
-          created_at?: string
-          updated_at?: string
-        }
-      }
     }
   }
 }

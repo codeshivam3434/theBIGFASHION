@@ -3,7 +3,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { motion, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button"
-import { X, LogIn, UserPlus } from "lucide-react"
+import { X } from "lucide-react"
 
 interface MobileMenuProps {
   isOpen: boolean
@@ -12,11 +12,6 @@ interface MobileMenuProps {
 
 export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
   const pathname = usePathname()
-
-  // Check if we're on an auth page to hide the auth buttons
-  const isAuthPage = pathname.startsWith("/auth")
-  // Check if we're on a dashboard page to hide the auth buttons
-  const isDashboardPage = pathname.startsWith("/dashboard")
 
   return (
     <AnimatePresence>
@@ -56,35 +51,13 @@ export function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
             ))}
           </div>
           <div className="mt-auto p-4 border-t">
-            {!isAuthPage && !isDashboardPage && (
-              <div className="flex flex-col gap-3">
-                <Link
-                  href="/auth/signup"
-                  className="flex h-12 w-full items-center justify-center rounded-md bg-primary px-4 py-2 text-base font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-                  onClick={onClose}
-                >
-                  <UserPlus className="mr-2 h-5 w-5" />
-                  Sign Up
-                </Link>
-                <Link
-                  href="/auth/login"
-                  className="flex h-12 w-full items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-base font-medium shadow-sm transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-                  onClick={onClose}
-                >
-                  <LogIn className="mr-2 h-5 w-5" />
-                  Sign In
-                </Link>
-              </div>
-            )}
-            {isDashboardPage && (
-              <Link
-                href="/dashboard"
-                className="flex h-12 w-full items-center justify-center rounded-md bg-primary px-4 py-2 text-base font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-                onClick={onClose}
-              >
-                Dashboard
-              </Link>
-            )}
+            <Link
+              href="/contact"
+              className="flex h-12 w-full items-center justify-center rounded-md bg-primary px-4 py-2 text-base font-medium text-primary-foreground shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+              onClick={onClose}
+            >
+              Contact Us
+            </Link>
           </div>
         </motion.div>
       )}
